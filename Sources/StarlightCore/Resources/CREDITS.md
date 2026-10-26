@@ -1,18 +1,22 @@
 # The sky's sources
 
 Every bundled star, name, line and border, where it comes from and the terms that let the app
-bundle it. `tools/sky_data.py` builds these files from the sources below; the Acknowledgements
-screen credits each of them.
+bundle it. `tools/sky_data.py` builds these files from the sources below. This file ships in the
+app with them, and the app's Acknowledgements screen, when it comes, credits each of them.
 
 - **Stars** (`stars.tsv`): *The Bright Star Catalogue*, 5th revised edition (preliminary version),
   Dorrit Hoffleit and Wayne H. Warren Jr., Yale University Observatory and NASA's Astronomical Data
   Center, 1991 (VizieR V/50). Distributed by NASA's High Energy Astrophysics Science Archive
-  Research Center as a U.S. Government Work (catalog.data.gov, "bright star catalog").
+  Research Center, which lists it as a U.S. Government Work
+  (https://catalog.data.gov/dataset/bright-star-catalog).
 - **Star names** (`names.tsv`): the IAU Catalog of Star Names, International Astronomical Union,
-  Working Group on Star Names (WGSN). Creative Commons Attribution.
+  Working Group on Star Names (WGSN), https://www.pas.rochester.edu/~emamajek/WGSN/IAU-CSN.txt,
+  whose header says "All IAU-produced products (Images, Videos, Texts) are released under
+  Creative Commons Attribution".
 - **Figures** (`figures.tsv`): the constellation lines of d3-celestial, copyright 2015 Olaf Frohn,
   under the BSD 3-Clause License (below), drawn after the IAU's constellation charts (IAU and Sky &
-  Telescope magazine, Roger Sinnott and Rick Fienberg; Creative Commons Attribution).
+  Telescope magazine, Roger Sinnott and Rick Fienberg; released by the IAU under Creative Commons
+  Attribution). https://github.com/ofrohn/d3-celestial
 - **Borders** (`borders.tsv`): the constellation boundaries the IAU adopted, Eugène Delporte,
   *Délimitation scientifique des constellations*, Cambridge University Press, 1930, as digitized
   in the Catalogue of Constellation Boundary Data, A. C. Davenhall and S. K. Leggett, Royal

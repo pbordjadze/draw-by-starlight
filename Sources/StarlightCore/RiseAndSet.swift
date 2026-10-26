@@ -55,9 +55,15 @@ extension Place {
         case .star(let star):
             // A star's place barely moves in two days: precess once.
             let position = star.position(at: JulianDay(start.value + days / 2))
-            return crossings(from: start, to: end) { _ in (position, -0.5667) }
-        default:
-            return crossings(from: start, to: end) { (object.position(at: $0), object.standardAltitude(at: $0)) }
+            let standard = object.standardAltitude(at: start)
+            return crossings(from: start, to: end) { _ in (position, standard) }
+        case .sun:
+            return crossings(from: start, to: end) { (Sun(at: $0).position, object.standardAltitude(at: $0)) }
+        case .moon:
+            return crossings(from: start, to: end) {
+                let moon = Moon(at: $0)
+                return (moon.position, 0.7275 * moon.parallax - 0.5667)
+            }
         }
     }
 
@@ -67,8 +73,9 @@ extension Place {
     }
 
     /// Every moment in (start, end] at which a body whose place and standard altitude `body` gives
-    /// crosses that altitude, in order: sampled every ten minutes (no body the app shows crosses
-    /// twice that fast), then halved down to a second.
+    /// crosses that altitude, in order: sampled every ten minutes, then halved down to a second. A
+    /// body that only grazes the horizon, rising and setting within one ten-minute step (possible
+    /// only far north or south), is missed.
     func crossings(from start: JulianDay, to end: JulianDay, body: (JulianDay) -> (Equatorial, Double)) -> [Crossing] {
         func height(_ t: Double) -> Double {
             let (position, standard) = body(JulianDay(t))

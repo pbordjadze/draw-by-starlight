@@ -26,14 +26,14 @@ struct CatalogueTests {
     }
 
     @Test func arcturusMoves() throws {
-        // BSC5, HR 5340: proper motion −1.093″ and −1.998″ a year: in 26 years, about 59″.
+        // BSC5, HR 5340: proper motion −1.093″ and −1.998″ a year: in 26 years, about 59″ more than
+        // precession alone moves it.
         let star = try #require(catalogue.stars[5340])
         #expect(star.properMotion.rightAscension == -1.093)
         #expect(star.properMotion.declination == -1.998)
-        let moved = Equatorial(
-            rightAscension: star.j2000.rightAscension + star.properMotion.rightAscension * 26 / 3600 / cos(star.j2000.declination * .pi / 180),
-            declination: star.j2000.declination + star.properMotion.declination * 26 / 3600)
-        #expect(abs(moved.separation(from: star.j2000) * 3600 - 59.3) < 0.5)
+        let later = JulianDay(JulianDay.j2000.value + 26 * 365.25)
+        let precessedOnly = star.j2000.precessed(from: .j2000, to: later)
+        #expect(abs(star.position(at: later).separation(from: precessedOnly) * 3600 - 59.3) < 0.5)
     }
 
     @Test func theNamedStars() {
