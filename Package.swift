@@ -11,7 +11,7 @@ let package = Package(
         .library(name: "StarlightCore", targets: ["StarlightCore"]),
     ],
     targets: [
-        .target(name: "StarlightCore"),
+        .target(name: "StarlightCore", resources: [.process("Resources")]),
         .testTarget(name: "StarlightCoreTests", dependencies: ["StarlightCore"]),
     ],
     swiftLanguageModes: [.v6]
