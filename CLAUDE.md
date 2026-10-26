@@ -71,8 +71,9 @@ reason to the manifest, and to the list `ShipHygieneTests` pins (Debug-only code
 - Deployment target iOS 26.0, iPhone (an iPad runs it as an iPhone app). Build with Xcode 26.6
   (CI). Swift 6 with `SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor` and approachable concurrency: app
   types are MainActor by default; mark pure helpers `nonisolated` and CPU-heavy async work
-  `@concurrent`. StarlightCore is a separate module (nonisolated). The test targets have neither
-  setting: suites that touch app types are `@MainActor`.
+  `@concurrent`. StarlightCore is a separate module (nonisolated). The test targets use
+  approachable concurrency but don't default to MainActor: suites that touch app types are
+  `@MainActor`.
 - `MemberImportVisibility` is enabled: every file that touches members of a type from another
   module imports that module itself (`import StarlightCore`, …); a file that logs through `Log`
   imports `os`.
