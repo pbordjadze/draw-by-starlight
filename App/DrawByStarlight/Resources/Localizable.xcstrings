@@ -1,0 +1,10 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Tonight" : {
+      "comment" : "The home screen's title: tonight's sky.",
+      "extractionState" : "manual"
+    }
+  },
+  "version" : "1.0"
+}
