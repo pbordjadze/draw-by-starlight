@@ -1,0 +1,311 @@
+Timestamp               Ty Process[PID:TID]
+2026-10-26 03:44:07.750 Df DrawByStarlight[8566:7656] [com.apple.xpc:connection] [0x1036b5ee0] activating connection: mach=true listener=false peer=false name=com.apple.cfprefsd.daemon
+2026-10-26 03:44:07.799 Df DrawByStarlight[8566:7660] [com.apple.xpc:connection] [0x1036bdc20] activating connection: mach=true listener=false peer=false name=com.apple.fontservicesd
+2026-10-26 03:44:07.806 Df DrawByStarlight[8566:7664] [com.apple.BoardServices:XPCErrors] [C:1] Alloc com.apple.frontboard.systemappservices
+2026-10-26 03:44:07.807 Df DrawByStarlight[8566:7664] [com.apple.xpc:connection] [0x103d5c000] activating connection: mach=false listener=false peer=false name=(anonymous)
+2026-10-26 03:44:07.822 Df DrawByStarlight[8566:7656] [com.apple.UIKit:UIScreen] Evaluated capturing state as 0 on <UIScreen: 0x103d5c140> for initial
+2026-10-26 03:44:07.823 Df DrawByStarlight[8566:7656] [com.apple.UIKit:UIScreen] Evaluated capturing state as 0 on <UIScreen: 0x103d5c140> for CADisplay KVO
+2026-10-26 03:44:07.825 Df DrawByStarlight[8566:7656] (libMobileGestalt.dylib) No persisted cache on this platform.
+2026-10-26 03:44:07.827 Df DrawByStarlight[8566:7656] [com.apple.Accessibility:AXSupportCommon] Read CategoryName: per-app = 1, category name = (null)
+2026-10-26 03:44:07.827 Df DrawByStarlight[8566:7656] [com.apple.Accessibility:AXSupportCommon] Read CategoryName: per-app = 0, category name = (null)
+2026-10-26 03:44:07.857 A  DrawByStarlight[8566:7665] (CoreFoundation) Loading Preferences From User Session CFPrefsD
+2026-10-26 03:44:07.859 Df DrawByStarlight[8566:7656] [com.apple.UIKit:Application] Deactivation reason added: 10; deactivation reasons: 0 -> 1024; animating application lifecycle event: 0
+2026-10-26 03:44:07.859 Df DrawByStarlight[8566:7656] [com.apple.runningboard:connection] Initializing connection
+2026-10-26 03:44:07.859 Df DrawByStarlight[8566:7656] [com.apple.runningboard:process] Removing all cached process handles
+2026-10-26 03:44:07.859 Df DrawByStarlight[8566:7656] [com.apple.BoardServices:Injection] activating monitor for service com.apple.frontboard.open
+2026-10-26 03:44:07.860 Df DrawByStarlight[8566:7656] [com.apple.BoardServices:Injection] activating monitor for service com.apple.frontboard.workspace-service
+2026-10-26 03:44:07.860 Df DrawByStarlight[8566:7660] [com.apple.UIKit:BackgroundTask] Creating new assertion because there is no existing background assertion.
+2026-10-26 03:44:07.860 Df DrawByStarlight[8566:7656] [com.apple.FrontBoard:Common] FBSWorkspace registering source: com.apple.frontboard.systemappservices
+2026-10-26 03:44:07.860 Df DrawByStarlight[8566:7660] [com.apple.UIKit:BackgroundTask] Creating new background assertion
+2026-10-26 03:44:07.860 Df DrawByStarlight[8566:7660] [com.apple.UIKit:BackgroundTask] Created new background assertion <BKSProcessAssertion: 0x103d7c3c0>
+2026-10-26 03:44:07.861 Df DrawByStarlight[8566:7660] [com.apple.runningboard:connection] Creating connection to com.apple.runningboard
+2026-10-26 03:44:07.861 Df DrawByStarlight[8566:7660] [com.apple.xpc:connection] [0x103d5cf00] activating connection: mach=true listener=false peer=false name=com.apple.runningboard
+2026-10-26 03:44:07.861 Df DrawByStarlight[8566:7667] [com.apple.runningboard:connection] Sending handshake request attempt #1 to server
+2026-10-26 03:44:07.862 Df DrawByStarlight[8566:7656] [com.apple.FrontBoard:Common] FBSWorkspace connected to endpoint : <BSServiceConnectionEndpoint: 0x103d29320; target: com.apple.frontboard.systemappservices; service: com.apple.frontboard.workspace-service>
+2026-10-26 03:44:07.862 Df DrawByStarlight[8566:7656] [com.apple.FrontBoard:Common] <FBSWorkspaceScenesClient:0x103cac6e0 com.apple.frontboard.systemappservices> attempting immediate handshake from activate
+2026-10-26 03:44:07.863 Df DrawByStarlight[8566:7656] [com.apple.FrontBoard:Common] <FBSWorkspaceScenesClient:0x103cac6e0 com.apple.frontboard.systemappservices> sent handshake
+2026-10-26 03:44:07.863 Df DrawByStarlight[8566:7656] [com.apple.runningboard:general] Added observer for process assertions expiration warning: <_RBSExpirationWarningClient: 0x103d29820>
+2026-10-26 03:44:07.865 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UIApplicationSceneKeyboardSettings on FBSSceneSettings
+2026-10-26 03:44:07.865 Df DrawByStarlight[8566:7667] [com.apple.runningboard:connection] Handshake succeeded
+2026-10-26 03:44:07.865 Df DrawByStarlight[8566:7667] [com.apple.runningboard:connection] Identity resolved as app<com.pbordjadze.drawbystarlight((null))>
+2026-10-26 03:44:07.866 A  DrawByStarlight[8566:7664] (RunningBoardServices) didChangeInheritances
+2026-10-26 03:44:07.866 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneOcclusionSettings> on FBSSceneSettings
+2026-10-26 03:44:07.866 Df DrawByStarlight[8566:7660] [com.apple.UIKit:BackgroundTask] Incrementing reference count for background assertion <BKSProcessAssertion: 0x103d7c3c0>
+2026-10-26 03:44:07.867 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneInterfaceProtectionSettings> on FBSSceneSettings
+2026-10-26 03:44:07.867 Df DrawByStarlight[8566:7660] [com.apple.UIKit:BackgroundTask] Created background task <_UIBackgroundTaskInfo: 0x103c75ec0>: taskID = 1, taskName = Launch Background Task for Coalescing, creationTime = 502 (elapsed = 0).
+2026-10-26 03:44:07.867 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneLayoutPreferencesHostSettingsExtension on FBSSceneSettings
+2026-10-26 03:44:07.867 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneSafeAreaSettingsExtension on FBSSceneSettings
+2026-10-26 03:44:07.868 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneLayoutPreferenceClientSettingsExtension on FBSSceneClientSettings
+2026-10-26 03:44:07.869 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UIHomeAffordanceHostSceneSettings> on FBSSceneSettings
+2026-10-26 03:44:07.869 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISystemShellSceneHostingEnvironmentSettings on FBSSceneSettings
+2026-10-26 03:44:07.869 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneRenderingEnvironmentSettings on FBSSceneSettings
+2026-10-26 03:44:07.869 Df DrawByStarlight[8566:7656] [com.apple.dt.xctest:Default] Registering for test daemon availability notify post.
+2026-10-26 03:44:07.869 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneRenderingEnvironmentClientSettings> on FBSSceneClientSettings
+2026-10-26 03:44:07.869 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneTransitioningHostSettings> on FBSSceneSettings
+2026-10-26 03:44:07.869 Df DrawByStarlight[8566:7656] [com.apple.dt.xctest:Default] notify_get_state check indicated test daemon not ready.
+2026-10-26 03:44:07.870 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneFocusSystemSettings> on FBSSceneSettings
+2026-10-26 03:44:07.870 Df DrawByStarlight[8566:7656] [com.apple.dt.xctest:Default] notify_get_state check indicated test daemon not ready.
+2026-10-26 03:44:07.870 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneOrientationSettingsExtension on FBSSceneSettings
+2026-10-26 03:44:07.870 Df DrawByStarlight[8566:7656] [com.apple.dt.xctest:Default] notify_get_state check indicated test daemon not ready.
+2026-10-26 03:44:07.871 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneOrientationClientSettingsExtension on FBSSceneClientSettings
+2026-10-26 03:44:07.871 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneWindowingControlClientSettings on FBSSceneClientSettings
+2026-10-26 03:44:07.872 Df DrawByStarlight[8566:7660] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneHostingContentSizePreferenceClientSettings> on FBSSceneClientSettings
+2026-10-26 03:44:07.872 Df DrawByStarlight[8566:7656] [com.apple.UIKit:Application] Deactivation reason added: 11; deactivation reasons: 1024 -> 3072; animating application lifecycle event: 0
+2026-10-26 03:44:07.872 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension FBSSceneSettingsCore on FBSSceneSettings
+2026-10-26 03:44:07.874 Df DrawByStarlight[8566:7660] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneHostingTraitCollectionPropagationSettings on FBSSceneSettings
+2026-10-26 03:44:07.875 Df DrawByStarlight[8566:7656] [com.apple.UIKit:Application] Deactivation reason removed: 10; deactivation reasons: 3072 -> 2048; animating application lifecycle event: 0
+2026-10-26 03:44:07.876 Df DrawByStarlight[8566:7656] [com.apple.UIKit:EventBus] Event Timing Profile for Touch: not found, path="/System/Library/EventTimingProfiles/Sim.Touch.plist"
+2026-10-26 03:44:07.876 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension FBSSceneClientSettingsCore on FBSSceneClientSettings
+2026-10-26 03:44:07.876 Df DrawByStarlight[8566:7656] [com.apple.UIKit:EventBus] Event Timing Profile for Pencil: not found, path="/System/Library/EventTimingProfiles/Sim.Pencil.plist"
+2026-10-26 03:44:07.876 Df DrawByStarlight[8566:7656] [com.apple.UIKit:UpdateScheduler] Selected display: name=LCD (PurpleMain), id=1
+2026-10-26 03:44:07.876 Df DrawByStarlight[8566:7660] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneHostingSheetPresentationSettings> on FBSSceneSettings
+2026-10-26 03:44:07.877 Df DrawByStarlight[8566:7660] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneHostingSheetPresentationClientSettings> on FBSSceneClientSettings
+2026-10-26 03:44:07.878 Df DrawByStarlight[8566:7660] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneHostingEventDeferringSettings> on FBSSceneSettings
+2026-10-26 03:44:07.878 Df DrawByStarlight[8566:7660] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <UIKit__UITypedKeyValueSceneSettings> on FBSSceneSettings
+2026-10-26 03:44:07.879 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] UIMutableApplicationSceneSettings setting counterpart class: UIApplicationSceneSettings
+2026-10-26 03:44:07.879 Df DrawByStarlight[8566:7660] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <UIKit__UITypedKeyValueSceneSettings> on FBSSceneClientSettings
+2026-10-26 03:44:07.880 Df DrawByStarlight[8566:7660] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneHostingViewControllerPreferencePropagationClientSettings> on FBSSceneClientSettings
+2026-10-26 03:44:07.880 Df DrawByStarlight[8566:7660] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneZoomTransitionSettings> on FBSSceneSettings
+2026-10-26 03:44:07.880 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] UIMutableApplicationSceneClientSettings setting counterpart class: UIApplicationSceneClientSettings
+2026-10-26 03:44:07.881 Df DrawByStarlight[8566:7656] [com.apple.xpc:connection] [0x103d5d180] activating connection: mach=true listener=false peer=false name=com.apple.lsd.mapdb
+2026-10-26 03:44:07.881 Df DrawByStarlight[8566:766b] [com.apple.FrontBoard:SceneExtension] Realizing settings extension FBSSceneTransitionContextCore on FBSSceneTransitionContext
+2026-10-26 03:44:07.941 Df DrawByStarlight[8566:7656] [com.apple.BoardServices:XPCErrors] [C:2] Alloc com.apple.backboard.hid-services.xpc
+2026-10-26 03:44:07.941 Df DrawByStarlight[8566:7656] [com.apple.xpc:connection] [0x103d5d540] activating connection: mach=false listener=false peer=false name=(anonymous)
+2026-10-26 03:44:07.943 Df DrawByStarlight[8566:7656] [com.apple.app_launch_measurement:ApplicationLaunch] alm_acquire_pageins_recording_assertion: acquired pageins recording assertion!
+2026-10-26 03:44:07.947 Df DrawByStarlight[8566:7656] [com.apple.UIKit:BackgroundTask] Will add backgroundTask with taskName: Persistent SceneSession Map Update, expirationHandler: <__NSGlobalBlock__: 0x1e78c84e8>
+2026-10-26 03:44:07.947 Df DrawByStarlight[8566:7656] [com.apple.UIKit:BackgroundTask] Reusing background assertion <BKSProcessAssertion: 0x103d7c3c0>
+2026-10-26 03:44:07.947 Df DrawByStarlight[8566:7656] [com.apple.UIKit:BackgroundTask] Incrementing reference count for background assertion <BKSProcessAssertion: 0x103d7c3c0>
+2026-10-26 03:44:07.948 Df DrawByStarlight[8566:7656] [com.apple.UIKit:BackgroundTask] Created background task <_UIBackgroundTaskInfo: 0x103e75680>: taskID = 2, taskName = Persistent SceneSession Map Update, creationTime = 502 (elapsed = 0).
+2026-10-26 03:44:07.948 Df DrawByStarlight[8566:7656] [com.apple.UIKit:Application] Deactivation reason added: 5; deactivation reasons: 2048 -> 2080; animating application lifecycle event: 1
+2026-10-26 03:44:07.949 Df DrawByStarlight[8566:7656] [com.apple.UIKit:InterfaceStyle] Should send trait collection or coordinate space update, interface style 2 -> 2, <UIWindowScene: 0x1036ae9f0> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:07.950 Df DrawByStarlight[8566:7665] [com.apple.BackBoard:EventDelivery] BKSHIDEventDeliveryManager - connection activation
+2026-10-26 03:44:07.951 Df DrawByStarlight[8566:7656] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x1036ae9f0> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:07.951 Df DrawByStarlight[8566:7656] [com.apple.UIKit:HomeAffordanceObservation] Initializing: <_UIHomeAffordanceSceneNotifier: 0x103eb9570>; with scene: <UIWindowScene: 0x1036ae9f0>
+2026-10-26 03:44:07.951 Df DrawByStarlight[8566:7656] [com.apple.BacklightServices:scenes] 0x103c2ba20 setDelegate:<0x103c2bd20 _UIBacklightEnvironment> hasDelegate:YES for environment:sceneID:com.pbordjadze.drawbystarlight-default
+2026-10-26 03:44:07.951 Df DrawByStarlight[8566:7656] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x1036ae9f0> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:07.951 Df DrawByStarlight[8566:7656] [com.apple.UIKit:EventDeferring] [0x103eb9490] Initialized with scene: <UIWindowScene: 0x1036ae9f0>; behavior: <_UIEventDeferringBehavior_iOS: 0x103f5d620>; availableForProcess: 1, systemShellManagesKeyboardFocus: 1
+2026-10-26 03:44:07.953 Df DrawByStarlight[8566:7665] [com.apple.BackBoard:EventDelivery] BKSHIDEventObserver - connection activation
+2026-10-26 03:44:07.953 Df DrawByStarlight[8566:7656] [com.apple.BackBoard:EventDelivery] policyStatus:<BKSHIDEventDeliveryPolicyObserver: 0x103c4aa00; process scope; status: target> was:none
+2026-10-26 03:44:07.953 Df DrawByStarlight[8566:7656] [com.apple.UIKit:KeyWindow] Setting default evaluation strategy for UIUserInterfaceIdiomPhone to LastOneWins
+2026-10-26 03:44:07.953 Df DrawByStarlight[8566:7656] [com.apple.UIKit:KeyWindow] Scene target of keyboard event deferring environment did change: 1; scene: UIWindowScene: 0x1036ae9f0; scene identity: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.pbordjadze.drawbystarlight-default
+2026-10-26 03:44:07.953 Df DrawByStarlight[8566:7656] [com.apple.UIKit:EventDeferring] [0x103eb9490] Scene target of event deferring environments did update: scene: 0x1036ae9f0; current systemShellManagesKeyboardFocus: 1; systemShellManagesKeyboardFocusForScene: 1; eligibleForRecordRemoval: 1;
+2026-10-26 03:44:07.953 Df DrawByStarlight[8566:7656] [com.apple.UIKit:KeyWindow] Scene became target of keyboard event deferring environment: UIWindowScene: 0x1036ae9f0; scene identity: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.pbordjadze.drawbystarlight-default
+2026-10-26 03:44:07.953 Df DrawByStarlight[8566:7656] [com.apple.UIKit:KeyWindow] Stack[KeyWindow] 0x103c2abe0: Taking no further action for migration from LastOneWins -> SystemShellManaged as there are no scenes
+2026-10-26 03:44:07.953 Df DrawByStarlight[8566:7656] [com.apple.UIKit:KeyWindow] Setting default evaluation strategy for UIUserInterfaceIdiomPhone to SystemShellManaged
+2026-10-26 03:44:07.953 Df DrawByStarlight[8566:7656] [com.apple.UIKit:KeyWindow] Key window needs update: 0; currentKeyWindowScene: 0x0; evaluatedKeyWindowScene: 0x1036ae9f0; currentApplicationKeyWindow: 0x0; evaluatedApplicationKeyWindow: 0x0; reason: UIWindowScene: 0x1036ae9f0: Window scene became target of keyboard environment
+2026-10-26 03:44:07.954 Df DrawByStarlight[8566:7656] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x1036ae9f0> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:07.954 Df DrawByStarlight[8566:7656] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x1036ae9f0> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:07.955 Df DrawByStarlight[8566:7656] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x1036ae9f0> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:08.000 Df DrawByStarlight[8566:7656] [com.apple.UIKit:Orientation] <UIWindowScene: 0x1036ae9f0> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65) Scene updated orientation preferences: none -> ( Pu Ll Lr )
+2026-10-26 03:44:08.004 Df DrawByStarlight[8566:7656] [com.apple.UIKit:KeyWindow] Key window API is scene-level: YES
+2026-10-26 03:44:08.004 Df DrawByStarlight[8566:7656] [com.apple.UIKit:KeyWindow] UIWindowScene: 0x1036ae9f0: Window became key in scene: UIWindow: 0x103e28400; contextId: 0x914D9E60: reason: UIWindowScene: 0x1036ae9f0: Window requested to become key in scene: 0x103e28400
+2026-10-26 03:44:08.004 Df DrawByStarlight[8566:7656] [com.apple.UIKit:KeyWindow] Key window needs update: 1; currentKeyWindowScene: 0x0; evaluatedKeyWindowScene: 0x1036ae9f0; currentApplicationKeyWindow: 0x0; evaluatedApplicationKeyWindow: 0x103e28400; reason: UIWindowScene: 0x1036ae9f0: Window requested to become key in scene: 0x103e28400
+2026-10-26 03:44:08.004 Df DrawByStarlight[8566:7656] [com.apple.UIKit:KeyWindow] Window did become application key: UIWindow: 0x103e28400; contextId: 0x914D9E60; scene identity: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.pbordjadze.drawbystarlight-default
+2026-10-26 03:44:08.004 Df DrawByStarlight[8566:7656] [com.apple.UIKit:EventDeferring] [0x103eb9490] Begin local event deferring requested for token: 0x103c49a40; environments: 1; reason: UIWindowScene: 0x1036ae9f0: Begin event deferring in keyboardFocus for window: 0x103e28400
+2026-10-26 03:44:08.007 Df DrawByStarlight[8566:7667] [com.apple.BackBoard:EventDelivery] policyStatus:<BKSHIDEventDeliveryPolicyObserver: 0x103c4aa00; token: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.pbordjadze.drawbystarlight-default; status: ancestor> was:target
+2026-10-26 03:44:08.007 Df DrawByStarlight[8566:7656] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x1036ae9f0> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:08.009 Df DrawByStarlight[8566:7656] [com.apple.UIKit:AppLifecycle] sceneOfRecord: sceneID: sceneID:com.pbordjadze.drawbystarlight-default  persistentID: 58194CE3-83A9-4D91-A14C-E27A8BAFBA65
+2026-10-26 03:44:08.009 Df DrawByStarlight[8566:7656] [com.apple.UIKit:Application] Ignoring already applied deactivation reason: 5; deactivation reasons: 2080
+2026-10-26 03:44:08.009 Df DrawByStarlight[8566:7656] [com.apple.UIKit:Application] Deactivation reason added: 12; deactivation reasons: 2080 -> 6176; animating application lifecycle event: 1
+2026-10-26 03:44:08.009 Df DrawByStarlight[8566:7656] [com.apple.UIKit:Application] Deactivation reason removed: 11; deactivation reasons: 6176 -> 4128; animating application lifecycle event: 1
+2026-10-26 03:44:08.010 Df DrawByStarlight[8566:7656] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneIntelligenceSupportSettings> on FBSSceneSettings
+2026-10-26 03:44:08.013 Df DrawByStarlight[8566:7656] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x1036ae9f0> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:08.016 A  DrawByStarlight[8566:7656] (CoreFoundation) Updating Key-Value Observers Of Preferences
+2026-10-26 03:44:08.017 Df DrawByStarlight[8566:7667] [com.apple.UIIntelligenceSupport:xpc] establishing connection to agent
+2026-10-26 03:44:08.025 Df DrawByStarlight[8566:7667] [com.apple.xpc:session] [0x103d7ea30] Session created.
+2026-10-26 03:44:08.027 Df DrawByStarlight[8566:7667] [com.apple.xpc:session] [0x103d7ea30] Session created from connection [0x103fe8a00]
+2026-10-26 03:44:08.027 Df DrawByStarlight[8566:7667] [com.apple.xpc:connection] [0x103fe8a00] activating connection: mach=true listener=false peer=false name=com.apple.uiintelligencesupport.agent
+2026-10-26 03:44:08.039 Df DrawByStarlight[8566:7667] [com.apple.xpc:session] [0x103d7ea30] Session activated
+2026-10-26 03:44:08.377 Df DrawByStarlight[8566:7656] [PrototypeTools:domain] Not observing PTDefaults on customer install.
+2026-10-26 03:44:08.477 Df DrawByStarlight[8566:7667] [com.apple.UIKit:BackgroundTask] Ending background task with UIBackgroundTaskIdentifier: 2
+2026-10-26 03:44:08.478 Df DrawByStarlight[8566:7667] [com.apple.UIKit:BackgroundTask] Ending task with identifier 2 and description: <_UIBackgroundTaskInfo: 0x103e75680>: taskID = 2, taskName = Persistent SceneSession Map Update, creationTime = 502 (elapsed = 0), _expireHandler: <__NSGlobalBlock__: 0x1e78c84e8>
+2026-10-26 03:44:08.478 Df DrawByStarlight[8566:7667] [com.apple.UIKit:BackgroundTask] Decrementing reference count for assertion <BKSProcessAssertion: 0x103d7c3c0> (used by background task with identifier 2: <_UIBackgroundTaskInfo: 0x103e75680>: taskID = 2, taskName = Persistent SceneSession Map Update, creationTime = 502 (elapsed = 0))
+2026-10-26 03:44:08.570 Df DrawByStarlight[8566:7656] [com.apple.network:activity] Create activity from XPC object <nw_activity 50:1 [1C073BEF-6FA7-4FD5-B70C-957AA51EBC61] (reporting strategy default)>
+2026-10-26 03:44:08.570 Df DrawByStarlight[8566:7656] [com.apple.network:activity] Create activity from XPC object <nw_activity 50:2 [C4F2FFD2-D19F-41ED-8BA8-1D2432AB5772] (reporting strategy default)>
+2026-10-26 03:44:08.570 Df DrawByStarlight[8566:7656] [com.apple.network:activity] Set activity <nw_activity 50:1 [1C073BEF-6FA7-4FD5-B70C-957AA51EBC61] (reporting strategy default)> as the global parent
+2026-10-26 03:44:08.571 Df DrawByStarlight[8566:7656] [com.apple.UIKit:BackgroundTask] Ending background task with UIBackgroundTaskIdentifier: 1
+2026-10-26 03:44:08.571 Df DrawByStarlight[8566:7656] [com.apple.UIKit:BackgroundTask] Ending task with identifier 1 and description: <_UIBackgroundTaskInfo: 0x103c75ec0>: taskID = 1, taskName = Launch Background Task for Coalescing, creationTime = 502 (elapsed = 1), _expireHandler: (null)
+2026-10-26 03:44:08.571 Df DrawByStarlight[8566:7656] [com.apple.UIKit:BackgroundTask] Decrementing reference count for assertion <BKSProcessAssertion: 0x103d7c3c0> (used by background task with identifier 1: <_UIBackgroundTaskInfo: 0x103c75ec0>: taskID = 1, taskName = Launch Background Task for Coalescing, creationTime = 502 (elapsed = 1))
+2026-10-26 03:44:08.571 Df DrawByStarlight[8566:7656] [com.apple.UIKit:BackgroundTask] Will invalidate assertion: <BKSProcessAssertion: 0x103d7c3c0> for task identifier: 1
+2026-10-26 03:44:08.576 Df DrawByStarlight[8566:7665] [com.apple.CoreAnalytics:client] No XPC connection in Simulator
+2026-10-26 03:44:08.577 E  DrawByStarlight[8566:7665] [com.apple.app_launch_measurement:General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+2026-10-26 03:44:08.582 A  DrawByStarlight[8566:7664] (RunningBoardServices) didChangeInheritances
+2026-10-26 03:44:08.582 Df DrawByStarlight[8566:7656] [com.apple.UIKit:EventDeferring] [0x103eb9490] Scene target of event deferring environments did update: scene: 0x1036ae9f0; current systemShellManagesKeyboardFocus: 1; systemShellManagesKeyboardFocusForScene: 1; eligibleForRecordRemoval: 1;
+2026-10-26 03:44:08.583 Df DrawByStarlight[8566:7656] [com.apple.UIKit:KeyWindow] Scene became target of keyboard event deferring environment: UIWindowScene: 0x1036ae9f0; scene identity: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.pbordjadze.drawbystarlight-default
+2026-10-26 03:44:08.584 Df DrawByStarlight[8566:7656] [com.apple.Accessibility:AXCommon] Read Per-App on Init: Smart invert = (null)
+2026-10-26 03:44:08.585 Df DrawByStarlight[8566:7656] [com.apple.UIKit:UpdateScheduler] Target list changed: <CADisplay:LCD PurpleMain>
+2026-10-26 03:44:08.585 Df DrawByStarlight[8566:7656] [com.apple.UIKit:AppLifecycle] sceneOfRecord: sceneID: sceneID:com.pbordjadze.drawbystarlight-default  persistentID: 58194CE3-83A9-4D91-A14C-E27A8BAFBA65
+2026-10-26 03:44:08.586 Df DrawByStarlight[8566:7656] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x1036ae9f0> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:08.587 Df DrawByStarlight[8566:7656] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x1036ae9f0> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:08.589 Df DrawByStarlight[8566:7656] [com.apple.UIKit:AppLifecycle] sceneOfRecord: sceneID: sceneID:com.pbordjadze.drawbystarlight-default  persistentID: 58194CE3-83A9-4D91-A14C-E27A8BAFBA65
+2026-10-26 03:44:08.590 Df DrawByStarlight[8566:7656] [com.apple.UIKit:Application] Deactivation reason removed: 12; deactivation reasons: 4128 -> 32; animating application lifecycle event: 1
+2026-10-26 03:44:08.590 Df DrawByStarlight[8566:7656] [com.apple.KeyboardArbiter:Client] Send setDeactivating: N (-DeactivationReason:SuspendedEventsOnly)
+2026-10-26 03:44:08.592 Df DrawByStarlight[8566:7656] [com.apple.UIKit:Application] Deactivation reason removed: 5; deactivation reasons: 32 -> 0; animating application lifecycle event: 0
+2026-10-26 03:44:08.594 Df DrawByStarlight[8566:7656] [com.apple.KeyboardArbiter:Client] startConnection
+2026-10-26 03:44:08.596 Df DrawByStarlight[8566:7656] [com.apple.xpc:connection] [0x106d50280] activating connection: mach=true listener=false peer=false name=com.apple.UIKit.KeyboardManagement.hosted
+2026-10-26 03:44:08.602 Df DrawByStarlight[8566:7656] [com.apple.KeyboardArbiter:Client] handleKeyboardChange: set currentKeyboard:N (wasKeyboard:N)
+2026-10-26 03:44:08.612 Df DrawByStarlight[8566:7656] [com.apple.UIKit:KeyboardSceneDelegate] forceReloadInputViews
+2026-10-26 03:44:08.612 Df DrawByStarlight[8566:7656] [com.apple.UIKit:KeyboardSceneDelegate] Reloading input views for key-window scene responder: <(null): 0x0; > force:Y
+2026-10-26 03:44:08.618 Df DrawByStarlight[8566:7656] [com.apple.UIKit:KeyboardArbiterClientLog] isWritingToolsHandlingKeyboardTracking:Y (WT ready:Y, Arbiter ready:Y)
+2026-10-26 03:44:08.642 A  DrawByStarlight[8566:7665] (RunningBoardServices) didChangeInheritances
+2026-10-26 03:44:08.665 Df DrawByStarlight[8566:7656] [com.apple.network:activity] <nw_activity 50:1 [1C073BEF-6FA7-4FD5-B70C-957AA51EBC61] (global parent) (reporting strategy default) complete (reason success)> complete with reason 2 (success), duration 1218ms
+2026-10-26 03:44:08.666 Df DrawByStarlight[8566:7656] [com.apple.network:activity] <nw_activity 50:2 [C4F2FFD2-D19F-41ED-8BA8-1D2432AB5772] (reporting strategy default) complete (reason success)> complete with reason 2 (success), duration 1218ms
+2026-10-26 03:44:08.666 Df DrawByStarlight[8566:7656] [com.apple.network:activity] Unsetting the global parent activity <nw_activity 50:1 [1C073BEF-6FA7-4FD5-B70C-957AA51EBC61] (global parent) (reporting strategy default) complete (reason success)>
+2026-10-26 03:44:08.666 Df DrawByStarlight[8566:7656] [com.apple.network:activity] Unset the global parent activity
+2026-10-26 03:44:08.666 Df DrawByStarlight[8566:7656] [com.apple.app_launch_measurement:ApplicationLaunch] alm_release_pageins_recording_assertion: releasing pageins recording assertion
+2026-10-26 03:44:08.666 E  DrawByStarlight[8566:7664] [com.apple.app_launch_measurement:General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+2026-10-26 03:44:08.668 Df DrawByStarlight[8566:7656] [com.apple.UIKit:AppLifecycle] sceneOfRecord: sceneID: sceneID:com.pbordjadze.drawbystarlight-default  persistentID: 58194CE3-83A9-4D91-A14C-E27A8BAFBA65
+2026-10-26 03:44:08.668 Df DrawByStarlight[8566:7656] [com.apple.UIKit:InterfaceStyle] Scene did update interface style to 1, <UIWindowScene: 0x1036ae9f0> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:08.669 Df DrawByStarlight[8566:7656] [com.apple.UIKit:InterfaceStyle] Push traits update to screen for new style 1, <UIWindowScene: 0x1036ae9f0> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:08.713 A  DrawByStarlight[8566:7665] (RunningBoardServices) didChangeInheritances
+2026-10-26 03:44:09.017 A  DrawByStarlight[8566:7665] (RunningBoardServices) didChangeInheritances
+2026-10-26 03:44:17.159 Df DrawByStarlight[8917:79b2] [com.apple.xpc:connection] [0x105369fe0] activating connection: mach=true listener=false peer=false name=com.apple.cfprefsd.daemon
+2026-10-26 03:44:17.174 Df DrawByStarlight[8917:79b7] [com.apple.xpc:connection] [0x105371f20] activating connection: mach=true listener=false peer=false name=com.apple.fontservicesd
+2026-10-26 03:44:17.178 Df DrawByStarlight[8917:79b6] [com.apple.BoardServices:XPCErrors] [C:1] Alloc com.apple.frontboard.systemappservices
+2026-10-26 03:44:17.179 Df DrawByStarlight[8917:79b6] [com.apple.xpc:connection] [0x10595c000] activating connection: mach=false listener=false peer=false name=(anonymous)
+2026-10-26 03:44:17.192 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:UIScreen] Evaluated capturing state as 0 on <UIScreen: 0x10595c140> for initial
+2026-10-26 03:44:17.193 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:UIScreen] Evaluated capturing state as 0 on <UIScreen: 0x10595c140> for CADisplay KVO
+2026-10-26 03:44:17.196 Df DrawByStarlight[8917:79b2] (libMobileGestalt.dylib) No persisted cache on this platform.
+2026-10-26 03:44:17.197 Df DrawByStarlight[8917:79b2] [com.apple.Accessibility:AXSupportCommon] Read CategoryName: per-app = 1, category name = (null)
+2026-10-26 03:44:17.197 Df DrawByStarlight[8917:79b2] [com.apple.Accessibility:AXSupportCommon] Read CategoryName: per-app = 0, category name = (null)
+2026-10-26 03:44:17.218 A  DrawByStarlight[8917:79b7] (CoreFoundation) Loading Preferences From User Session CFPrefsD
+2026-10-26 03:44:17.221 Df DrawByStarlight[8917:79b8] [com.apple.UIKit:BackgroundTask] Creating new assertion because there is no existing background assertion.
+2026-10-26 03:44:17.221 Df DrawByStarlight[8917:79b8] [com.apple.UIKit:BackgroundTask] Creating new background assertion
+2026-10-26 03:44:17.221 Df DrawByStarlight[8917:79b8] [com.apple.UIKit:BackgroundTask] Created new background assertion <BKSProcessAssertion: 0x10597c0a0>
+2026-10-26 03:44:17.221 Df DrawByStarlight[8917:79b8] [com.apple.runningboard:connection] Initializing connection
+2026-10-26 03:44:17.221 Df DrawByStarlight[8917:79b8] [com.apple.runningboard:process] Removing all cached process handles
+2026-10-26 03:44:17.222 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:Application] Deactivation reason added: 10; deactivation reasons: 0 -> 1024; animating application lifecycle event: 0
+2026-10-26 03:44:17.223 Df DrawByStarlight[8917:79b8] [com.apple.runningboard:connection] Creating connection to com.apple.runningboard
+2026-10-26 03:44:17.223 Df DrawByStarlight[8917:79b8] [com.apple.xpc:connection] [0x10595cf00] activating connection: mach=true listener=false peer=false name=com.apple.runningboard
+2026-10-26 03:44:17.223 Df DrawByStarlight[8917:79b2] [com.apple.BoardServices:Injection] activating monitor for service com.apple.frontboard.open
+2026-10-26 03:44:17.223 Df DrawByStarlight[8917:79b6] [com.apple.runningboard:connection] Sending handshake request attempt #1 to server
+2026-10-26 03:44:17.223 Df DrawByStarlight[8917:79b2] [com.apple.BoardServices:Injection] activating monitor for service com.apple.frontboard.workspace-service
+2026-10-26 03:44:17.224 Df DrawByStarlight[8917:79b2] [com.apple.FrontBoard:Common] FBSWorkspace registering source: com.apple.frontboard.systemappservices
+2026-10-26 03:44:17.226 Df DrawByStarlight[8917:79b2] [com.apple.FrontBoard:Common] FBSWorkspace connected to endpoint : <BSServiceConnectionEndpoint: 0x105929100; target: com.apple.frontboard.systemappservices; service: com.apple.frontboard.workspace-service>
+2026-10-26 03:44:17.226 Df DrawByStarlight[8917:79b2] [com.apple.FrontBoard:Common] <FBSWorkspaceScenesClient:0x1058acdc0 com.apple.frontboard.systemappservices> attempting immediate handshake from activate
+2026-10-26 03:44:17.227 Df DrawByStarlight[8917:79b6] [com.apple.runningboard:connection] Handshake succeeded
+2026-10-26 03:44:17.227 Df DrawByStarlight[8917:79b2] [com.apple.FrontBoard:Common] <FBSWorkspaceScenesClient:0x1058acdc0 com.apple.frontboard.systemappservices> sent handshake
+2026-10-26 03:44:17.228 Df DrawByStarlight[8917:79b2] [com.apple.runningboard:general] Added observer for process assertions expiration warning: <_RBSExpirationWarningClient: 0x105929820>
+2026-10-26 03:44:17.228 Df DrawByStarlight[8917:79b6] [com.apple.runningboard:connection] Identity resolved as app<com.pbordjadze.drawbystarlight((null))>
+2026-10-26 03:44:17.235 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UIApplicationSceneKeyboardSettings on FBSSceneSettings
+2026-10-26 03:44:17.236 Df DrawByStarlight[8917:79b8] [com.apple.UIKit:BackgroundTask] Incrementing reference count for background assertion <BKSProcessAssertion: 0x10597c0a0>
+2026-10-26 03:44:17.236 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneOcclusionSettings> on FBSSceneSettings
+2026-10-26 03:44:17.236 Df DrawByStarlight[8917:79b8] [com.apple.UIKit:BackgroundTask] Created background task <_UIBackgroundTaskInfo: 0x105877180>: taskID = 1, taskName = Launch Background Task for Coalescing, creationTime = 511 (elapsed = 0).
+2026-10-26 03:44:17.237 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneInterfaceProtectionSettings> on FBSSceneSettings
+2026-10-26 03:44:17.237 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneLayoutPreferencesHostSettingsExtension on FBSSceneSettings
+2026-10-26 03:44:17.237 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneSafeAreaSettingsExtension on FBSSceneSettings
+2026-10-26 03:44:17.238 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneLayoutPreferenceClientSettingsExtension on FBSSceneClientSettings
+2026-10-26 03:44:17.239 Df DrawByStarlight[8917:79b2] [com.apple.dt.xctest:Default] Registering for test daemon availability notify post.
+2026-10-26 03:44:17.239 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UIHomeAffordanceHostSceneSettings> on FBSSceneSettings
+2026-10-26 03:44:17.239 Df DrawByStarlight[8917:79b2] [com.apple.dt.xctest:Default] notify_get_state check indicated test daemon not ready.
+2026-10-26 03:44:17.239 Df DrawByStarlight[8917:79b2] [com.apple.dt.xctest:Default] notify_get_state check indicated test daemon not ready.
+2026-10-26 03:44:17.240 Df DrawByStarlight[8917:79b2] [com.apple.dt.xctest:Default] notify_get_state check indicated test daemon not ready.
+2026-10-26 03:44:17.240 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISystemShellSceneHostingEnvironmentSettings on FBSSceneSettings
+2026-10-26 03:44:17.240 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneRenderingEnvironmentSettings on FBSSceneSettings
+2026-10-26 03:44:17.240 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:Application] Deactivation reason added: 11; deactivation reasons: 1024 -> 3072; animating application lifecycle event: 0
+2026-10-26 03:44:17.241 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneRenderingEnvironmentClientSettings> on FBSSceneClientSettings
+2026-10-26 03:44:17.241 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneTransitioningHostSettings> on FBSSceneSettings
+2026-10-26 03:44:17.241 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneFocusSystemSettings> on FBSSceneSettings
+2026-10-26 03:44:17.241 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneOrientationSettingsExtension on FBSSceneSettings
+2026-10-26 03:44:17.241 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneOrientationClientSettingsExtension on FBSSceneClientSettings
+2026-10-26 03:44:17.242 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneWindowingControlClientSettings on FBSSceneClientSettings
+2026-10-26 03:44:17.242 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:Application] Deactivation reason removed: 10; deactivation reasons: 3072 -> 2048; animating application lifecycle event: 0
+2026-10-26 03:44:17.242 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension FBSSceneSettingsCore on FBSSceneSettings
+2026-10-26 03:44:17.243 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:EventBus] Event Timing Profile for Touch: not found, path="/System/Library/EventTimingProfiles/Sim.Touch.plist"
+2026-10-26 03:44:17.243 Df DrawByStarlight[8917:79b8] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneHostingContentSizePreferenceClientSettings> on FBSSceneClientSettings
+2026-10-26 03:44:17.243 A  DrawByStarlight[8917:79bc] (RunningBoardServices) didChangeInheritances
+2026-10-26 03:44:17.243 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:EventBus] Event Timing Profile for Pencil: not found, path="/System/Library/EventTimingProfiles/Sim.Pencil.plist"
+2026-10-26 03:44:17.243 Df DrawByStarlight[8917:79b8] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneHostingTraitCollectionPropagationSettings on FBSSceneSettings
+2026-10-26 03:44:17.244 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:UpdateScheduler] Selected display: name=LCD (PurpleMain), id=1
+2026-10-26 03:44:17.244 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension FBSSceneClientSettingsCore on FBSSceneClientSettings
+2026-10-26 03:44:17.245 Df DrawByStarlight[8917:79b8] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneHostingSheetPresentationSettings> on FBSSceneSettings
+2026-10-26 03:44:17.245 Df DrawByStarlight[8917:79b8] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneHostingSheetPresentationClientSettings> on FBSSceneClientSettings
+2026-10-26 03:44:17.246 Df DrawByStarlight[8917:79b8] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneHostingEventDeferringSettings> on FBSSceneSettings
+2026-10-26 03:44:17.247 Df DrawByStarlight[8917:79b8] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <UIKit__UITypedKeyValueSceneSettings> on FBSSceneSettings
+2026-10-26 03:44:17.248 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] UIMutableApplicationSceneSettings setting counterpart class: UIApplicationSceneSettings
+2026-10-26 03:44:17.249 Df DrawByStarlight[8917:79b8] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <UIKit__UITypedKeyValueSceneSettings> on FBSSceneClientSettings
+2026-10-26 03:44:17.249 Df DrawByStarlight[8917:79b8] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneHostingViewControllerPreferencePropagationClientSettings> on FBSSceneClientSettings
+2026-10-26 03:44:17.250 Df DrawByStarlight[8917:79b8] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneZoomTransitionSettings> on FBSSceneSettings
+2026-10-26 03:44:17.250 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] UIMutableApplicationSceneClientSettings setting counterpart class: UIApplicationSceneClientSettings
+2026-10-26 03:44:17.250 Df DrawByStarlight[8917:79bb] [com.apple.FrontBoard:SceneExtension] Realizing settings extension FBSSceneTransitionContextCore on FBSSceneTransitionContext
+2026-10-26 03:44:17.252 Df DrawByStarlight[8917:79b2] [com.apple.xpc:connection] [0x10595d180] activating connection: mach=true listener=false peer=false name=com.apple.lsd.mapdb
+2026-10-26 03:44:17.317 Df DrawByStarlight[8917:79b2] [com.apple.BoardServices:XPCErrors] [C:2] Alloc com.apple.backboard.hid-services.xpc
+2026-10-26 03:44:17.318 Df DrawByStarlight[8917:79b2] [com.apple.xpc:connection] [0x10595d540] activating connection: mach=false listener=false peer=false name=(anonymous)
+2026-10-26 03:44:17.321 Df DrawByStarlight[8917:79b2] [com.apple.app_launch_measurement:ApplicationLaunch] alm_acquire_pageins_recording_assertion: acquired pageins recording assertion!
+2026-10-26 03:44:17.323 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:Application] Deactivation reason added: 5; deactivation reasons: 2048 -> 2080; animating application lifecycle event: 1
+2026-10-26 03:44:17.324 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:InterfaceStyle] Should send trait collection or coordinate space update, interface style 2 -> 2, <UIWindowScene: 0x105378890> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:17.326 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x105378890> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:17.326 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:HomeAffordanceObservation] Initializing: <_UIHomeAffordanceSceneNotifier: 0x105ad9650>; with scene: <UIWindowScene: 0x105378890>
+2026-10-26 03:44:17.326 Df DrawByStarlight[8917:79b2] [com.apple.BacklightServices:scenes] 0x10582afa0 setDelegate:<0x10582af10 _UIBacklightEnvironment> hasDelegate:YES for environment:sceneID:com.pbordjadze.drawbystarlight-default
+2026-10-26 03:44:17.327 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x105378890> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:17.327 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:EventDeferring] [0x105ad9570] Initialized with scene: <UIWindowScene: 0x105378890>; behavior: <_UIEventDeferringBehavior_iOS: 0x105b79560>; availableForProcess: 1, systemShellManagesKeyboardFocus: 1
+2026-10-26 03:44:17.328 Df DrawByStarlight[8917:79bb] [com.apple.BackBoard:EventDelivery] BKSHIDEventDeliveryManager - connection activation
+2026-10-26 03:44:17.330 Df DrawByStarlight[8917:79b8] [com.apple.BackBoard:EventDelivery] BKSHIDEventObserver - connection activation
+2026-10-26 03:44:17.330 Df DrawByStarlight[8917:79b2] [com.apple.BackBoard:EventDelivery] policyStatus:<BKSHIDEventDeliveryPolicyObserver: 0x105849c80; process scope; status: target> was:none
+2026-10-26 03:44:17.330 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:KeyWindow] Setting default evaluation strategy for UIUserInterfaceIdiomPhone to LastOneWins
+2026-10-26 03:44:17.330 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:KeyWindow] Scene target of keyboard event deferring environment did change: 1; scene: UIWindowScene: 0x105378890; scene identity: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.pbordjadze.drawbystarlight-default
+2026-10-26 03:44:17.330 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:EventDeferring] [0x105ad9570] Scene target of event deferring environments did update: scene: 0x105378890; current systemShellManagesKeyboardFocus: 1; systemShellManagesKeyboardFocusForScene: 1; eligibleForRecordRemoval: 1;
+2026-10-26 03:44:17.330 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:KeyWindow] Scene became target of keyboard event deferring environment: UIWindowScene: 0x105378890; scene identity: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.pbordjadze.drawbystarlight-default
+2026-10-26 03:44:17.330 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:KeyWindow] Stack[KeyWindow] 0x10582aa30: Taking no further action for migration from LastOneWins -> SystemShellManaged as there are no scenes
+2026-10-26 03:44:17.330 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:KeyWindow] Setting default evaluation strategy for UIUserInterfaceIdiomPhone to SystemShellManaged
+2026-10-26 03:44:17.330 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:KeyWindow] Key window needs update: 0; currentKeyWindowScene: 0x0; evaluatedKeyWindowScene: 0x105378890; currentApplicationKeyWindow: 0x0; evaluatedApplicationKeyWindow: 0x0; reason: UIWindowScene: 0x105378890: Window scene became target of keyboard environment
+2026-10-26 03:44:17.331 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x105378890> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:17.331 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x105378890> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:17.334 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x105378890> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:17.409 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:Orientation] <UIWindowScene: 0x105378890> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65) Scene updated orientation preferences: none -> ( Pu Ll Lr )
+2026-10-26 03:44:17.416 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:KeyWindow] Key window API is scene-level: YES
+2026-10-26 03:44:17.416 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:KeyWindow] UIWindowScene: 0x105378890: Window became key in scene: UIWindow: 0x105a28400; contextId: 0x1A6934F5: reason: UIWindowScene: 0x105378890: Window requested to become key in scene: 0x105a28400
+2026-10-26 03:44:17.416 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:KeyWindow] Key window needs update: 1; currentKeyWindowScene: 0x0; evaluatedKeyWindowScene: 0x105378890; currentApplicationKeyWindow: 0x0; evaluatedApplicationKeyWindow: 0x105a28400; reason: UIWindowScene: 0x105378890: Window requested to become key in scene: 0x105a28400
+2026-10-26 03:44:17.416 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:KeyWindow] Window did become application key: UIWindow: 0x105a28400; contextId: 0x1A6934F5; scene identity: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.pbordjadze.drawbystarlight-default
+2026-10-26 03:44:17.416 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:EventDeferring] [0x105ad9570] Begin local event deferring requested for token: 0x10584ad00; environments: 1; reason: UIWindowScene: 0x105378890: Begin event deferring in keyboardFocus for window: 0x105a28400
+2026-10-26 03:44:17.419 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x105378890> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:17.420 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:AppLifecycle] sceneOfRecord: sceneID: sceneID:com.pbordjadze.drawbystarlight-default  persistentID: 58194CE3-83A9-4D91-A14C-E27A8BAFBA65
+2026-10-26 03:44:17.420 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:Application] Ignoring already applied deactivation reason: 5; deactivation reasons: 2080
+2026-10-26 03:44:17.420 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:Application] Deactivation reason added: 12; deactivation reasons: 2080 -> 6176; animating application lifecycle event: 1
+2026-10-26 03:44:17.420 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:Application] Deactivation reason removed: 11; deactivation reasons: 6176 -> 4128; animating application lifecycle event: 1
+2026-10-26 03:44:17.421 Df DrawByStarlight[8917:79b2] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneIntelligenceSupportSettings> on FBSSceneSettings
+2026-10-26 03:44:17.423 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x105378890> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:17.424 Df DrawByStarlight[8917:79b9] [com.apple.UIIntelligenceSupport:xpc] establishing connection to agent
+2026-10-26 03:44:17.427 Df DrawByStarlight[8917:79b8] [com.apple.BackBoard:EventDelivery] policyStatus:<BKSHIDEventDeliveryPolicyObserver: 0x105849c80; token: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.pbordjadze.drawbystarlight-default; status: ancestor> was:target
+2026-10-26 03:44:17.427 Df DrawByStarlight[8917:79b9] [com.apple.xpc:session] [0x10597c7d0] Session created.
+2026-10-26 03:44:17.427 A  DrawByStarlight[8917:79b2] (CoreFoundation) Updating Key-Value Observers Of Preferences
+2026-10-26 03:44:17.428 Df DrawByStarlight[8917:79b9] [com.apple.xpc:session] [0x10597c7d0] Session created from connection [0x10880ca00]
+2026-10-26 03:44:17.428 Df DrawByStarlight[8917:79b9] [com.apple.xpc:connection] [0x10880ca00] activating connection: mach=true listener=false peer=false name=com.apple.uiintelligencesupport.agent
+2026-10-26 03:44:17.428 Df DrawByStarlight[8917:79b9] [com.apple.xpc:session] [0x10597c7d0] Session activated
+2026-10-26 03:44:17.482 Df DrawByStarlight[8917:79b2] [PrototypeTools:domain] Not observing PTDefaults on customer install.
+2026-10-26 03:44:17.583 Df DrawByStarlight[8917:79b2] [com.apple.network:activity] Create activity from XPC object <nw_activity 50:1 [858290EE-E2BF-4BA2-8C50-8425CC141D24] (reporting strategy default)>
+2026-10-26 03:44:17.583 Df DrawByStarlight[8917:79b2] [com.apple.network:activity] Create activity from XPC object <nw_activity 50:2 [75093DF6-B3B5-4E0C-8586-6F80D4F67F8D] (reporting strategy default)>
+2026-10-26 03:44:17.583 Df DrawByStarlight[8917:79b2] [com.apple.network:activity] Set activity <nw_activity 50:1 [858290EE-E2BF-4BA2-8C50-8425CC141D24] (reporting strategy default)> as the global parent
+2026-10-26 03:44:17.584 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:BackgroundTask] Ending background task with UIBackgroundTaskIdentifier: 1
+2026-10-26 03:44:17.584 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:BackgroundTask] Ending task with identifier 1 and description: <_UIBackgroundTaskInfo: 0x105877180>: taskID = 1, taskName = Launch Background Task for Coalescing, creationTime = 511 (elapsed = 1), _expireHandler: (null)
+2026-10-26 03:44:17.584 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:BackgroundTask] Decrementing reference count for assertion <BKSProcessAssertion: 0x10597c0a0> (used by background task with identifier 1: <_UIBackgroundTaskInfo: 0x105877180>: taskID = 1, taskName = Launch Background Task for Coalescing, creationTime = 511 (elapsed = 1))
+2026-10-26 03:44:17.584 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:BackgroundTask] Will invalidate assertion: <BKSProcessAssertion: 0x10597c0a0> for task identifier: 1
+2026-10-26 03:44:17.590 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:EventDeferring] [0x105ad9570] Scene target of event deferring environments did update: scene: 0x105378890; current systemShellManagesKeyboardFocus: 1; systemShellManagesKeyboardFocusForScene: 1; eligibleForRecordRemoval: 1;
+2026-10-26 03:44:17.590 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:KeyWindow] Scene became target of keyboard event deferring environment: UIWindowScene: 0x105378890; scene identity: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.pbordjadze.drawbystarlight-default
+2026-10-26 03:44:17.591 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:UpdateScheduler] Target list changed: <CADisplay:LCD PurpleMain>
+2026-10-26 03:44:17.591 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:AppLifecycle] sceneOfRecord: sceneID: sceneID:com.pbordjadze.drawbystarlight-default  persistentID: 58194CE3-83A9-4D91-A14C-E27A8BAFBA65
+2026-10-26 03:44:17.592 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x105378890> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:17.592 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 2, <UIWindowScene: 0x105378890> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:17.593 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:AppLifecycle] sceneOfRecord: sceneID: sceneID:com.pbordjadze.drawbystarlight-default  persistentID: 58194CE3-83A9-4D91-A14C-E27A8BAFBA65
+2026-10-26 03:44:17.593 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:Application] Deactivation reason removed: 12; deactivation reasons: 4128 -> 32; animating application lifecycle event: 1
+2026-10-26 03:44:17.593 Df DrawByStarlight[8917:79b2] [com.apple.KeyboardArbiter:Client] Send setDeactivating: N (-DeactivationReason:SuspendedEventsOnly)
+2026-10-26 03:44:17.594 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:Application] Deactivation reason removed: 5; deactivation reasons: 32 -> 0; animating application lifecycle event: 0
+2026-10-26 03:44:17.595 A  DrawByStarlight[8917:79bc] (RunningBoardServices) didChangeInheritances
+2026-10-26 03:44:17.595 Df DrawByStarlight[8917:79b2] [com.apple.KeyboardArbiter:Client] startConnection
+2026-10-26 03:44:17.596 Df DrawByStarlight[8917:79b2] [com.apple.xpc:connection] [0x10896c280] activating connection: mach=true listener=false peer=false name=com.apple.UIKit.KeyboardManagement.hosted
+2026-10-26 03:44:17.598 A  DrawByStarlight[8917:79b8] (RunningBoardServices) didChangeInheritances
+2026-10-26 03:44:17.601 Df DrawByStarlight[8917:79b2] [com.apple.KeyboardArbiter:Client] handleKeyboardChange: set currentKeyboard:N (wasKeyboard:N)
+2026-10-26 03:44:17.607 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:KeyboardSceneDelegate] forceReloadInputViews
+2026-10-26 03:44:17.607 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:KeyboardSceneDelegate] Reloading input views for key-window scene responder: <(null): 0x0; > force:Y
+2026-10-26 03:44:17.608 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:KeyboardArbiterClientLog] isWritingToolsHandlingKeyboardTracking:Y (WT ready:Y, Arbiter ready:Y)
+2026-10-26 03:44:17.614 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:AppLifecycle] sceneOfRecord: sceneID: sceneID:com.pbordjadze.drawbystarlight-default  persistentID: 58194CE3-83A9-4D91-A14C-E27A8BAFBA65
+2026-10-26 03:44:17.614 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:InterfaceStyle] Scene did update interface style to 1, <UIWindowScene: 0x105378890> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:17.614 Df DrawByStarlight[8917:79b2] [com.apple.UIKit:InterfaceStyle] Push traits update to screen for new style 1, <UIWindowScene: 0x105378890> (58194CE3-83A9-4D91-A14C-E27A8BAFBA65)
+2026-10-26 03:44:17.643 Df DrawByStarlight[8917:79b2] [com.apple.network:activity] <nw_activity 50:1 [858290EE-E2BF-4BA2-8C50-8425CC141D24] (global parent) (reporting strategy default) complete (reason success)> complete with reason 2 (success), duration 911ms
+2026-10-26 03:44:17.643 Df DrawByStarlight[8917:79b2] [com.apple.network:activity] <nw_activity 50:2 [75093DF6-B3B5-4E0C-8586-6F80D4F67F8D] (reporting strategy default) complete (reason success)> complete with reason 2 (success), duration 911ms
+2026-10-26 03:44:17.643 Df DrawByStarlight[8917:79b2] [com.apple.network:activity] Unsetting the global parent activity <nw_activity 50:1 [858290EE-E2BF-4BA2-8C50-8425CC141D24] (global parent) (reporting strategy default) complete (reason success)>
+2026-10-26 03:44:17.643 Df DrawByStarlight[8917:79b2] [com.apple.network:activity] Unset the global parent activity
+2026-10-26 03:44:17.643 Df DrawByStarlight[8917:79b2] [com.apple.app_launch_measurement:ApplicationLaunch] alm_release_pageins_recording_assertion: releasing pageins recording assertion
+2026-10-26 03:44:17.695 A  DrawByStarlight[8917:79b9] (RunningBoardServices) didChangeInheritances
+2026-10-26 03:44:17.762 Df DrawByStarlight[8917:79b2] [com.apple.Accessibility:AXCommon] Read Per-App on Init: Smart invert = (null)
+2026-10-26 03:44:18.387 A  DrawByStarlight[8917:79b9] (RunningBoardServices) didChangeInheritances
