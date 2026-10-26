@@ -11,7 +11,11 @@ rules.
   floor.
 - `Sources/StarlightCore`: the portable, dependency-free sky (builds on Linux too). `JulianDay`
   (a moment as days since 4713 BC; T since J2000.0), the time argument every sky computation
-  starts from.
+  starts from; `Time` (sidereal time, ΔT), `Coordinates` (`Equatorial`, `Horizontal`, `Place`),
+  `Precession`, `Sun`, `Moon` (place, phase, the next new or full), `RiseAndSet` (`SkyObject`),
+  `Catalogue` (`Star`, `Constellation`: figures and borders), `Projection` (a figure laid flat as
+  the stargazer sees it). `Resources/`: the bundled sky, built by `tools/sky_data.py`, and
+  `CREDITS.md`, its sources and licenses, for the Acknowledgements screen.
 - `Tests/StarlightCoreTests` (Swift Testing), pinned to published values (below).
 - `App/`: `DrawByStarlight.xcodeproj` (synchronized folders: adding files needs no project edit),
   `DrawByStarlight/` (`App/` the app, `Theme`, `Log` and `DemoMode`; `Tonight/` the home screen,
@@ -23,7 +27,8 @@ rules.
   check; or `compile`), `report` (`ci/report.py` writes `STATUS.md`). No IPA job and no SideStore
   source: the app stays out of SideStore until the owner says. The scripts came from
   `pbordjadze/paint-by-number`'s `ci/` by way of `pbordjadze/pigeon`, and keep their shape.
-- `tools/`: `swift.sh` (SwiftPM in Docker), `strings_check.py` (its docstring is the manual).
+- `tools/`: `swift.sh` (SwiftPM in Docker), `strings_check.py` and `sky_data.py` (their docstrings
+  are the manuals).
 - `PRIVACY.md`: the privacy policy, word for word what the app does (below).
 - Plans, briefs and the backlog are not committed here: they live in the private
   `painting-company` repository (this app is its row 128). A commit message says what changed and
