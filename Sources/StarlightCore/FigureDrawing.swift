@@ -105,14 +105,15 @@ public struct FigureDrawing: Sendable, Equatable {
     }
 
     /// The star to show when the stargazer hesitates: the far end of a line from the selected
-    /// star; with nothing selected, where to begin: a star already in the drawing that a missing
-    /// line leaves from, else the brightest star a missing line touches. Nil when the figure is
-    /// whole.
+    /// star, or the selected star itself when no line is left from it (tapping it lets go); with
+    /// nothing selected, where to begin: a star already in the drawing that a missing line leaves
+    /// from, else the brightest star a missing line touches. Nil when the figure is whole.
     public var hint: Int? {
         let remaining = remaining
         guard let first = remaining.first else { return nil }
         if let selected {
             if let next = remaining.first(where: { $0.touches(selected) }) { return next.other(than: selected) }
+            return selected
         }
         let named = namedStars
         if let next = remaining.first(where: { named.contains($0.a) || named.contains($0.b) }) {

@@ -34,7 +34,7 @@ struct SkyCanvasView: View {
                         .allowsHitTesting(false)
                         .accessibilityElement()
                         .accessibilityLabel(accessibilityLabel(star))
-                        .accessibilityValue(model.drawing.selected == star.id ? Text("Selected") : Text(verbatim: ""))
+                        .accessibilityValue(accessibilityValue(star))
                         .accessibilityHint(accessibilityHint(star))
                         .accessibilityAddTraits(.isButton)
                         .accessibilityIdentifier("star-\(star.id)")
@@ -200,6 +200,12 @@ struct SkyCanvasView: View {
         if model.drawing.namedStars.contains(star.id) || model.isComplete { return star.star.label }
         return String(localized: "voiceover.unnamed-star", defaultValue: "A star of \(model.name)",
                       comment: "VoiceOver's name for a star no line has reached yet; the argument is the constellation's name.")
+    }
+
+    private func accessibilityValue(_ star: FigureScene.PlacedStar) -> Text {
+        if model.drawing.selected == star.id { return Text("Selected") }
+        if model.hint == star.id { return Text("Glimmering") }
+        return Text(verbatim: "")
     }
 
     private func accessibilityHint(_ star: FigureScene.PlacedStar) -> String {

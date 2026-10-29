@@ -88,8 +88,14 @@ struct FinishedFigureView: View {
 
     private var standing: String {
         guard let place = sky.place else { return String(localized: "Place unknown") }
-        // Circumpolar: every star's declination keeps it above the horizon all day.
-        let circumpolar = model.figure.allSatisfy { $0.star.j2000.declination > 90 - place.latitude + 1 }
+        switch model.scene.timing {
+        case .unseen: return String(localized: "Never rises from here.")
+        case .notTonight: return String(localized: "Not up tonight.")
+        default: break
+        }
+        // Circumpolar: every star's declination keeps it above the horizon all day, at either pole.
+        let pole: Double = place.latitude < 0 ? -1 : 1
+        let circumpolar = model.figure.allSatisfy { $0.star.j2000.declination * pole > 90 - abs(place.latitude) + 1 }
         if circumpolar {
             return String(localized: "Never sets from here.")
         }
@@ -151,11 +157,15 @@ struct WikipediaCard: View {
                 }
                 .font(.body.weight(.semibold))
             }
-            .tint(Theme.gold)
             .accessibilityHint("Opens Wikipedia in Safari.")
             Text(terms)
                 .font(.caption2)
                 .foregroundStyle(Theme.lavender)
+            Link(destination: stories.licenseURL) {
+                Text(license)
+                    .font(.caption2.weight(.semibold))
+            }
+            .accessibilityHint("Opens the license in Safari.")
         }
         .padding(16)
         .background(Theme.surface, in: RoundedRectangle(cornerRadius: Theme.cardRadius))
@@ -166,7 +176,12 @@ struct WikipediaCard: View {
 
     private var terms: String {
         let revised = story.revised.formatted(date: .long, time: .omitted)
-        return String(localized: "wikipedia.terms", defaultValue: "Quoted word for word from the article “\(story.title)” as revised \(revised); text under \(stories.license).",
-                      comment: "Under a quotation from Wikipedia; the arguments are the article's title, the date of its revision and the license's name.")
+        return String(localized: "wikipedia.terms", defaultValue: "Quoted from the article “\(story.title)” as revised \(revised), with its pronunciation notes left out.",
+                      comment: "Under a quotation from Wikipedia; the arguments are the article's title and the date of its revision.")
+    }
+
+    private var license: String {
+        String(localized: "wikipedia.license", defaultValue: "Text under the \(stories.license) license",
+               comment: "A link under a quotation from Wikipedia, to its license; the argument is the license's name.")
     }
 }

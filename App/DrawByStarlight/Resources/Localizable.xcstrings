@@ -45,6 +45,10 @@
       "comment": "The heading of the story card: the text below is quoted from Wikipedia.",
       "extractionState": "manual"
     },
+    "Glimmering": {
+      "comment": "VoiceOver value of the star glimmering to show the next line.",
+      "extractionState": "manual"
+    },
     "It never rises from here. North is up.": {
       "comment": "Under a constellation's name on the drawing screen when it never rises from the stargazer's place.",
       "extractionState": "manual"
@@ -65,12 +69,28 @@
       "comment": "Under a constellation's name in the list when it never rises from the stargazer's place.",
       "extractionState": "manual"
     },
+    "Never rises from here.": {
+      "comment": "A fact on the finished figure: it never rises from the stargazer's place.",
+      "extractionState": "manual"
+    },
     "Never sets from here.": {
       "comment": "A fact on the finished figure: it is circumpolar from the stargazer's place.",
       "extractionState": "manual"
     },
     "North is up.": {
       "comment": "Under a constellation's name on the drawing screen when the place is unknown.",
+      "extractionState": "manual"
+    },
+    "Not up tonight": {
+      "comment": "Under a constellation's name in the list when it rises from the stargazer's place but not tonight.",
+      "extractionState": "manual"
+    },
+    "Not up tonight.": {
+      "comment": "A fact on the finished figure: it rises from here but not tonight.",
+      "extractionState": "manual"
+    },
+    "Not up tonight. North is up.": {
+      "comment": "Under a constellation's name on the drawing screen when it rises from the stargazer's place but not tonight.",
       "extractionState": "manual"
     },
     "Nothing selected.": {
@@ -83,6 +103,10 @@
     },
     "Opens Wikipedia in Safari.": {
       "comment": "VoiceOver hint on the link to the Wikipedia article.",
+      "extractionState": "manual"
+    },
+    "Opens the license in Safari.": {
+      "comment": "VoiceOver hint on the link to the Wikipedia text's license.",
       "extractionState": "manual"
     },
     "Pause, and the next star glimmers.": {
@@ -269,6 +293,18 @@
       "comment": "Beside the From Wikipedia heading: Wikipedia's own subtitle.",
       "extractionState": "manual"
     },
+    "voiceover.glimmer": {
+      "comment": "VoiceOver, when a star glimmers to show the next line; the argument is the star's name.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ glimmers."
+          }
+        }
+      }
+    },
     "voiceover.hint.join": {
       "comment": "VoiceOver hint on a star while another is selected; the argument is the selected star's name.",
       "extractionState": "manual",
@@ -333,14 +369,26 @@
       "comment": "A compass direction, in a sentence.",
       "extractionState": "manual"
     },
-    "wikipedia.terms": {
-      "comment": "Under a quotation from Wikipedia; the arguments are the article's title, the date of its revision and the license's name.",
+    "wikipedia.license": {
+      "comment": "A link under a quotation from Wikipedia, to its license; the argument is the license's name.",
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quoted word for word from the article “%@” as revised %@; text under %@."
+            "value": "Text under the %@ license"
+          }
+        }
+      }
+    },
+    "wikipedia.terms": {
+      "comment": "Under a quotation from Wikipedia; the arguments are the article's title and the date of its revision.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quoted from the article “%@” as revised %@, with its pronunciation notes left out."
           }
         }
       }

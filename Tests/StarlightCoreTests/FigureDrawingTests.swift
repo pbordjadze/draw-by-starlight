@@ -45,8 +45,13 @@ struct FigureDrawingTests {
         // Nothing selected again: continue from a star already drawn.
         #expect(d.hint == 168 || d.hint == 264)
         _ = d.tap(21)
-        // Selected a star with no line left from it... Caph still has one (to Schedar).
+        // Caph still has a line left (to Schedar).
         #expect(d.hint == 168)
+        _ = d.tap(168)
+        _ = d.tap(168)
+        _ = d.tap(21)
+        // Caph has none left now: the hint is Caph itself, to let go of.
+        #expect(d.hint == 21)
     }
 
     @Test func resetAndComplete() {

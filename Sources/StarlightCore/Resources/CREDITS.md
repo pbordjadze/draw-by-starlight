@@ -18,8 +18,10 @@ app with them, and the app's Acknowledgements screen, when it comes, credits eac
   Telescope magazine, Roger Sinnott and Rick Fienberg; released by the IAU under Creative Commons
   Attribution). https://github.com/ofrohn/d3-celestial
 - **Stories** (`stories.json`, written by `tools/wikipedia_stories.py`): the lead section of each
-  constellation's article in the English Wikipedia, quoted word for word, with the article's URL
-  and the id and date of the revision quoted. Text by Wikipedia's contributors, under the Creative
+  constellation's article in the English Wikipedia, quoted as it stands but for the pronunciation
+  notes (the plain-text extract drops a pronunciation template's audio and IPA and leaves its empty
+  brackets behind; those brackets and doubled spaces are removed, and nothing else), with the
+  article's URL and the id and date of the revision quoted. Text by Wikipedia's contributors, under the Creative
   Commons Attribution-ShareAlike 4.0 International license
   (https://creativecommons.org/licenses/by-sa/4.0/); the app names the source and links the
   article wherever it quotes one. Wikipedia and the Wikipedia wordmark are trademarks of the

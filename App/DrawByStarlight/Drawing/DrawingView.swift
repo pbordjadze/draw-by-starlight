@@ -19,7 +19,9 @@ struct DrawingView: View {
         let scene = sky.scene(constellation)
         _model = State(initialValue: DrawingModel(
             scene: scene, story: sky.stories[constellation.id], catalogue: sky.catalogue,
-            alreadyDrawn: drawn.isDrawn(constellation.id), lines: drawn.lines(constellation.id)))
+            // Drawn before, and not since taken up again: whole; else the lines so far.
+            alreadyDrawn: drawn.isDrawn(constellation.id) && drawn.lines(constellation.id).isEmpty,
+            lines: drawn.lines(constellation.id)))
     }
 
     var body: some View {
@@ -94,7 +96,6 @@ struct DrawingView: View {
                 if !model.isComplete {
                     Button("Show me") { model.showMe() }
                         .font(.body.weight(.semibold))
-                        .tint(Theme.gold)
                         .accessibilityHint("The next star glimmers.")
                 }
             }

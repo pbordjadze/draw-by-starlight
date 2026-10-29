@@ -141,7 +141,16 @@ final class DrawingModel {
     func showMe() {
         guard !isComplete else { return }
         pauseTask?.cancel()
-        hint = drawing.hint
+        glimmer(drawing.hint)
+    }
+
+    /// A star glimmers, and VoiceOver says which.
+    private func glimmer(_ star: Int?) {
+        hint = star
+        if let star {
+            announce(String(localized: "voiceover.glimmer", defaultValue: "\(label(star)) glimmers.",
+                            comment: "VoiceOver, when a star glimmers to show the next line; the argument is the star's name."))
+        }
     }
 
     /// Starts over: the lines go, the figure stays where it is.
@@ -175,8 +184,8 @@ final class DrawingModel {
         switch outcome {
         case .selected(let star):
             prompt = drawing.drawn.isEmpty ? .next : .none
-            // Help asked for and taken: keep helping until a line is drawn.
-            if hint == star { hint = drawing.hint }
+            // Help on screen: it follows the selection until a line is drawn.
+            if hint != nil { glimmer(drawing.hint) }
             announce(String(localized: "voiceover.selected", defaultValue: "\(label(star)) selected. Now choose the next star.",
                                   comment: "VoiceOver, after a star is chosen as a line's start; the argument is the star's name."))
             wait()
@@ -235,7 +244,7 @@ final class DrawingModel {
         pauseTask = Task { [weak self] in
             try? await Task.sleep(for: self?.pause ?? .seconds(4))
             guard !Task.isCancelled, let self, !isComplete, drag == nil else { return }
-            hint = drawing.hint
+            glimmer(drawing.hint)
         }
     }
 
@@ -250,7 +259,7 @@ final class DrawingModel {
             _ = drawing.tap(stars[2])
             prompt = .none
             pauseTask?.cancel()
-            hint = drawing.hint
+            glimmer(drawing.hint)
         } else if scenario.contains("-done") {
             pauseTask?.cancel()
             drawing.complete()

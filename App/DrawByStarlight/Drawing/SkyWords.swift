@@ -40,6 +40,8 @@ nonisolated enum SkyWords {
             return String(localized: "drawing.standing.later",
                 defaultValue: "Below the horizon now. Turned as it will sit at \(time(moment)), \(height(altitude: center.altitude)) in the \(direction(azimuth: center.azimuth)).",
                 comment: "Under a constellation's name on the drawing screen when it hasn't risen yet; the arguments are a clock time, a height word (high, halfway up, low) and a compass direction.")
+        case .notTonight:
+            return String(localized: "Not up tonight. North is up.")
         case .unseen:
             return place == nil
                 ? String(localized: "North is up.")
@@ -66,6 +68,8 @@ nonisolated enum SkyWords {
             return String(localized: "list.standing.dawn",
                 defaultValue: "Rises later; before dawn at \(time(moment))",
                 comment: "Under a constellation's name in the list when it rises after midnight and is highest in daylight; the argument is a clock time, an hour before sunrise.")
+        case .notTonight:
+            return String(localized: "Not up tonight")
         case .unseen:
             return place == nil ? String(localized: "Place unknown") : String(localized: "Never rises from here")
         }

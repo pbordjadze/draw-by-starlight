@@ -85,6 +85,25 @@ struct FigureSceneTests {
         #expect(try #require(leo.transit) > moment)
     }
 
+    @Test func scorpiusIsNotUpTonight() {
+        // Scorpius set with the Sun in late October; it is back in the summer, so not "never".
+        let sco = scene("Sco")
+        #expect(sco.timing == .notTonight)
+        #expect(sco.center == nil && sco.transit != nil)
+    }
+
+    @Test func inDaylightTonightStartsAtSunset() throws {
+        // Opened at 3 PM EDT (19:00 UT): Cassiopeia is shown as at sunset (about 6:05 PM EDT),
+        // not as it stands in the afternoon sky.
+        let afternoon = try moment(2026, 10, 25, 19)
+        let cas = scene("Cas", at: afternoon)
+        #expect(cas.timing == .now)
+        let hours = (cas.moment.value - afternoon.value) * 24
+        #expect(hours > 2.5 && hours < 3.5)
+        let center = try #require(cas.center)
+        #expect(center.altitude > 20 && center.azimuth > 0 && center.azimuth < 60)
+    }
+
     @Test func theSouthernCrossNeverRisesFromPennsylvania() {
         let cru = scene("Cru")
         #expect(cru.timing == .unseen)

@@ -9,6 +9,7 @@ import SwiftUI
 struct TonightView: View {
     @State private var sky = Sky.tonight()
     @State private var path: [String] = []
+    @Environment(\.scenePhase) private var scenePhase
     private let drawn = Self.store()
 
     /// The stargazer's drawings; a demo scenario (and so a screenshot or a UI test) gets a store of
@@ -43,6 +44,12 @@ struct TonightView: View {
                 if let constellation = sky.constellation(id) {
                     DrawingView(constellation: constellation, sky: sky, drawn: drawn)
                 }
+            }
+        }
+        .onChange(of: scenePhase) { _, phase in
+            // Back after a while (the next evening, say): tonight's sky again.
+            if phase == .active, Date.now.timeIntervalSince(sky.now) > 1800, path.isEmpty {
+                sky = Sky.tonight()
             }
         }
         #if DEBUG
@@ -91,6 +98,8 @@ struct TonightView: View {
                  (.beforeDawn(let x), .later(let y)), (.beforeDawn(let x), .beforeDawn(let y)): x < y
             case (.later, _), (.beforeDawn, _): true
             case (_, .later), (_, .beforeDawn): false
+            case (.notTonight, .unseen): true
+            case (.unseen, .notTonight): false
             default: a.constellation.name < b.constellation.name
             }
         }

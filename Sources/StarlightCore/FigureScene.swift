@@ -21,6 +21,9 @@ public struct FigureScene: Sendable {
         /// The figure is below the horizon now and crosses the meridian in daylight; the scene
         /// shows it an hour before the next sunrise, at this moment.
         case beforeDawn(JulianDay)
+        /// It rises from here, but not tonight (it set before dark, or comes up with the Sun):
+        /// the scene is north up.
+        case notTonight
         /// It never rises from here (or the place is unknown): the scene is north up instead.
         case unseen
     }
@@ -28,7 +31,7 @@ public struct FigureScene: Sendable {
     public let constellation: Constellation
     public let moment: JulianDay
     public let timing: Timing
-    /// Where the figure's middle stands at `moment`; nil when `timing` is `.unseen`.
+    /// Where the figure's middle stands at `moment`; nil when the scene is north up.
     public let center: Horizontal?
     /// The figure's stars, in the order the figure's lines reach them.
     public let figure: [PlacedStar]
@@ -51,32 +54,46 @@ public struct FigureScene: Sendable {
         let stars = constellation.stars.compactMap { catalogue.stars[$0] }
         let middleJ2000 = Self.middle(of: stars.map { $0.j2000 }) ?? Equatorial(rightAscension: 0, declination: 0)
 
-        // The moment: now if the figure's middle is up, else its next meridian crossing, or an hour
-        // before sunrise when the crossing comes in daylight.
+        // The moment: tonight starts now, or at sunset while the Sun is up. The figure is shown
+        // then if its middle is up, else at its next meridian crossing, or an hour before sunrise
+        // when the crossing comes in daylight; else it isn't up tonight, or never from here.
         var moment = now
         var timing = Timing.unseen
         var transit: JulianDay?
         var direction: (Equatorial) -> Horizontal = { Horizontal(altitude: $0.declination, azimuth: -$0.rightAscension) }
         if let place {
+            var start = now
+            if place.horizontal(of: .sun, at: now).altitude > -6, let sunset = place.nextSet(of: .sun, after: now) {
+                start = sunset
+            }
             // Hour angle zero: the sidereal time equals the middle's right ascension.
-            let wait = (middleJ2000.rightAscension - place.siderealTime(at: now)).normalizedDegrees / 360.985_647
-            let crossing = JulianDay(now.value + wait)
+            let wait = (middleJ2000.rightAscension - place.siderealTime(at: start)).normalizedDegrees / 360.985_647
+            let crossing = JulianDay(start.value + wait)
             transit = crossing
             let middleAltitude = { (t: JulianDay) in place.horizontal(of: middleJ2000.precessed(from: .j2000, to: t), at: t).altitude }
-            let sunrise = place.nextRise(of: .sun, after: now)
-            if middleAltitude(now) >= Self.horizon {
+            let sunrise = place.nextRise(of: .sun, after: start)
+            // Its altitude when it crosses the meridian: below the horizon, it never rises here.
+            let culmination = 90 - abs(place.latitude - middleJ2000.declination)
+            if culmination < Self.horizon {
+                timing = .unseen
+            } else if middleAltitude(start) >= Self.horizon {
+                moment = start
                 timing = .now
             } else if let sunrise, crossing > sunrise {
                 let beforeDawn = JulianDay(sunrise.value - 1 / 24)
-                if beforeDawn > now, middleAltitude(beforeDawn) >= Self.horizon {
+                if beforeDawn > start, middleAltitude(beforeDawn) >= Self.horizon {
                     moment = beforeDawn
                     timing = .beforeDawn(beforeDawn)
+                } else {
+                    timing = .notTonight
                 }
             } else if middleAltitude(crossing) >= Self.horizon {
                 moment = crossing
                 timing = .later(crossing)
+            } else {
+                timing = .notTonight
             }
-            if timing != .unseen {
+            if timing != .unseen && timing != .notTonight {
                 let t = moment
                 direction = { place.horizontal(of: $0, at: t) }
             }
@@ -87,7 +104,7 @@ public struct FigureScene: Sendable {
 
         let figureDirections = stars.map { direction($0.position(at: moment)) }
         let projection = SkyProjection(centeredOn: figureDirections) ?? SkyProjection(center: Horizontal(altitude: 0, azimuth: 0))
-        center = timing == .unseen ? nil : projection.center
+        center = timing == .unseen || timing == .notTonight ? nil : projection.center
         figure = zip(stars, figureDirections).map { PlacedStar(star: $0, point: projection.project($1)) }
         let span = figure.map { ($0.point.x * $0.point.x + $0.point.y * $0.point.y).squareRoot() }.max() ?? 1
         self.span = max(span, 1)
