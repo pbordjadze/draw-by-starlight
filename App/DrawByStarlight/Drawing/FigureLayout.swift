@@ -55,10 +55,10 @@ nonisolated struct FigureLayout: Equatable {
         }
         let away = CGPoint(x: p.x - middle.x, y: p.y - middle.y)
         let sides: [(side: CGPoint, offset: CGPoint, anchor: LabelAnchor)] = [
-            (CGPoint(x: 1, y: 0), CGPoint(x: 16, y: 0), .leading),
-            (CGPoint(x: -1, y: 0), CGPoint(x: -16, y: 0), .trailing),
-            (CGPoint(x: 0, y: 1), CGPoint(x: 0, y: 16), .top),
-            (CGPoint(x: 0, y: -1), CGPoint(x: 0, y: -16), .bottom),
+            (CGPoint(x: 1, y: 0), CGPoint(x: 20, y: 0), .leading),
+            (CGPoint(x: -1, y: 0), CGPoint(x: -20, y: 0), .trailing),
+            (CGPoint(x: 0, y: 1), CGPoint(x: 0, y: 20), .top),
+            (CGPoint(x: 0, y: -1), CGPoint(x: 0, y: -20), .bottom),
         ]
         // A line within about 50° of a side crowds it; the rest is a preference for the outside.
         let best = sides.min { a, b in

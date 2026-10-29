@@ -9,7 +9,16 @@ import SwiftUI
 struct TonightView: View {
     @State private var sky = Sky.tonight()
     @State private var path: [String] = []
-    private let drawn = DrawnFigures.shared
+    private let drawn = Self.store()
+
+    /// The stargazer's drawings; a demo scenario (and so a screenshot or a UI test) gets a store of
+    /// its own in memory, so it neither reads nor leaves anything on the device.
+    private static func store() -> DrawnFigures {
+        #if DEBUG
+        if DemoMode.isActive { return DrawnFigures(file: nil) }
+        #endif
+        return DrawnFigures.shared
+    }
 
     var body: some View {
         NavigationStack(path: $path) {

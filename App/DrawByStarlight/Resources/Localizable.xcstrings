@@ -136,7 +136,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Below the horizon now. Turned as it will sit at %1$@, %2$@ in the %3$@."
+            "value": "Below the horizon now. Turned as it will sit at %@, %@ in the %@."
           }
         }
       }
@@ -148,7 +148,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Turned as it sits tonight, %1$@ in the %2$@."
+            "value": "Turned as it sits tonight, %@ in the %@."
           }
         }
       }
@@ -164,7 +164,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@, magnitude %2$@"
+            "value": "%@, magnitude %@"
           }
         }
       }
@@ -176,7 +176,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "First drawn %1$@."
+            "value": "First drawn %@."
           }
         }
       }
@@ -188,7 +188,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Highest at %1$@, %2$@ in the %3$@."
+            "value": "Highest at %@, %@ in the %@."
           }
         }
       }
@@ -208,7 +208,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rises later; before dawn at %1$@"
+            "value": "Rises later; before dawn at %@"
           }
         }
       }
@@ -220,7 +220,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rises later; highest at %1$@"
+            "value": "Rises later; highest at %@"
           }
         }
       }
@@ -232,7 +232,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ in the %2$@"
+            "value": "%@ in the %@"
           }
         }
       }
@@ -276,7 +276,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Draws a line from %1$@."
+            "value": "Draws a line from %@."
           }
         }
       }
@@ -288,7 +288,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ to %2$@: a line of the figure."
+            "value": "%@ to %@: a line of the figure."
           }
         }
       }
@@ -300,7 +300,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ selected. Now choose the next star."
+            "value": "%@ selected. Now choose the next star."
           }
         }
       }
@@ -312,7 +312,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "A star of %1$@"
+            "value": "A star of %@"
           }
         }
       }
@@ -324,7 +324,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ is whole."
+            "value": "%@ is whole."
           }
         }
       }
@@ -340,7 +340,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quoted word for word from the article “%1$@” as revised %2$@; text under %3$@."
+            "value": "Quoted word for word from the article “%@” as revised %@; text under %@."
           }
         }
       }
