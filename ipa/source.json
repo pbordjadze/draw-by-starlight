@@ -1,0 +1,41 @@
+{
+  "name": "Draw by Starlight (CI builds)",
+  "identifier": "com.pbordjadze.drawbystarlight.source",
+  "subtitle": "Automatic builds",
+  "iconURL": "https://raw.githubusercontent.com/pbordjadze/draw-by-starlight/sidestore/icon.png",
+  "website": "https://github.com/pbordjadze/draw-by-starlight",
+  "tintColor": "#C9A24A",
+  "apps": [
+    {
+      "name": "Draw by Starlight",
+      "bundleIdentifier": "com.pbordjadze.drawbystarlight",
+      "developerName": "pbordjadze",
+      "subtitle": "Learn the night sky by drawing it",
+      "localizedDescription": "Learn the constellations by drawing them, star to star, in tonight's real sky. A line that belongs stays and names its stars; pause, and the next star glimmers. When the figure is whole, its story, quoted from Wikipedia. No account, no network, nothing counted: everything stays on your iPhone. A work in progress.",
+      "iconURL": "https://raw.githubusercontent.com/pbordjadze/draw-by-starlight/sidestore/icon.png",
+      "tintColor": "#C9A24A",
+      "category": "education",
+      "versions": [
+        {
+          "version": "1.0.13",
+          "buildVersion": "13",
+          "date": "2026-10-29T10:54:28Z",
+          "localizedDescription": "Merge claude/slice-3-drawing: the drawing (painting-company row 128, slice 3)",
+          "downloadURL": "https://github.com/pbordjadze/draw-by-starlight/releases/download/build-13/DrawByStarlight.ipa",
+          "size": 395112,
+          "minOSVersion": "26.0"
+        }
+      ],
+      "version": "1.0.13",
+      "versionDate": "2026-10-29T10:54:28Z",
+      "versionDescription": "Merge claude/slice-3-drawing: the drawing (painting-company row 128, slice 3)",
+      "downloadURL": "https://github.com/pbordjadze/draw-by-starlight/releases/download/build-13/DrawByStarlight.ipa",
+      "size": 395112,
+      "appPermissions": {
+        "entitlements": [],
+        "privacy": {}
+      }
+    }
+  ],
+  "news": []
+}
