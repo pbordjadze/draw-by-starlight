@@ -78,9 +78,10 @@ struct TonightView: View {
             case (.now, .now): (a.center?.altitude ?? 0) > (b.center?.altitude ?? 0)
             case (.now, _): true
             case (_, .now): false
-            case (.later(let x), .later(let y)): x < y
-            case (.later, _): true
-            case (_, .later): false
+            case (.later(let x), .later(let y)), (.later(let x), .beforeDawn(let y)),
+                 (.beforeDawn(let x), .later(let y)), (.beforeDawn(let x), .beforeDawn(let y)): x < y
+            case (.later, _), (.beforeDawn, _): true
+            case (_, .later), (_, .beforeDawn): false
             default: a.constellation.name < b.constellation.name
             }
         }

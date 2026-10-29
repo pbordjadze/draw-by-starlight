@@ -201,6 +201,18 @@
       "comment": "How high a figure stands (50° and up), in a sentence (\"high in the east\").",
       "extractionState": "manual"
     },
+    "list.standing.dawn": {
+      "comment": "Under a constellation's name in the list when it rises after midnight and is highest in daylight; the argument is a clock time, an hour before sunrise.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rises later; before dawn at %1$@"
+          }
+        }
+      }
+    },
     "list.standing.later": {
       "comment": "Under a constellation's name in the list when it hasn't risen yet; the argument is a clock time.",
       "extractionState": "manual",

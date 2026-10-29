@@ -14,7 +14,7 @@ struct SkyCanvasView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            let layout = FigureLayout(size: geometry.size, span: model.scene.span)
+            let layout = FigureLayout(size: geometry.size, figure: model.figure.map(\.point))
             ZStack {
                 backdrop(layout)
                 TimelineView(.animation(minimumInterval: 1 / 30, paused: model.hint == nil || reduceMotion)) { context in
@@ -25,6 +25,21 @@ struct SkyCanvasView: View {
                 names(layout)
                 forgottenLine(layout)
                 sparkles(layout)
+                // One invisible, untouchable element per star for VoiceOver and the UI tests; the
+                // gesture below takes the touches.
+                ForEach(model.figure) { star in
+                    Color.clear
+                        .frame(width: 44, height: 44)
+                        .position(layout.point(star.point))
+                        .allowsHitTesting(false)
+                        .accessibilityElement()
+                        .accessibilityLabel(accessibilityLabel(star))
+                        .accessibilityValue(model.drawing.selected == star.id ? Text("Selected") : Text(verbatim: ""))
+                        .accessibilityHint(accessibilityHint(star))
+                        .accessibilityAddTraits(.isButton)
+                        .accessibilityIdentifier("star-\(star.id)")
+                        .accessibilityAction { model.tap(star.id) }
+                }
             }
             .animation(reduceMotion ? .linear(duration: 0.3) : .easeIn(duration: 0.9), value: model.forgotten)
             .animation(.easeOut(duration: 0.4), value: model.sparkles)
@@ -42,21 +57,6 @@ struct SkyCanvasView: View {
                         model.touchEnded(on: layout.nearest(to: value.location, among: model.figure, within: 34))
                     }
             )
-            .accessibilityChildren {
-                ZStack {
-                    ForEach(model.figure) { star in
-                        Color.clear
-                            .frame(width: 44, height: 44)
-                            .position(layout.point(star.point))
-                            .accessibilityLabel(accessibilityLabel(star))
-                            .accessibilityValue(model.drawing.selected == star.id ? Text("Selected") : Text(verbatim: ""))
-                            .accessibilityHint(accessibilityHint(star))
-                            .accessibilityAddTraits(.isButton)
-                            .accessibilityIdentifier("star-\(star.id)")
-                            .accessibilityAction { model.tap(star.id) }
-                    }
-                }
-            }
         }
     }
 
@@ -145,7 +145,7 @@ struct SkyCanvasView: View {
     /// The names beside the stars a line has reached.
     private func names(_ layout: FigureLayout) -> some View {
         ForEach(model.figure.filter { model.drawing.namedStars.contains($0.id) }) { star in
-            let placement = layout.labelPlacement(for: star, among: model.figure)
+            let placement = layout.labelPlacement(for: star, among: model.figure, lines: model.drawing.segments)
             let p = layout.point(star.point)
             // A zero-sized anchor at the point; the name hangs off its side.
             Color.clear

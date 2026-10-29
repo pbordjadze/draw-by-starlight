@@ -16,8 +16,11 @@ public struct FigureScene: Sendable {
         /// Now: the figure is up.
         case now
         /// The figure is below the horizon now; the scene shows it at its highest, when it crosses
-        /// the meridian, at this moment (within the next day).
+        /// the meridian, at this moment (before the next sunrise).
         case later(JulianDay)
+        /// The figure is below the horizon now and crosses the meridian in daylight; the scene
+        /// shows it an hour before the next sunrise, at this moment.
+        case beforeDawn(JulianDay)
         /// It never rises from here (or the place is unknown): the scene is north up instead.
         case unseen
     }
@@ -39,8 +42,7 @@ public struct FigureScene: Sendable {
     /// place.
     public let transit: JulianDay?
 
-    /// Stars below this altitude count as not up: a figure whose lowest star is lower than this
-    /// is shown later, at its highest.
+    /// A figure whose middle is lower than this is not up: it is shown later, at its highest.
     static let horizon = 3.0
 
     /// `backdrop` false skips the surrounding stars (a list of standings needs none).
@@ -49,7 +51,8 @@ public struct FigureScene: Sendable {
         let stars = constellation.stars.compactMap { catalogue.stars[$0] }
         let middleJ2000 = Self.middle(of: stars.map { $0.j2000 }) ?? Equatorial(rightAscension: 0, declination: 0)
 
-        // The moment: now if every star is up, else the figure's next meridian crossing.
+        // The moment: now if the figure's middle is up, else its next meridian crossing, or an hour
+        // before sunrise when the crossing comes in daylight.
         var moment = now
         var timing = Timing.unseen
         var transit: JulianDay?
@@ -59,10 +62,17 @@ public struct FigureScene: Sendable {
             let wait = (middleJ2000.rightAscension - place.siderealTime(at: now)).normalizedDegrees / 360.985_647
             let crossing = JulianDay(now.value + wait)
             transit = crossing
-            let lowest = stars.map { place.horizontal(of: $0.position(at: now), at: now).altitude }.min() ?? -90
-            if lowest >= Self.horizon {
+            let middleAltitude = { (t: JulianDay) in place.horizontal(of: middleJ2000.precessed(from: .j2000, to: t), at: t).altitude }
+            let sunrise = place.nextRise(of: .sun, after: now)
+            if middleAltitude(now) >= Self.horizon {
                 timing = .now
-            } else if place.horizontal(of: middleJ2000.precessed(from: .j2000, to: crossing), at: crossing).altitude >= Self.horizon {
+            } else if let sunrise, crossing > sunrise {
+                let beforeDawn = JulianDay(sunrise.value - 1 / 24)
+                if beforeDawn > now, middleAltitude(beforeDawn) >= Self.horizon {
+                    moment = beforeDawn
+                    timing = .beforeDawn(beforeDawn)
+                }
+            } else if middleAltitude(crossing) >= Self.horizon {
                 moment = crossing
                 timing = .later(crossing)
             }

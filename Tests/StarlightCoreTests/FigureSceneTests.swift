@@ -61,6 +61,30 @@ struct FigureSceneTests {
         #expect(cas.transit != nil && cas.center != nil)
     }
 
+    @Test func ursaMajorComesBeforeDawn() throws {
+        // At 9 PM the Great Bear is at its lowest, its middle on the northern horizon, and it
+        // crosses the meridian after sunrise: shown an hour before sunrise, high in the northeast.
+        let uma = scene("UMa")
+        guard case .beforeDawn(let moment) = uma.timing else { Issue.record("Ursa Major should be shown before dawn"); return }
+        let center = try #require(uma.center)
+        #expect(center.altitude > 40, "\(center)")
+        #expect(center.azimuth > 20 && center.azimuth < 90, "\(center)")
+        #expect((moment.value - evening.value) * 24 > 9)
+    }
+
+    @Test func leoComesBeforeDawn() throws {
+        // Leo rises after midnight and crosses the meridian in daylight (sunrise is about 7:25 AM
+        // EDT): shown an hour before sunrise, halfway up in the east.
+        let leo = scene("Leo")
+        guard case .beforeDawn(let moment) = leo.timing else { Issue.record("Leo should be shown before dawn"); return }
+        let hours = (moment.value - evening.value) * 24
+        #expect(hours > 9 && hours < 10)
+        let center = try #require(leo.center)
+        #expect(center.altitude > 30, "\(center)")
+        #expect(center.azimuth > 90 && center.azimuth < 150, "\(center)")
+        #expect(try #require(leo.transit) > moment)
+    }
+
     @Test func theSouthernCrossNeverRisesFromPennsylvania() {
         let cru = scene("Cru")
         #expect(cru.timing == .unseen)

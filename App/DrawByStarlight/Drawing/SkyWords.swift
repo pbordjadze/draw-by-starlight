@@ -35,10 +35,10 @@ nonisolated enum SkyWords {
             return String(localized: "drawing.standing.now",
                 defaultValue: "Turned as it sits tonight, \(height(altitude: center.altitude)) in the \(direction(azimuth: center.azimuth)).",
                 comment: "Under a constellation's name on the drawing screen; the arguments are a height word (high, halfway up, low) and a compass direction.")
-        case .later(let transit):
+        case .later(let moment), .beforeDawn(let moment):
             let center = scene.center ?? Horizontal(altitude: 0, azimuth: 0)
             return String(localized: "drawing.standing.later",
-                defaultValue: "Below the horizon now. Turned as it will sit at \(time(transit)), \(height(altitude: center.altitude)) in the \(direction(azimuth: center.azimuth)).",
+                defaultValue: "Below the horizon now. Turned as it will sit at \(time(moment)), \(height(altitude: center.altitude)) in the \(direction(azimuth: center.azimuth)).",
                 comment: "Under a constellation's name on the drawing screen when it hasn't risen yet; the arguments are a clock time, a height word (high, halfway up, low) and a compass direction.")
         case .unseen:
             return place == nil
@@ -62,6 +62,10 @@ nonisolated enum SkyWords {
             return String(localized: "list.standing.later",
                 defaultValue: "Rises later; highest at \(time(transit))",
                 comment: "Under a constellation's name in the list when it hasn't risen yet; the argument is a clock time.")
+        case .beforeDawn(let moment):
+            return String(localized: "list.standing.dawn",
+                defaultValue: "Rises later; before dawn at \(time(moment))",
+                comment: "Under a constellation's name in the list when it rises after midnight and is highest in daylight; the argument is a clock time, an hour before sunrise.")
         case .unseen:
             return place == nil ? String(localized: "Place unknown") : String(localized: "Never rises from here")
         }

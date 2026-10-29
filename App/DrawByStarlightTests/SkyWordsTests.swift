@@ -15,7 +15,8 @@ struct SkyWordsTests {
         #expect(SkyWords.direction(azimuth: 359) == "north")
         #expect(SkyWords.direction(azimuth: 37) == "northeast")
         #expect(SkyWords.direction(azimuth: 180) == "south")
-        #expect(SkyWords.direction(azimuth: 292) == "northwest")
+        #expect(SkyWords.direction(azimuth: 300) == "northwest")
+        #expect(SkyWords.direction(azimuth: 292) == "west")
         #expect(SkyWords.height(altitude: 64) == "high")
         #expect(SkyWords.height(altitude: 40) == "halfway up")
         #expect(SkyWords.height(altitude: 10) == "low")
@@ -30,9 +31,17 @@ struct SkyWordsTests {
     @Test func orionLater() throws {
         let scene = sky.scene(try #require(sky.constellation("Ori")), backdrop: false)
         let standing = SkyWords.standing(scene, place: sky.place, time: sky.time)
-        #expect(standing.hasPrefix("Below the horizon now. Turned as it will sit at "))
-        #expect(standing.hasSuffix(" AM, high in the south."))
+        #expect(standing.hasPrefix("Below the horizon now. Turned as it will sit at 4:07"))
+        // iOS sets a narrow space before AM.
+        #expect(standing.contains("AM, high in the south."))
         #expect(SkyWords.listing(scene, place: sky.place, time: sky.time).hasPrefix("Rises later; highest at "))
+    }
+
+    @Test func leoBeforeDawn() throws {
+        let scene = sky.scene(try #require(sky.constellation("Leo")), backdrop: false)
+        let listing = SkyWords.listing(scene, place: sky.place, time: sky.time)
+        #expect(listing.hasPrefix("Rises later; before dawn at 6:2"))
+        #expect(SkyWords.standing(scene, place: sky.place, time: sky.time).hasPrefix("Below the horizon now. Turned as it will sit at 6:2"))
     }
 
     @Test func noPlace() throws {

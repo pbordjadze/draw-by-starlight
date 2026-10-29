@@ -99,7 +99,8 @@ struct DrawingModelTests {
         let constellation = sky.constellation("Cas")!
         let m = DrawingModel(scene: sky.scene(constellation), story: nil, catalogue: sky.catalogue, alreadyDrawn: false,
                              lines: [[21, 168], [168, 264], [7, 8]])
-        #expect(m.lines == [[21, 168], [168, 264]] && m.drawing.selected == nil && m.prompt == .none && !m.isComplete)
+        // In the figure's order, whatever order they were drawn in.
+        #expect(m.lines == [[168, 264], [21, 168]] && m.drawing.selected == nil && m.prompt == .none && !m.isComplete)
         m.tap(264)
         m.tap(403)
         #expect(m.lines.count == 3)
