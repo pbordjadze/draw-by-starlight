@@ -21,8 +21,8 @@ struct DrawnFiguresTests {
 
         let second = DrawnFigures(file: file)
         let record = try #require(second.records["Cas"])
-        #expect(abs(record.first.timeIntervalSince(night)) < 1)
-        #expect(abs(record.latest.timeIntervalSince(night) - 86_400) < 1)
+        #expect(abs(try #require(record.first).timeIntervalSince(night)) < 1)
+        #expect(abs(try #require(record.latest).timeIntervalSince(night) - 86_400) < 1)
         #expect(!second.isDrawn("Ori"))
     }
 

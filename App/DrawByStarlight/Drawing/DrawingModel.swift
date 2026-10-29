@@ -68,8 +68,9 @@ final class DrawingModel {
             drawing.deselect()
         }
         self.drawing = drawing
-        isComplete = alreadyDrawn || drawing.isComplete
-        prompt = isComplete || !drawing.drawn.isEmpty ? .none : .start
+        let complete = alreadyDrawn || drawing.isComplete
+        isComplete = complete
+        prompt = complete || !drawing.drawn.isEmpty ? .none : .start
     }
 
     /// The lines drawn so far, as pairs of Bright Star numbers, for keeping.
