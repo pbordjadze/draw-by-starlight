@@ -17,6 +17,18 @@ app with them, and the app's Acknowledgements screen, when it comes, credits eac
   under the BSD 3-Clause License (below), drawn after the IAU's constellation charts (IAU and Sky &
   Telescope magazine, Roger Sinnott and Rick Fienberg; released by the IAU under Creative Commons
   Attribution). https://github.com/ofrohn/d3-celestial
+- **Stories** (`stories.json`, written by `tools/wikipedia_stories.py`): the lead section of each
+  constellation's article in the English Wikipedia, quoted as it stands but for the pronunciation
+  notes (the plain-text extract drops a pronunciation template's audio and IPA and leaves its empty
+  brackets behind; those brackets and doubled spaces are removed, and nothing else), with the
+  article's URL and the id and date of the revision quoted. Text by Wikipedia's contributors, under the Creative
+  Commons Attribution-ShareAlike 4.0 International license
+  (https://creativecommons.org/licenses/by-sa/4.0/); the app names the source and links the
+  article wherever it quotes one. Wikipedia and the Wikipedia wordmark are trademarks of the
+  Wikimedia Foundation, used here only to say where the words come from.
+- **Places** (`zones.tsv`, written by `tools/zones.py`): each time zone's principal location, from
+  the IANA Time Zone Database's `zone1970.tab` (Paul Eggert and contributors; public domain,
+  https://www.iana.org/time-zones), the app's first guess at where the stargazer is.
 - **Borders** (`borders.tsv`): the constellation boundaries the IAU adopted, Eugène Delporte,
   *Délimitation scientifique des constellations*, Cambridge University Press, 1930, as digitized
   in the Catalogue of Constellation Boundary Data, A. C. Davenhall and S. K. Leggett, Royal
