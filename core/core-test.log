@@ -1,0 +1,148 @@
+Building for debugging...
+Build complete! (16.14s)
+Test Suite 'All tests' started at 2026-10-29 10:45:09.112
+Test Suite 'debug.xctest' started at 2026-10-29 10:45:09.113
+Test Suite 'debug.xctest' passed at 2026-10-29 10:45:09.113
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'All tests' passed at 2026-10-29 10:45:09.113
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+◇ Test run started.
+↳ Testing Library Version: 6.2.4 (5ee435b15ad40ec)
+↳ Target Platform: x86_64-unknown-linux-gnu
+◇ Suite FigureDrawingTests started.
+◇ Suite JulianDayTests started.
+◇ Suite SkyTests started.
+◇ Suite CatalogueTests started.
+◇ Suite FirstSetTests started.
+◇ Suite RiseAndSetTests started.
+◇ Suite ProjectionTests started.
+◇ Suite SunAndMoonTests started.
+◇ Suite FigureSceneTests started.
+◇ Test tappingAlongTheChain() started.
+◇ Test theHint() started.
+◇ Test aLineThatDoesNotBelongIsForgotten() started.
+◇ Test meeusSiderealTimeExample() started.
+◇ Test resetAndComplete() started.
+◇ Test j2000IsNoonOnTheFirstOf2000() started.
+◇ Test roundTripsThroughDate() started.
+◇ Test sputnikLaunch() started.
+◇ Test theUnixEpoch() started.
+◇ Test precessionRoundTrips() started.
+◇ Test venusOverWashington() started.
+◇ Test siderealTimeAtMidnight() started.
+◇ Test localSiderealTimeAddsTheLongitude() started.
+◇ Test starLabels() started.
+◇ Test precessionAndProperMotion() started.
+◇ Test theStoriesSayWhereTheyComeFrom() started.
+◇ Test designatedStarsLieInsideTheirBorders() started.
+◇ Test aPlaceFromTheTimeZone() started.
+◇ Test everyFigureIsInTheCatalogueWithItsStory() started.
+◇ Test siderealTimeInTheEvening() started.
+◇ Test betelgeuse() started.
+◇ Test everyStarOfTheBrightStarCatalogue() started.
+◇ Test theNamedStars() started.
+◇ Test cassiopeiasW() started.
+◇ Test arcturusMoves() started.
+◇ Test the88Constellations() started.
+◇ Test theBordersCloseAroundThePoles() started.
+◇ Test lyrasParallelogramIsDrawnOnce() started.
+◇ Test aStarRisesAndSetsADayLess4MinutesLater() started.
+◇ Test venusOverBoston() started.
+◇ Test polarisNeverSetsFromPennsylvania() started.
+◇ Test theTwentyFifthOfOctober2026(event:hour:minute:) started.
+◇ Test theCenterIsTheOrigin() started.
+◇ Test facingSouthEastIsOnTheLeft() started.
+◇ Test distanceFromTheCenterIsTwiceTheTangentOfHalfTheAngle() started.
+◇ Test centeredOnAFigure() started.
+◇ Test itsPhaseInApril1992() started.
+◇ Test upIsTowardTheZenith() started.
+◇ Test theMoonInApril1992() started.
+◇ Test theNewMoonOfFebruary1977() started.
+◇ Test theSunInOctober1992() started.
+◇ Test theMoonOverPennsylvania() started.
+◇ Test thePhasesOfOctober2026(phase:day:hour:minute:) started.
+◇ Test theHuntersMoonIsFullAndWaning() started.
+◇ Test theBackdropSurroundsTheFigure() started.
+◇ Test aStandingNeedsNoBackdrop() started.
+◇ Test cassiopeiaHighInTheNortheast() started.
+◇ Test inDaylightTonightStartsAtSunset() started.
+◇ Test noPlaceMeansNorthUp() started.
+◇ Test cygnusHighInTheWest() started.
+◇ Test leoComesBeforeDawn() started.
+◇ Test ursaMajorComesBeforeDawn() started.
+◇ Test theSouthernCrossNeverRisesFromPennsylvania() started.
+◇ Test orionComesLater() started.
+◇ Test scorpiusIsNotUpTonight() started.
+◇ Test case passing 3 arguments event → "moonset", hour → 10, minute → 43 to theTwentyFifthOfOctober2026(event:hour:minute:) started.
+◇ Test case passing 3 arguments event → "moonrise", hour → 21, minute → 32 to theTwentyFifthOfOctober2026(event:hour:minute:) started.
+◇ Test case passing 3 arguments event → "sunrise", hour → 11, minute → 21 to theTwentyFifthOfOctober2026(event:hour:minute:) started.
+◇ Test case passing 3 arguments event → "sunset", hour → 22, minute → 6 to theTwentyFifthOfOctober2026(event:hour:minute:) started.
+◇ Test case passing 4 arguments phase → .lastQuarter, day → 3, hour → 13, minute → 25 to thePhasesOfOctober2026(phase:day:hour:minute:) started.
+◇ Test case passing 4 arguments phase → .new, day → 10, hour → 15, minute → 50 to thePhasesOfOctober2026(phase:day:hour:minute:) started.
+◇ Test case passing 4 arguments phase → .firstQuarter, day → 18, hour → 16, minute → 12 to thePhasesOfOctober2026(phase:day:hour:minute:) started.
+◇ Test case passing 4 arguments phase → .full, day → 26, hour → 4, minute → 12 to thePhasesOfOctober2026(phase:day:hour:minute:) started.
+✔ Test resetAndComplete() passed after 0.109 seconds.
+✔ Test aLineThatDoesNotBelongIsForgotten() passed after 0.110 seconds.
+✔ Test theHint() passed after 0.110 seconds.
+✔ Test tappingAlongTheChain() passed after 0.112 seconds.
+✔ Test roundTripsThroughDate() passed after 0.127 seconds.
+✔ Test sputnikLaunch() passed after 0.127 seconds.
+✔ Test meeusSiderealTimeExample() passed after 0.127 seconds.
+✔ Test j2000IsNoonOnTheFirstOf2000() passed after 0.127 seconds.
+✔ Test theUnixEpoch() passed after 0.132 seconds.
+✔ Test siderealTimeAtMidnight() passed after 0.132 seconds.
+✔ Test precessionRoundTrips() passed after 0.132 seconds.
+✔ Test venusOverWashington() passed after 0.132 seconds.
+✔ Test localSiderealTimeAddsTheLongitude() passed after 0.135 seconds.
+✔ Test precessionAndProperMotion() passed after 0.135 seconds.
+✔ Test starLabels() passed after 0.135 seconds.
+✔ Test theStoriesSayWhereTheyComeFrom() passed after 0.135 seconds.
+✔ Test siderealTimeInTheEvening() passed after 0.135 seconds.
+✔ Test betelgeuse() passed after 0.135 seconds.
+✔ Test everyStarOfTheBrightStarCatalogue() passed after 0.135 seconds.
+✔ Test theNamedStars() passed after 0.135 seconds.
+✔ Test cassiopeiasW() passed after 0.135 seconds.
+✔ Test arcturusMoves() passed after 0.135 seconds.
+✔ Test everyFigureIsInTheCatalogueWithItsStory() passed after 0.135 seconds.
+✔ Test the88Constellations() passed after 0.135 seconds.
+✔ Test theBordersCloseAroundThePoles() passed after 0.135 seconds.
+✔ Test lyrasParallelogramIsDrawnOnce() passed after 0.135 seconds.
+✔ Test aPlaceFromTheTimeZone() passed after 0.135 seconds.
+✔ Test venusOverBoston() passed after 0.135 seconds.
+✔ Test polarisNeverSetsFromPennsylvania() passed after 0.135 seconds.
+✔ Test aStarRisesAndSetsADayLess4MinutesLater() passed after 0.135 seconds.
+✔ Test theCenterIsTheOrigin() passed after 0.135 seconds.
+✔ Test theTwentyFifthOfOctober2026(event:hour:minute:) with 4 test cases passed after 0.135 seconds.
+✔ Test facingSouthEastIsOnTheLeft() passed after 0.135 seconds.
+✔ Test distanceFromTheCenterIsTwiceTheTangentOfHalfTheAngle() passed after 0.135 seconds.
+✔ Test centeredOnAFigure() passed after 0.135 seconds.
+✔ Test itsPhaseInApril1992() passed after 0.135 seconds.
+✔ Test upIsTowardTheZenith() passed after 0.135 seconds.
+✔ Test theMoonInApril1992() passed after 0.135 seconds.
+✔ Test theNewMoonOfFebruary1977() passed after 0.135 seconds.
+✔ Test theSunInOctober1992() passed after 0.135 seconds.
+✔ Test theMoonOverPennsylvania() passed after 0.135 seconds.
+✔ Test theHuntersMoonIsFullAndWaning() passed after 0.135 seconds.
+✔ Test thePhasesOfOctober2026(phase:day:hour:minute:) with 4 test cases passed after 0.135 seconds.
+✔ Test aStandingNeedsNoBackdrop() passed after 0.134 seconds.
+✔ Test theBackdropSurroundsTheFigure() passed after 0.135 seconds.
+✔ Test cassiopeiaHighInTheNortheast() passed after 0.042 seconds.
+✔ Test inDaylightTonightStartsAtSunset() passed after 0.042 seconds.
+✔ Test noPlaceMeansNorthUp() passed after 0.042 seconds.
+✔ Test leoComesBeforeDawn() passed after 0.042 seconds.
+✔ Test cygnusHighInTheWest() passed after 0.042 seconds.
+✔ Test theSouthernCrossNeverRisesFromPennsylvania() passed after 0.041 seconds.
+✔ Test ursaMajorComesBeforeDawn() passed after 0.042 seconds.
+✔ Suite FigureDrawingTests passed after 0.138 seconds.
+✔ Suite JulianDayTests passed after 0.138 seconds.
+✔ Suite SkyTests passed after 0.138 seconds.
+✔ Suite FirstSetTests passed after 0.138 seconds.
+✔ Suite RiseAndSetTests passed after 0.138 seconds.
+✔ Suite ProjectionTests passed after 0.138 seconds.
+✔ Suite SunAndMoonTests passed after 0.138 seconds.
+✔ Test orionComesLater() passed after 0.043 seconds.
+✔ Test scorpiusIsNotUpTonight() passed after 0.049 seconds.
+✔ Suite FigureSceneTests passed after 0.146 seconds.
+✔ Test designatedStarsLieInsideTheirBorders() passed after 0.320 seconds.
+✔ Suite CatalogueTests passed after 0.321 seconds.
+✔ Test run with 55 tests in 9 suites passed after 0.322 seconds.
