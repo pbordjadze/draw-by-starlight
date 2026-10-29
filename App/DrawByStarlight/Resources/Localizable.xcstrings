@@ -1,10 +1,338 @@
 {
-  "sourceLanguage" : "en",
-  "strings" : {
-    "Tonight" : {
-      "comment" : "The home screen's title: tonight's sky.",
-      "extractionState" : "manual"
+  "sourceLanguage": "en",
+  "strings": {
+    "Already drawn.": {
+      "comment": "VoiceOver, after a line already drawn is drawn again.",
+      "extractionState": "manual"
+    },
+    "Border": {
+      "comment": "The label of a fact on the finished figure: its IAU border.",
+      "extractionState": "manual"
+    },
+    "Brightest star": {
+      "comment": "The label of a fact on the finished figure.",
+      "extractionState": "manual"
+    },
+    "Close": {
+      "comment": "The close button of the finished figure's sheet.",
+      "extractionState": "manual"
+    },
+    "Done": {
+      "comment": "The one button on the finished figure: back to the list.",
+      "extractionState": "manual"
+    },
+    "Draw": {
+      "comment": "The list's section header: the constellations that can be drawn.",
+      "extractionState": "manual"
+    },
+    "Draw again": {
+      "comment": "Toolbar button on a finished drawing: clears the lines to draw it once more.",
+      "extractionState": "manual"
+    },
+    "Drawn": {
+      "comment": "VoiceOver's name for the sparkle beside a constellation already drawn, in the list.",
+      "extractionState": "manual"
+    },
+    "Drawn tonight.": {
+      "comment": "At the top of the finished figure, when it was drawn tonight.",
+      "extractionState": "manual"
+    },
+    "Each is turned as it sits in your sky tonight.": {
+      "comment": "The list's footer.",
+      "extractionState": "manual"
+    },
+    "From Wikipedia": {
+      "comment": "The heading of the story card: the text below is quoted from Wikipedia.",
+      "extractionState": "manual"
+    },
+    "It never rises from here. North is up.": {
+      "comment": "Under a constellation's name on the drawing screen when it never rises from the stargazer's place.",
+      "extractionState": "manual"
+    },
+    "Join the stars, one line at a time.": {
+      "comment": "The prompt under the sky before the first line.",
+      "extractionState": "manual"
+    },
+    "Keep reading on Wikipedia": {
+      "comment": "The link under a story whose article says more; opens Safari.",
+      "extractionState": "manual"
+    },
+    "Let go on a star.": {
+      "comment": "The prompt under the sky while a line follows the finger.",
+      "extractionState": "manual"
+    },
+    "Never rises from here": {
+      "comment": "Under a constellation's name in the list when it never rises from the stargazer's place.",
+      "extractionState": "manual"
+    },
+    "Never sets from here.": {
+      "comment": "A fact on the finished figure: it is circumpolar from the stargazer's place.",
+      "extractionState": "manual"
+    },
+    "North is up.": {
+      "comment": "Under a constellation's name on the drawing screen when the place is unknown.",
+      "extractionState": "manual"
+    },
+    "Nothing selected.": {
+      "comment": "VoiceOver, after the selected star is tapped again.",
+      "extractionState": "manual"
+    },
+    "Now to the next star.": {
+      "comment": "The prompt under the sky once a first star is chosen.",
+      "extractionState": "manual"
+    },
+    "Opens Wikipedia in Safari.": {
+      "comment": "VoiceOver hint on the link to the Wikipedia article.",
+      "extractionState": "manual"
+    },
+    "Pause, and the next star glimmers.": {
+      "comment": "Under the prompt until the first line is drawn: how help comes.",
+      "extractionState": "manual"
+    },
+    "Place unknown": {
+      "comment": "In the list and on the finished figure when the device's time zone gives no place.",
+      "extractionState": "manual"
+    },
+    "Read the article on Wikipedia": {
+      "comment": "The link under a story whose article's lead is all shown; opens Safari.",
+      "extractionState": "manual"
+    },
+    "Selected": {
+      "comment": "VoiceOver value of the star a line will start from.",
+      "extractionState": "manual"
+    },
+    "Show me": {
+      "comment": "Button under the sky: the next star glimmers at once.",
+      "extractionState": "manual"
+    },
+    "Starts a line here.": {
+      "comment": "VoiceOver hint on a star while none is selected.",
+      "extractionState": "manual"
+    },
+    "Story": {
+      "comment": "Toolbar button on a finished drawing: shows its story again.",
+      "extractionState": "manual"
+    },
+    "The dotted line: its border, drawn by the IAU in 1930.": {
+      "comment": "A fact on the finished figure, beside the dotted border on the drawing.",
+      "extractionState": "manual"
+    },
+    "The next star glimmers.": {
+      "comment": "VoiceOver hint on the Show me button.",
+      "extractionState": "manual"
+    },
+    "Those two aren't joined.": {
+      "comment": "The prompt under the sky, and VoiceOver, after a line that isn't part of the figure.",
+      "extractionState": "manual"
+    },
+    "Tonight": {
+      "comment": "The home screen's title: tonight's sky; also the label of a fact on the finished figure (where it stands tonight).",
+      "extractionState": "manual"
+    },
+    "drawing.standing.later": {
+      "comment": "Under a constellation's name on the drawing screen when it hasn't risen yet; the arguments are a clock time, a height word (high, halfway up, low) and a compass direction.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Below the horizon now. Turned as it will sit at %1$@, %2$@ in the %3$@."
+          }
+        }
+      }
+    },
+    "drawing.standing.now": {
+      "comment": "Under a constellation's name on the drawing screen; the arguments are a height word (high, halfway up, low) and a compass direction.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turned as it sits tonight, %1$@ in the %2$@."
+          }
+        }
+      }
+    },
+    "east": {
+      "comment": "A compass direction, in a sentence (\"high in the east\").",
+      "extractionState": "manual"
+    },
+    "figure.brightest": {
+      "comment": "A fact on the finished figure; the arguments are a star's name and its magnitude.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, magnitude %2$@"
+          }
+        }
+      }
+    },
+    "figure.drawn-on": {
+      "comment": "On the finished figure, when it was drawn before; the argument is a date.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First drawn %1$@."
+          }
+        }
+      }
+    },
+    "figure.highest": {
+      "comment": "A fact on the finished figure; the arguments are a clock time, a height word (high, halfway up, low) and a compass direction.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Highest at %1$@, %2$@ in the %3$@."
+          }
+        }
+      }
+    },
+    "halfway up": {
+      "comment": "How high a figure stands (25° to 50°), in a sentence.",
+      "extractionState": "manual"
+    },
+    "high": {
+      "comment": "How high a figure stands (50° and up), in a sentence (\"high in the east\").",
+      "extractionState": "manual"
+    },
+    "list.standing.later": {
+      "comment": "Under a constellation's name in the list when it hasn't risen yet; the argument is a clock time.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rises later; highest at %1$@"
+          }
+        }
+      }
+    },
+    "list.standing.now": {
+      "comment": "Under a constellation's name in the list; the arguments are a capitalized height word (High, Halfway up, Low) and a compass direction.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ in the %2$@"
+          }
+        }
+      }
+    },
+    "low": {
+      "comment": "How high a figure stands (under 25°), in a sentence.",
+      "extractionState": "manual"
+    },
+    "north": {
+      "comment": "A compass direction, in a sentence.",
+      "extractionState": "manual"
+    },
+    "northeast": {
+      "comment": "A compass direction, in a sentence.",
+      "extractionState": "manual"
+    },
+    "northwest": {
+      "comment": "A compass direction, in a sentence.",
+      "extractionState": "manual"
+    },
+    "south": {
+      "comment": "A compass direction, in a sentence.",
+      "extractionState": "manual"
+    },
+    "southeast": {
+      "comment": "A compass direction, in a sentence.",
+      "extractionState": "manual"
+    },
+    "southwest": {
+      "comment": "A compass direction, in a sentence.",
+      "extractionState": "manual"
+    },
+    "the free encyclopedia": {
+      "comment": "Beside the From Wikipedia heading: Wikipedia's own subtitle.",
+      "extractionState": "manual"
+    },
+    "voiceover.hint.join": {
+      "comment": "VoiceOver hint on a star while another is selected; the argument is the selected star's name.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Draws a line from %1$@."
+          }
+        }
+      }
+    },
+    "voiceover.joined": {
+      "comment": "VoiceOver, after a line that belongs is drawn; the arguments are its two stars' names.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ to %2$@: a line of the figure."
+          }
+        }
+      }
+    },
+    "voiceover.selected": {
+      "comment": "VoiceOver, after a star is chosen as a line's start; the argument is the star's name.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ selected. Now choose the next star."
+          }
+        }
+      }
+    },
+    "voiceover.unnamed-star": {
+      "comment": "VoiceOver's name for a star no line has reached yet; the argument is the constellation's name.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A star of %1$@"
+          }
+        }
+      }
+    },
+    "voiceover.whole": {
+      "comment": "VoiceOver, when the last line of a figure is drawn; the argument is the constellation's name.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ is whole."
+          }
+        }
+      }
+    },
+    "west": {
+      "comment": "A compass direction, in a sentence.",
+      "extractionState": "manual"
+    },
+    "wikipedia.terms": {
+      "comment": "Under a quotation from Wikipedia; the arguments are the article's title, the date of its revision and the license's name.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quoted word for word from the article “%1$@” as revised %2$@; text under %3$@."
+          }
+        }
+      }
     }
   },
-  "version" : "1.0"
+  "version": "1.0"
 }

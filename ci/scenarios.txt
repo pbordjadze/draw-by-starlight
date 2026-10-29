@@ -1,2 +1,8 @@
-tonight-empty@20
-tonight-empty-long-text@20
+constellations@20
+constellations-long-text@20
+draw-cassiopeia@20
+draw-cassiopeia-hint@20
+draw-cassiopeia-done@25
+draw-cassiopeia-done-long-text@25
+draw-ursa-major@20
+draw-orion@20

@@ -21,6 +21,12 @@ enum Theme {
     static let gold = Color(red: 0.788, green: 0.635, blue: 0.290)
     /// `outline`: line work and hairlines.
     static let outline = Color("Outline")
+    /// Parchment: the drawn lines and the stars' names, and the faint stars around a figure.
+    static let ink = Color(red: 0.929, green: 0.902, blue: 0.855)
+    /// Lavender, for what's only a hint: a line that didn't belong, a border, a note.
+    static let lavender = Color(red: 0.608, green: 0.541, blue: 0.706)
+    /// The gold's light: a star's heart and the glimmer.
+    static let goldLight = Color(red: 0.929, green: 0.816, blue: 0.537)
 
     /// Navigation titles in New York, like the identity's headings.
     static func styleNavigationTitles() {

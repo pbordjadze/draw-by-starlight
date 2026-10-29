@@ -14,21 +14,33 @@ rules.
   starts from; `Time` (sidereal time, ΔT), `Coordinates` (`Equatorial`, `Horizontal`, `Place`),
   `Precession`, `Sun`, `Moon` (place, phase, the next new or full), `RiseAndSet` (`SkyObject`),
   `Catalogue` (`Star`, `Constellation`: figures and borders), `Projection` (a figure laid flat as
-  the stargazer sees it). `Resources/`: the bundled sky, built by `tools/sky_data.py`, and
-  `CREDITS.md`, its sources and licenses, for the Acknowledgements screen.
+  the stargazer sees it), `FigureScene` (one constellation laid out for drawing in a place's sky
+  at a moment, or at its next meridian crossing when it is below the horizon; the stars around
+  it; its border), `FigureDrawing` (the lines drawn, the selected star, the hint), `Stories`
+  (`Story`: each drawable constellation's Wikipedia lead, verbatim, with its revision; the first
+  set is `Catalogue.firstSet`), `Places` (`Place.guess(timeZone:)`). `Resources/`: the bundled
+  sky, built by `tools/sky_data.py`, `stories.json` (`tools/wikipedia_stories.py`), `zones.tsv`
+  (`tools/zones.py`), and `CREDITS.md`, its sources and licenses, for the Acknowledgements screen.
 - `Tests/StarlightCoreTests` (Swift Testing), pinned to published values (below).
 - `App/`: `DrawByStarlight.xcodeproj` (synchronized folders: adding files needs no project edit),
   `DrawByStarlight/` (`App/` the app, `Theme`, `Log` and `DemoMode`; `Tonight/` the home screen,
-  empty until the sky lands; `Resources/` the catalogs, privacy manifest and assets),
+  a plain list of what can be drawn until the dome lands (slice 4); `Drawing/` the one way to
+  draw: `Sky` (the catalogue, the stories, the place guessed from the time zone, the moment),
+  `DrawingModel` (lines, touches, the pause and the glimmer), `SkyCanvasView` (the canvas, one
+  gesture, a VoiceOver button per star), `DrawingView`, `FinishedFigureView` (the story shown as
+  Wikipedia's, with its link), `DrawnFigures` (what's drawn, a JSON file in Application Support),
+  `SkyWords`, `FigureLayout`; `Resources/` the catalogs, privacy manifest and assets),
   `DrawByStarlightTests` (Swift Testing), `DrawByStarlightUITests` (XCTest), `Config/Info.plist`
   (export compliance, the scene manifest; the rest is the target's `INFOPLIST_KEY_*` settings).
 - `ci/` and `.github/workflows/ci.yml`: jobs `core` (Linux: StarlightCore tests, warnings, string
   catalog), `apple` (`iphone` on every push: Debug build, screenshots, unit and UI tests, Release
-  check; or `compile`), `report` (`ci/report.py` writes `STATUS.md`). No IPA job and no SideStore
-  source: the app stays out of SideStore until the owner says. The scripts came from
-  `pbordjadze/paint-by-number`'s `ci/` by way of `pbordjadze/pigeon`, and keep their shape.
-- `tools/`: `swift.sh` (SwiftPM in Docker), `strings_check.py` and `sky_data.py` (their docstrings
-  are the manuals).
+  check; or `compile`), `ipa` (on `main`, or `[ipa]` on a branch without publishing: the
+  unsigned IPA as the `build-<n>` prerelease and the SideStore source on the `sidestore` branch,
+  `ci/sidestore_source.py`; CI owns that branch), `report` (`ci/report.py` writes `STATUS.md`).
+  The scripts came from `pbordjadze/paint-by-number`'s `ci/` by way of `pbordjadze/pigeon`, and
+  keep their shape.
+- `tools/`: `swift.sh` (SwiftPM in Docker, or a Swift toolchain on the PATH), `strings_check.py`,
+  `sky_data.py`, `wikipedia_stories.py` and `zones.py` (their docstrings are the manuals).
 - `PRIVACY.md`: the privacy policy, word for word what the app does (below).
 - Plans, briefs and the backlog are not committed here: they live in the private
   `painting-company` repository (this app is its row 128). A commit message says what changed and
@@ -44,14 +56,18 @@ rules.
   *Astronomical Algorithms*), named in the test.
 - Bundled data (stars, names, figures' lines, borders, stories) needs a license that allows
   bundling; reject on any doubt, and credit everything on the Acknowledgements screen.
+- The app writes no prose about the sky. A constellation's story is Wikipedia's lead section,
+  quoted word for word (`tools/wikipedia_stories.py` keeps the revision), shown under a heading
+  that names Wikipedia, with the article linked; facts beside it are computed from the catalogue.
 - Angles in degrees, times as `JulianDay` or `Date`, in StarlightCore; the app converts for
   display.
 
 ## Privacy (hard rules)
 
 No account, no server, no network, no analytics, no ads, no third-party code. Everything stays on
-the device. No location permission: the place is a city the stargazer picks (asking for location
-is the owner's decision). A change to what the app collects or asks for changes `PRIVACY.md`,
+the device; the one link out (a story's Wikipedia article) opens Safari. No location permission:
+the place is a city the stargazer picks, guessed until then from the time zone (asking for
+location is the owner's decision). A change to what the app collects or asks for changes `PRIVACY.md`,
 `Resources/PrivacyInfo.xcprivacy`, `ShipHygieneTests` and `ci/check_release.sh` together. A
 required-reason API (UserDefaults, file timestamps, disk space, boot time) adds its category and
 reason to the manifest, and to the list `ShipHygieneTests` pins (Debug-only code, like
@@ -82,6 +98,10 @@ reason to the manifest, and to the list `ShipHygieneTests` pins (Debug-only code
 - `MemberImportVisibility` is enabled: every file that touches members of a type from another
   module imports that module itself (`import StarlightCore`, …); a file that logs through `Log`
   imports `os`.
+- Drawing (the one way): tap or drag star to star; a line that belongs stays and names its two
+  stars, one that doesn't fades in lavender; after four seconds without a new line, or on "Show
+  me", the next star glimmers; the whole figure brings two gold sparkles, then its story. What's
+  drawn stays drawn. Help never counts, scores or levels.
 - Night only: the sky is the canvas, so the app is always dark (`UIUserInterfaceStyle` Dark), and
   the Outside screen is dim red on true black.
 - The look is Paint by Moonlight's design system (`Theme`, the asset catalog's colors): New York
