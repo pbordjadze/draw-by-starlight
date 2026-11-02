@@ -16,5 +16,11 @@ final class DrawingTests: XCTestCase {
         }
         XCTAssertTrue(app.staticTexts["From Wikipedia"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts["Schedar"].exists)
+        // The story's sheet rests below the figure: every star stays in view above it.
+        let sheetTop = app.staticTexts["Drawn tonight."].frame.minY
+        for star in [542, 403, 264, 168, 21] {
+            let frame = app.descendants(matching: .any).matching(identifier: "star-\(star)").firstMatch.frame
+            XCTAssertLessThan(frame.midY, sheetTop, "star \(star) is under the story")
+        }
     }
 }

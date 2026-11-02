@@ -9,6 +9,8 @@ struct FinishedFigureView: View {
     let sky: Sky
     /// When this figure was first drawn; nil until it is recorded.
     let drawnAt: Date?
+    /// Where the sheet first rests: low enough that the figure shows whole above it, undimmed.
+    let firstDetent: PresentationDetent
     let done: () -> Void
 
     var body: some View {
@@ -43,7 +45,8 @@ struct FinishedFigureView: View {
                 }
             }
         }
-        .presentationDetents([.medium, .large])
+        .presentationDetents([firstDetent, .large])
+        .presentationBackgroundInteraction(.enabled(upThrough: firstDetent))
         .presentationDragIndicator(.visible)
         .presentationBackground(Theme.paper)
         #if DEBUG
