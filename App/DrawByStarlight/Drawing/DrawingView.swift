@@ -12,6 +12,11 @@ struct DrawingView: View {
     let sky: Sky
     let drawn: DrawnFigures
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    /// The bottom of the window and of the sky's slot, in the window's coordinates: what the
+    /// story's sheet would cover.
+    @State private var windowBottom: CGFloat = 0
+    @State private var skyBottom: CGFloat = 0
 
     init(constellation: Constellation, sky: Sky, drawn: DrawnFigures) {
         self.sky = sky
@@ -31,11 +36,19 @@ struct DrawingView: View {
                 .foregroundStyle(Theme.lavender)
                 .padding(.horizontal, 20)
                 .padding(.top, 4)
+                // Words for the first look; once a line is drawn, the sky is the screen. Faded,
+                // not removed, so the figure doesn't move under the finger.
+                .opacity(showsStanding ? 1 : 0)
+                .animation(reduceMotion ? nil : .easeOut(duration: 0.8), value: showsStanding)
             SkyCanvasView(model: model, showsBorder: model.isComplete)
+                // The whole figure stays in view above its story.
+                .padding(.bottom, model.showsStory ? storyInset : 0)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).maxY } action: { skyBottom = $0 }
                 .padding(.vertical, 8)
             footer
         }
+        .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).maxY + $0.safeAreaInsets.bottom } action: { windowBottom = $0 }
         .background(Theme.paper.ignoresSafeArea())
         .navigationTitle(Text(verbatim: model.name))
         .navigationBarTitleDisplayMode(.inline)
@@ -58,7 +71,8 @@ struct DrawingView: View {
             }
         }
         .sheet(isPresented: $model.showsStory) {
-            FinishedFigureView(model: model, sky: sky, drawnAt: drawn.records[model.scene.constellation.id]?.first) {
+            FinishedFigureView(model: model, sky: sky, drawnAt: drawn.records[model.scene.constellation.id]?.first,
+                               firstDetent: Self.storyDetent) {
                 model.showsStory = false
                 dismiss()
             }
@@ -84,28 +98,34 @@ struct DrawingView: View {
         .onDisappear { model.disappeared() }
     }
 
-    /// The one line of help, "Show me", and the hint about pausing until the first line is drawn.
+    /// Where the figure stands tonight: before the first line, and again once it's whole.
+    private var showsStanding: Bool { model.drawing.drawn.isEmpty || model.isComplete }
+
+    /// The story's sheet first rises this far, leaving the figure in view above it.
+    private static let storyFraction: CGFloat = 0.5
+    static let storyDetent = PresentationDetent.fraction(storyFraction)
+
+    /// How much of the sky's slot the story's sheet covers, and a little air.
+    private var storyInset: CGFloat {
+        max(0, skyBottom - windowBottom * (1 - Self.storyFraction)) + 16
+    }
+
+    /// The one line of help, and "Show me" (only a hint, so lavender).
     private var footer: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack(alignment: .firstTextBaseline, spacing: 12) {
-                promptText
-                    .font(.body)
-                    .foregroundStyle(Theme.ink)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .accessibilityAddTraits(.updatesFrequently)
-                if !model.isComplete {
-                    Button("Show me") { model.showMe() }
-                        .font(.body.weight(.semibold))
-                        .accessibilityHint("The next star glimmers.")
-                }
-            }
-            .frame(minHeight: 44)
-            if model.drawing.drawn.isEmpty && !model.isComplete {
-                Text("Pause, and the next star glimmers.")
-                    .font(.footnote)
-                    .foregroundStyle(Theme.lavender)
+        HStack(alignment: .firstTextBaseline, spacing: 12) {
+            promptText
+                .font(.body)
+                .foregroundStyle(Theme.ink)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .accessibilityAddTraits(.updatesFrequently)
+            if !model.isComplete {
+                Button("Show me") { model.showMe() }
+                    .font(.body.weight(.semibold))
+                    .tint(Theme.lavender)
+                    .accessibilityHint("The next star glimmers.")
             }
         }
+        .frame(minHeight: 44)
         .padding(.horizontal, 20)
         .padding(.bottom, 12)
     }

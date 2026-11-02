@@ -109,10 +109,6 @@
       "comment": "VoiceOver hint on the link to the Wikipedia text's license.",
       "extractionState": "manual"
     },
-    "Pause, and the next star glimmers.": {
-      "comment": "Under the prompt until the first line is drawn: how help comes.",
-      "extractionState": "manual"
-    },
     "Place unknown": {
       "comment": "In the list and on the finished figure when the device's time zone gives no place.",
       "extractionState": "manual"
