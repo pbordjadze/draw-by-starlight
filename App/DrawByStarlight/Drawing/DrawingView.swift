@@ -38,8 +38,8 @@ struct DrawingView: View {
                 .padding(.top, 4)
                 // Words for the first look; once a line is drawn, the sky is the screen. Faded,
                 // not removed, so the figure doesn't move under the finger.
-                .opacity(model.drawing.drawn.isEmpty || model.isComplete ? 1 : 0)
-                .animation(reduceMotion ? nil : .easeOut(duration: 0.8), value: model.drawing.drawn.isEmpty)
+                .opacity(showsStanding ? 1 : 0)
+                .animation(reduceMotion ? nil : .easeOut(duration: 0.8), value: showsStanding)
             SkyCanvasView(model: model, showsBorder: model.isComplete)
                 // The whole figure stays in view above its story.
                 .padding(.bottom, model.showsStory ? storyInset : 0)
@@ -97,6 +97,9 @@ struct DrawingView: View {
         }
         .onDisappear { model.disappeared() }
     }
+
+    /// Where the figure stands tonight: before the first line, and again once it's whole.
+    private var showsStanding: Bool { model.drawing.drawn.isEmpty || model.isComplete }
 
     /// The story's sheet first rises this far, leaving the figure in view above it.
     private static let storyFraction: CGFloat = 0.5
