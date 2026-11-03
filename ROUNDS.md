@@ -12,12 +12,14 @@ next round takes the weakest thing the critic names.
   gone (the glimmer teaches it). When a figure is whole, its story rises only halfway, undimmed,
   and the figure moves up to stay whole above it.
 - **To see it:** open any constellation, draw a line, then finish it.
-- **Critic:** not run as planned: the loop's axis changed first (below), so round 2 goes straight at it.
+- **Critic:** "The drawing is a delight, but finishing a figure ends on a form instead of the sky he
+  just drew." Weakest: the finished figure's sheet. Not yet showable without a caveat.
 - **Spend so far:** about $10
 
 ## Round 2: less text, more wonder
 
-The loop's main axis from here: show, don't tell. Words only on demand.
+The loop's main axis from here: show, don't tell. Words only on demand. This round also takes
+round 1's weakest thing: a finished figure no longer ends on a sheet.
 
 - **Build:** pending
 - **Changed:** the drawing screen has no words but the title and star names: the instruction
