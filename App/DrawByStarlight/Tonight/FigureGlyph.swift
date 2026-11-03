@@ -11,9 +11,9 @@ struct FigureGlyph: View {
 
     var body: some View {
         Canvas { context, size in
-            let layout = FigureLayout(size: size, figure: scene.figure.map(\.point), inset: 5)
-            // Line and star sizes grow with the glyph.
+            // Line and star sizes, and the room kept for the brightest star, grow with the glyph.
             let k = size.width / 64
+            let layout = FigureLayout(size: size, figure: scene.figure.map(\.point), inset: 3.4 * k)
             let points = Dictionary(uniqueKeysWithValues: scene.figure.map { ($0.id, layout.point($0.point)) })
             for (a, b) in scene.constellation.segments {
                 guard let p = points[a], let q = points[b] else { continue }
