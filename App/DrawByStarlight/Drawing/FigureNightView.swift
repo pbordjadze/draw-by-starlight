@@ -53,6 +53,8 @@ struct FigureNightView: View {
         let dawn: JulianDay
         let still: JulianDay
         let dome: Dome
+        /// The figure's stars' magnitudes, for their sizes.
+        let magnitudes: [Int: Double]
         /// The figure's middle through the night, on the dome.
         let path: [PlanePoint]
 
@@ -60,6 +62,9 @@ struct FigureNightView: View {
             self.constellation = constellation
             (evening, dawn) = FigureScene.night(from: sky.moment, at: place)
             self.still = still
+            magnitudes = Dictionary(uniqueKeysWithValues: constellation.stars.compactMap { id in
+                sky.catalogue.stars[id].map { (id, $0.magnitude) }
+            })
             dome = Dome(catalogue: sky.catalogue, place: place, around: evening, faintest: 3.5, figures: [constellation])
             let middle = FigureScene.middle(of: constellation.stars.compactMap { sky.catalogue.stars[$0]?.position(at: evening) })
                 ?? Equatorial(rightAscension: 0, declination: 0)
@@ -126,7 +131,7 @@ struct FigureNightView: View {
         }
         inside.stroke(lines, with: .color(Theme.ink.opacity(0.9)), lineWidth: 1.3)
         for (id, p) in points {
-            let magnitude = sky.catalogue.stars[id]?.magnitude ?? 4
+            let magnitude = night.magnitudes[id] ?? 4
             let r = max(1.2, 2.8 - 0.4 * magnitude)
             inside.fill(Path(ellipseIn: CGRect(x: p.x - 2.5 * r, y: p.y - 2.5 * r, width: 5 * r, height: 5 * r)),
                         with: .color(Theme.gold.opacity(0.15)))
