@@ -290,13 +290,21 @@ struct SkyDomeView: View {
         inside.clip(to: Path(ellipseIn: CGRect(x: disc.center.x - disc.radius, y: disc.center.y - disc.radius,
                                                width: 2 * disc.radius, height: 2 * disc.radius)))
         let waiting = night.up.filter { (marks.inked[$0.id] ?? []).isEmpty }.map(\.id)
+        let turns = Dictionary(uniqueKeysWithValues: waiting.enumerated().map { ($1, $0) })
         for constellation in night.up {
-            let turn = waiting.firstIndex(of: constellation.id)
-            let gold = turn.map { Self.glow(turn: $0, of: waiting.count, at: time) } ?? 1
+            let gold = turns[constellation.id].map { Self.glow(turn: $0, of: waiting.count, at: time) } ?? 1
             for id in constellation.stars {
                 guard let point = dome.point(of: id, at: moment), let star = sky.catalogue.stars[id] else { continue }
                 let p = disc.point(point)
-                let r = max(1, 2.6 - 0.4 * star.magnitude)
+                // Waiting, it is sized and faded like any star of its brightness; aglow, gold.
+                let band = Self.bands.first { star.magnitude <= $0.faintest } ?? Self.bands[Self.bands.count - 1]
+                let golden = CGFloat(max(1, 2.6 - 0.4 * star.magnitude))
+                let r = band.radius + (golden - band.radius) * CGFloat(gold)
+                if gold < 1 {
+                    let dot = Path(ellipseIn: CGRect(x: p.x - r, y: p.y - r, width: 2 * r, height: 2 * r))
+                    inside.fill(dot, with: .color(Theme.ink.opacity(band.opacity * (1 - gold))))
+                }
+                guard gold > 0 else { continue }
                 // Each twinkles at its own pace and phase.
                 let pace: Double = 1.1 + Double(id % 7) * 0.13
                 let phase = Double(id)
@@ -304,9 +312,8 @@ struct SkyDomeView: View {
                 let halo = 2.5 * r
                 inside.fill(Path(ellipseIn: CGRect(x: p.x - halo, y: p.y - halo, width: 2 * halo, height: 2 * halo)),
                             with: .color(Theme.gold.opacity(0.18 * gold * twinkle)))
-                let dot = Path(ellipseIn: CGRect(x: p.x - r, y: p.y - r, width: 2 * r, height: 2 * r))
-                inside.fill(dot, with: .color(Theme.ink.opacity(0.8 * (1 - gold))))
-                inside.fill(dot, with: .color(Theme.gold.opacity(gold)))
+                inside.fill(Path(ellipseIn: CGRect(x: p.x - r, y: p.y - r, width: 2 * r, height: 2 * r)),
+                            with: .color(Theme.gold.opacity(gold)))
             }
         }
     }

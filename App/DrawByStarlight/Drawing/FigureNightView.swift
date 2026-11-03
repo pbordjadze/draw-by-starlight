@@ -3,8 +3,8 @@ import SwiftUI
 
 /// A figure's night, shown instead of told: the whole sky from where the stargazer is (`Dome`),
 /// turning from sunset to sunrise (`FigureScene.night`) as it really will, again and again, the
-/// figure's path across it traced faintly, a short gold wake behind it. A figure that never sets circles inside the rim; one
-/// that rises later comes up over it. VoiceOver reads the night in words.
+/// figure's path across it traced faintly, a short wake behind it. A figure that never sets circles
+/// inside the rim; one that rises later comes up over it. VoiceOver reads the night in words.
 struct FigureNightView: View {
     /// What VoiceOver reads: where the figure stands tonight.
     let words: String
@@ -31,7 +31,7 @@ struct FigureNightView: View {
         }
         // A picture, not text: it doesn't grow with the text size.
         .aspectRatio(1, contentMode: .fit)
-        .frame(maxWidth: 340)
+        .frame(maxWidth: 300)
         .frame(maxWidth: .infinity)
         .accessibilityElement()
         .accessibilityLabel(Text(verbatim: words))
@@ -86,6 +86,16 @@ struct FigureNightView: View {
         }
     }
 
+    /// The steps of a night's path (`steps` of them, sunset to sunrise) the wake covers at
+    /// `moment`: the last dozen before it, never ahead of it; nil outside the night.
+    nonisolated static func wake(at moment: JulianDay, evening: JulianDay, dawn: JulianDay, steps: Int) -> Range<Int>? {
+        let span = dawn.value - evening.value
+        guard span > 0, steps > 0 else { return nil }
+        let now = Int(((moment.value - evening.value) / span * Double(steps)).rounded(.down))
+        guard now > 0, now <= steps else { return nil }
+        return max(0, now - 12)..<now
+    }
+
     private func draw(_ night: Night, at moment: JulianDay, in context: GraphicsContext, size: CGSize) {
         let radius = min(size.width, size.height) / 2 - 2
         let center = CGPoint(x: size.width / 2, y: size.height / 2)
@@ -120,18 +130,15 @@ struct FigureNightView: View {
         inside.stroke(trail, with: .color(Theme.lavender.opacity(0.45)),
                       style: StrokeStyle(lineWidth: 1, lineCap: .round, dash: [1.5, 5]))
 
-        // Behind the figure, a short gold wake of where it has just been.
-        let span = night.dawn.value - night.evening.value
-        let now = span > 0 ? Int(((moment.value - night.evening.value) / span * 96).rounded()) : 0
-        if now > 0, now < night.path.count {
-            let from = max(0, now - 12)
-            for step in from..<now {
-                var wake = Path()
-                wake.move(to: point(night.path[step]))
-                wake.addLine(to: point(night.path[step + 1]))
-                let rise = Double(step - from + 1) / Double(now - from)
-                inside.stroke(wake, with: .color(Theme.gold.opacity(0.55 * rise)),
-                              style: StrokeStyle(lineWidth: 1.6, lineCap: .round))
+        // Behind the figure, a short wake of where it has just been, brightening toward it.
+        if let wake = Self.wake(at: moment, evening: night.evening, dawn: night.dawn, steps: night.path.count - 1) {
+            for step in wake {
+                var segment = Path()
+                segment.move(to: point(night.path[step]))
+                segment.addLine(to: point(night.path[step + 1]))
+                let rise = Double(step - wake.lowerBound + 1) / Double(wake.count)
+                inside.stroke(segment, with: .color(Theme.ink.opacity(0.6 * rise)),
+                              style: StrokeStyle(lineWidth: 1.4, lineCap: .round))
             }
         }
 
