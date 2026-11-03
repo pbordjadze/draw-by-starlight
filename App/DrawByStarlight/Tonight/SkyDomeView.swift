@@ -14,6 +14,8 @@ struct SkyDomeView: View {
     let drawn: DrawnFigures
     /// False while a drawing covers the sky: it doesn't turn unseen.
     let showing: Bool
+    /// Where a figure opening zooms from (`TonightView`).
+    let zoom: Namespace.ID
     let open: (String) -> Void
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var night: Night?
@@ -150,6 +152,7 @@ struct SkyDomeView: View {
                     } label: {
                         FigureGlyph(scene: scene, inked: drawn.inked(scene.constellation), side: 60)
                             .opacity(0.7)
+                            .matchedTransitionSource(id: scene.constellation.id, in: zoom)
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel(Text(verbatim: scene.constellation.name))
@@ -361,6 +364,7 @@ struct SkyDomeView: View {
             if !points.isEmpty {
                 Color.clear
                     .frame(width: 44, height: 44)
+                    .matchedTransitionSource(id: constellation.id, in: zoom)
                     .position(x: points.map(\.x).reduce(0, +) / CGFloat(points.count),
                               y: points.map(\.y).reduce(0, +) / CGFloat(points.count))
                     .allowsHitTesting(false)

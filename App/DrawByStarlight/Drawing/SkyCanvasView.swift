@@ -2,10 +2,10 @@ import Foundation
 import StarlightCore
 import SwiftUI
 
-/// The sky of the drawing: the faint stars around the figure, the figure's stars in gold, the
-/// lines drawn, the line following the finger, a line that didn't belong fading in lavender, the
-/// glimmer, the names of the stars a line has reached, and the whole figure coming alive. One
-/// gesture draws; VoiceOver gets a button per star.
+/// The sky of the drawing: the faint stars around the figure, the figure's stars white until a line
+/// reaches them and gold after, the lines drawn, the line following the finger, a line that didn't
+/// belong fading in lavender, the glimmer, the names of the stars a line has reached, and the whole
+/// figure coming alive. One gesture draws; VoiceOver gets a button per star.
 struct SkyCanvasView: View {
     let model: DrawingModel
     /// The IAU border, shown once the figure is whole.
@@ -138,21 +138,27 @@ struct SkyCanvasView: View {
                            style: StrokeStyle(lineWidth: 1.5, lineCap: .round, dash: [6, 5]))
         }
 
-        // The figure's stars: a halo, a gold heart, a ring when selected, the glimmer.
+        // The figure's stars: white, as large as they are bright, until a line reaches them and
+        // they turn gold; a halo, a ring when selected, the glimmer.
         let phase = now.timeIntervalSinceReferenceDate.truncatingRemainder(dividingBy: 1.1) / 1.1
         let pulse = 0.5 - 0.5 * cos(2 * .pi * phase)
         for star in model.figure {
             guard let p = points[star.id] else { continue }
-            let radius = max(2.4, 5.2 - 0.8 * star.star.magnitude)
+            let lit = model.isLit(star.id)
+            let radius = max(2.3, 5.6 - 1.0 * star.star.magnitude)
             let halo = radius * (3.2 + 2.4 * (starGlow[star.id] ?? 0))
+            let haloColor = lit ? Theme.goldLight.opacity(0.35) : Theme.ink.opacity(0.18)
             context.fill(
                 Path(ellipseIn: CGRect(x: p.x - halo, y: p.y - halo, width: 2 * halo, height: 2 * halo)),
-                with: .radialGradient(Gradient(colors: [Theme.goldLight.opacity(0.35), Theme.gold.opacity(0)]),
+                with: .radialGradient(Gradient(colors: [haloColor, haloColor.opacity(0)]),
                                       center: p, startRadius: 0, endRadius: halo))
+            let heart = lit
+                ? Gradient(colors: [Color(red: 0.984, green: 0.945, blue: 0.824), Theme.goldLight, Theme.gold])
+                : Gradient(colors: [.white, Theme.ink, Theme.ink.opacity(0.7)])
             context.fill(
                 Path(ellipseIn: CGRect(x: p.x - radius, y: p.y - radius, width: 2 * radius, height: 2 * radius)),
-                with: .radialGradient(Gradient(colors: [Color(red: 0.984, green: 0.945, blue: 0.824), Theme.goldLight, Theme.gold]),
-                                      center: CGPoint(x: p.x - radius * 0.25, y: p.y - radius * 0.3), startRadius: 0, endRadius: radius * 1.1))
+                with: .radialGradient(heart, center: CGPoint(x: p.x - radius * 0.25, y: p.y - radius * 0.3),
+                                      startRadius: 0, endRadius: radius * 1.1))
             if model.drawing.selected == star.id || model.drag?.target == star.id {
                 context.stroke(Path(ellipseIn: CGRect(x: p.x - 13, y: p.y - 13, width: 26, height: 26)),
                                with: .color(Theme.gold.opacity(0.85)), lineWidth: 1)
@@ -223,7 +229,7 @@ struct SkyCanvasView: View {
     // MARK: Words
 
     private func accessibilityLabel(_ star: FigureScene.PlacedStar) -> String {
-        if model.drawing.namedStars.contains(star.id) || model.isComplete { return star.star.label }
+        if model.isLit(star.id) { return star.star.label }
         return String(localized: "voiceover.unnamed-star", defaultValue: "A star of \(model.name)",
                       comment: "VoiceOver's name for a star no line has reached yet; the argument is the constellation's name.")
     }

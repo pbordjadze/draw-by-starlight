@@ -39,4 +39,23 @@ final class DrawingTests: XCTestCase {
             XCTAssertLessThan(frame.midY, sheetTop, "star \(star) is under the story")
         }
     }
+
+    /// Opened with a zoom, the drawing could be pulled back down into the sky: a line drawn
+    /// straight down must draw, not close it.
+    @MainActor
+    func testALineDrawnDownwardDraws() {
+        let app = XCUIApplication()
+        app.launchArguments = ["-demo", "draw-cassiopeia"]
+        app.launch()
+        XCTAssertTrue(app.navigationBars["Cassiopeia"].waitForExistence(timeout: 10))
+        let ruchbah = app.descendants(matching: .any).matching(identifier: "star-403").firstMatch
+        let segin = app.descendants(matching: .any).matching(identifier: "star-542").firstMatch
+        XCTAssertTrue(ruchbah.waitForExistence(timeout: 5) && segin.exists)
+        XCTAssertGreaterThan(segin.frame.midY, ruchbah.frame.midY)
+        let from = ruchbah.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        let to = segin.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        from.press(forDuration: 0.1, thenDragTo: to)
+        XCTAssertTrue(app.navigationBars["Cassiopeia"].waitForExistence(timeout: 2))
+        XCTAssertEqual(segin.label, "Segin")
+    }
 }
