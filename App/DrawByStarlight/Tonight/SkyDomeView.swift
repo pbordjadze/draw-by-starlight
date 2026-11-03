@@ -296,7 +296,10 @@ struct SkyDomeView: View {
             guard let point = dome.point(of: id, at: moment), let star = sky.catalogue.stars[id] else { continue }
             let p = disc.point(point)
             let r = 2.5 * max(1, 2.6 - 0.4 * star.magnitude)
-            let glow = twinkle.map { 0.6 + 0.4 * sin($0 * (1.1 + Double(id % 7) * 0.13) + Double(id)) } ?? 1
+            // Each at its own pace and phase.
+            let pace: Double = 1.1 + Double(id % 7) * 0.13
+            let phase = Double(id)
+            let glow: Double = twinkle.map { t in 0.6 + 0.4 * sin(t * pace + phase) } ?? 1
             inside.fill(Path(ellipseIn: CGRect(x: p.x - r, y: p.y - r, width: 2 * r, height: 2 * r)),
                         with: .color(Theme.gold.opacity(0.16 * glow)))
         }
