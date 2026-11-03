@@ -69,8 +69,7 @@ struct DrawingView: View {
                 }
             }
             .sheet(isPresented: $model.showsStory) {
-                FinishedFigureView(model: model, sky: sky, drawnAt: drawn.records[model.scene.constellation.id]?.first,
-                                   firstDetent: Self.storyDetent) {
+                FinishedFigureView(model: model, sky: sky, firstDetent: Self.storyDetent) {
                     model.showsStory = false
                     dismiss()
                 }
