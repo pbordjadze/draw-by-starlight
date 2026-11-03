@@ -5,16 +5,12 @@
       "comment": "VoiceOver, after a line already drawn is drawn again.",
       "extractionState": "manual"
     },
-    "Brightest star": {
-      "comment": "The label of a fact on the finished figure.",
-      "extractionState": "manual"
-    },
     "Close": {
       "comment": "The close button of the finished figure's sheet.",
       "extractionState": "manual"
     },
     "Done": {
-      "comment": "The one button on the finished figure: back to the list.",
+      "comment": "The one button on the finished figure: back to the sky.",
       "extractionState": "manual"
     },
     "Draw again": {
@@ -23,6 +19,10 @@
     },
     "Drawn": {
       "comment": "VoiceOver's value for a constellation already drawn, in the list.",
+      "extractionState": "manual"
+    },
+    "E": {
+      "comment": "The east point at the rim of the sky on the home screen.",
       "extractionState": "manual"
     },
     "From Wikipedia": {
@@ -35,6 +35,10 @@
     },
     "Keep reading on Wikipedia": {
       "comment": "The link under a story whose article says more; opens Safari.",
+      "extractionState": "manual"
+    },
+    "N": {
+      "comment": "The north point at the rim of the sky on the home screen.",
       "extractionState": "manual"
     },
     "Never rises from here": {
@@ -77,6 +81,10 @@
       "comment": "The link under a story whose article's lead is all shown; opens Safari.",
       "extractionState": "manual"
     },
+    "S": {
+      "comment": "The south point at the rim of the sky on the home screen.",
+      "extractionState": "manual"
+    },
     "Selected": {
       "comment": "VoiceOver value of the star a line will start from.",
       "extractionState": "manual"
@@ -105,21 +113,13 @@
       "comment": "The home screen's title: tonight's sky; also the label of a fact on the finished figure (where it stands tonight).",
       "extractionState": "manual"
     },
+    "W": {
+      "comment": "The west point at the rim of the sky on the home screen.",
+      "extractionState": "manual"
+    },
     "east": {
       "comment": "A compass direction, in a sentence (\"high in the east\").",
       "extractionState": "manual"
-    },
-    "figure.brightest": {
-      "comment": "A fact on the finished figure; the arguments are a star's name and its magnitude.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@, magnitude %@"
-          }
-        }
-      }
     },
     "figure.highest": {
       "comment": "A fact on the finished figure; the arguments are a clock time, a height word (high, halfway up, low) and a compass direction.",
@@ -203,10 +203,6 @@
     },
     "southwest": {
       "comment": "A compass direction, in a sentence.",
-      "extractionState": "manual"
-    },
-    "the free encyclopedia": {
-      "comment": "Beside the From Wikipedia heading: Wikipedia's own subtitle.",
       "extractionState": "manual"
     },
     "voiceover.glimmer": {

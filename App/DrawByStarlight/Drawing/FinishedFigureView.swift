@@ -1,7 +1,7 @@
 import StarlightCore
 import SwiftUI
 
-/// The figure's story, on demand: a fact or two computed from the catalogue, then its story
+/// The figure's story, on demand: where it stands tonight, computed, then its story
 /// quoted from Wikipedia and plainly marked as Wikipedia's, with a link to the article. Nothing
 /// the sky above it already shows (that it's drawn, its border, its name twice). The drawing
 /// stays visible above the sheet.
@@ -49,16 +49,12 @@ struct FinishedFigureView: View {
         #endif
     }
 
-    /// Facts the catalogue and the sky give, never written by hand.
+    /// Where it stands tonight, computed, never written by hand: the one fact the sky above
+    /// doesn't show.
     private var facts: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            if let brightest = model.figure.min(by: { $0.star.magnitude < $1.star.magnitude }) {
-                fact(String(localized: "Brightest star"),
-                     String(localized: "figure.brightest", defaultValue: "\(brightest.star.label), magnitude \(brightest.star.magnitude.formatted(.number.precision(.fractionLength(1))))",
-                            comment: "A fact on the finished figure; the arguments are a star's name and its magnitude."))
-            }
-            fact(String(localized: "Tonight"), standing)
-        }
+        Text(verbatim: standing)
+            .font(.system(.title3, design: .serif).italic())
+            .foregroundStyle(Theme.ink)
     }
 
     private var standing: String {
@@ -79,18 +75,6 @@ struct FinishedFigureView: View {
         return String(localized: "figure.highest", defaultValue: "Highest at \(sky.time(transit)), \(SkyWords.height(altitude: center.altitude)) in the \(SkyWords.direction(azimuth: center.azimuth)).",
                       comment: "A fact on the finished figure; the arguments are a clock time, a height word (high, halfway up, low) and a compass direction.")
     }
-
-    private func fact(_ label: String, _ value: String) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(verbatim: label)
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(Theme.lavender)
-            Text(verbatim: value)
-                .font(.system(.body, design: .serif))
-                .foregroundStyle(Theme.ink)
-        }
-        .accessibilityElement(children: .combine)
-    }
 }
 
 /// A constellation's story, quoted from Wikipedia and shown as Wikipedia's: the source named at
@@ -108,10 +92,6 @@ struct WikipediaCard: View {
                 Text("From Wikipedia")
                     .font(.headline)
                     .foregroundStyle(Theme.ink)
-                Spacer(minLength: 0)
-                Text("the free encyclopedia")
-                    .font(.footnote)
-                    .foregroundStyle(Theme.lavender)
             }
             if let first = story.paragraphs.first {
                 Text(verbatim: first)

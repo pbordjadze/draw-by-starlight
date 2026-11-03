@@ -1,11 +1,10 @@
 import StarlightCore
 import SwiftUI
 
-/// The home screen. Until tonight's sky lands here (painting-company row 128, slice 4) it is a
-/// list of the constellations that can be drawn, each its figure in small as it sits tonight
-/// (inked in where it's drawn) and where it stands.
+/// The home screen: tonight's whole sky (`SkyDomeView`), each figure there to be touched and
+/// drawn, the ones not up yet waiting under the horizon.
 ///
-/// Demo scenarios: `constellations` (the list, Cassiopeia drawn and Cygnus begun); `draw-…` opens
+/// Demo scenarios: `constellations` (the sky, Cassiopeia drawn and Cygnus begun); `draw-…` opens
 /// a constellation (`DrawingView`).
 struct TonightView: View {
     @State private var sky = Sky.tonight()
@@ -24,23 +23,13 @@ struct TonightView: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            List {
-                // Figures on the night itself: no card, no chevrons, no separators.
-                ForEach(standings, id: \.constellation.id) { standing in
-                    Button {
-                        path.append(standing.constellation.id)
-                    } label: {
-                        row(standing)
-                    }
-                    .buttonStyle(.plain)
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
-                }
+            SkyDomeView(sky: sky, drawn: drawn) { id in
+                path.append(id)
             }
-            .listStyle(.plain)
-            .scrollContentBackground(.hidden)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Theme.paper.ignoresSafeArea())
             .navigationTitle("Tonight")
+            .toolbar(.hidden, for: .navigationBar)
             .navigationDestination(for: String.self) { id in
                 if let constellation = sky.constellation(id) {
                     DrawingView(constellation: constellation, sky: sky, drawn: drawn)
@@ -62,48 +51,10 @@ struct TonightView: View {
                 // Something drawn, to show it inked in: Cassiopeia whole, Cygnus begun.
                 drawn.record("Cas", at: DemoMode.fixedNow)
                 drawn.keep([[7949, 7796], [7796, 7615]], of: "Cyg")
-                DemoMode.markReady()
+                // Ready once the sky has wheeled into place (`SkyDomeView`).
             }
         }
         #endif
-    }
-
-    private func row(_ standing: FigureScene) -> some View {
-        HStack(spacing: 16) {
-            FigureGlyph(scene: standing, inked: drawn.inked(standing.constellation))
-            VStack(alignment: .leading, spacing: 3) {
-                Text(verbatim: standing.constellation.name)
-                    .font(.display(.headline, weight: .semibold))
-                    .foregroundStyle(Theme.ink)
-                Text(verbatim: SkyWords.listing(standing, place: sky.place, time: sky.time))
-                    .font(.subheadline)
-                    .foregroundStyle(Theme.lavender)
-            }
-            Spacer(minLength: 0)
-        }
-        .padding(.vertical, 2)
-        .contentShape(Rectangle())
-        .accessibilityElement(children: .combine)
-        .accessibilityValue(drawn.isDrawn(standing.constellation.id) ? Text("Drawn") : Text(verbatim: ""))
-    }
-
-    /// Where each constellation stands tonight: the ones up now first, highest first; then the
-    /// ones rising later, soonest first; then the ones that never rise from here.
-    private var standings: [FigureScene] {
-        sky.drawable.map { sky.scene($0, backdrop: false) }.sorted { a, b in
-            switch (a.timing, b.timing) {
-            case (.now, .now): (a.center?.altitude ?? 0) > (b.center?.altitude ?? 0)
-            case (.now, _): true
-            case (_, .now): false
-            case (.later(let x), .later(let y)), (.later(let x), .beforeDawn(let y)),
-                 (.beforeDawn(let x), .later(let y)), (.beforeDawn(let x), .beforeDawn(let y)): x < y
-            case (.later, _), (.beforeDawn, _): true
-            case (_, .later), (_, .beforeDawn): false
-            case (.notTonight, .unseen): true
-            case (.unseen, .notTonight): false
-            default: a.constellation.name < b.constellation.name
-            }
-        }
     }
 
     #if DEBUG

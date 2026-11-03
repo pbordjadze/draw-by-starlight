@@ -7,7 +7,13 @@ struct FigureGlyph: View {
     let scene: FigureScene
     /// The lines inked in, each a pair of Bright Star numbers, the smaller first.
     let inked: Set<[Int]>
-    @ScaledMetric(relativeTo: .headline) private var side: CGFloat = 96
+    @ScaledMetric private var side: CGFloat
+
+    init(scene: FigureScene, inked: Set<[Int]>, side: CGFloat = 96) {
+        self.scene = scene
+        self.inked = inked
+        _side = ScaledMetric(wrappedValue: side, relativeTo: .headline)
+    }
 
     var body: some View {
         Canvas { context, size in
@@ -33,7 +39,7 @@ struct FigureGlyph: View {
                              with: .color(Theme.gold))
             }
         }
-        .frame(width: max(side, 72), height: max(side, 72))
+        .frame(width: side, height: side)
         .accessibilityHidden(true)
     }
 }

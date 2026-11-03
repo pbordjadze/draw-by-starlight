@@ -14,7 +14,7 @@ rules.
   starts from; `Time` (sidereal time, ΔT), `Coordinates` (`Equatorial`, `Horizontal`, `Place`),
   `Precession`, `Sun`, `Moon` (place, phase, the next new or full), `RiseAndSet` (`SkyObject`),
   `Catalogue` (`Star`, `Constellation`: figures and borders), `Projection` (a figure laid flat as
-  the stargazer sees it), `FigureScene` (one constellation laid out for drawing in a place's sky
+  the stargazer sees it), `Dome` (the whole sky as a planisphere shows it), `FigureScene` (one constellation laid out for drawing in a place's sky
   at a moment, or at its next meridian crossing when it is below the horizon; the stars around
   it; its border), `FigureDrawing` (the lines drawn, the selected star, the hint), `Stories`
   (`Story`: each drawable constellation's Wikipedia lead, verbatim, with its revision; the first
@@ -24,8 +24,9 @@ rules.
 - `Tests/StarlightCoreTests` (Swift Testing), pinned to published values (below).
 - `App/`: `DrawByStarlight.xcodeproj` (synchronized folders: adding files needs no project edit),
   `DrawByStarlight/` (`App/` the app, `Theme`, `Log` and `DemoMode`; `Tonight/` the home screen,
-  a list of what can be drawn until the dome lands (slice 4), each row its figure in small
-  (`FigureGlyph`: tonight's turn, inked where drawn) and where it stands; `Drawing/` the one way to
+  tonight's whole sky (`SkyDomeView`: StarlightCore's `Dome`, wheeling into place as it opens, a
+  figure named once drawn, the ones not up under the rim as `FigureGlyph`s, tonight's turn, inked
+  where drawn); `Drawing/` the one way to
   draw: `Sky` (the catalogue, the stories, the place guessed from the time zone, the moment),
   `DrawingModel` (lines, touches, the pause and the glimmer), `SkyCanvasView` (the canvas, one
   gesture, a VoiceOver button per star), `DrawingView`, `FinishedFigureView` (the story shown as

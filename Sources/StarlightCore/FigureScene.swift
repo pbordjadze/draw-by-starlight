@@ -62,10 +62,7 @@ public struct FigureScene: Sendable {
         var transit: JulianDay?
         var direction: (Equatorial) -> Horizontal = { Horizontal(altitude: $0.declination, azimuth: -$0.rightAscension) }
         if let place {
-            var start = now
-            if place.horizontal(of: .sun, at: now).altitude > -6, let sunset = place.nextSet(of: .sun, after: now) {
-                start = sunset
-            }
+            let start = Self.evening(from: now, at: place)
             // Hour angle zero: the sidereal time equals the middle's right ascension.
             let wait = (middleJ2000.rightAscension - place.siderealTime(at: start)).normalizedDegrees / 360.985_647
             let crossing = JulianDay(start.value + wait)
@@ -121,6 +118,14 @@ public struct FigureScene: Sendable {
         border = constellation.border.map { outline in
             outline.map { projection.project(direction($0.precessed(from: .j2000, to: moment))) }
         }
+    }
+
+    /// Where tonight starts: now, or at sunset while the Sun is up.
+    public static func evening(from now: JulianDay, at place: Place) -> JulianDay {
+        if place.horizontal(of: .sun, at: now).altitude > -6, let sunset = place.nextSet(of: .sun, after: now) {
+            return sunset
+        }
+        return now
     }
 
     /// The direction in the middle of `directions` (the mean of their unit vectors).
