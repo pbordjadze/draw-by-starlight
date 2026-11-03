@@ -23,7 +23,7 @@ struct TonightView: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            SkyDomeView(sky: sky, drawn: drawn) { id in
+            SkyDomeView(sky: sky, drawn: drawn, showing: path.isEmpty) { id in
                 path.append(id)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)

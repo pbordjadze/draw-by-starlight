@@ -9,6 +9,8 @@ import SwiftUI
 struct SkyDomeView: View {
     let sky: Sky
     let drawn: DrawnFigures
+    /// False while a drawing covers the sky: it doesn't turn unseen.
+    let showing: Bool
     let open: (String) -> Void
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var night: Night?
@@ -30,7 +32,7 @@ struct SkyDomeView: View {
                     GeometryReader { geometry in
                         let disc = Disc(size: geometry.size)
                         ZStack {
-                            TimelineView(.animation(paused: settled || reduceMotion)) { context in
+                            TimelineView(.animation(paused: settled || reduceMotion || !showing)) { context in
                                 Canvas { canvas, _ in
                                     draw(dome, night: night, marks: marks, at: moment(night.evening, now: context.date), in: canvas, disc: disc)
                                 }
@@ -97,7 +99,7 @@ struct SkyDomeView: View {
             }
             if let place = sky.place {
                 evening = FigureScene.evening(from: sky.moment, at: place)
-                dome = Dome(catalogue: sky.catalogue, place: place, around: evening, figures: up)
+                dome = Dome(catalogue: sky.catalogue, place: place, around: evening, faintest: 4.6, figures: up)
             } else {
                 evening = sky.moment
                 dome = nil
