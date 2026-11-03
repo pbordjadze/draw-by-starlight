@@ -1,0 +1,4 @@
+Timestamp               Ty Process[PID:TID]
+2026-11-03 01:22:02.231 E  DrawByStarlight[14223:b2c4] [com.pbordjadze.drawbystarlight:sky] drawn.json unreadable, starting over: DecodingError.dataCorrupted: Data was corrupted. Debug description: The given data was not valid JSON.. Underlying error: Error Domain=NSCocoaErrorDomain Code=3840 "Unexpected character 'o' in expected null value around line 1, column 2." UserInfo={NSJSONSerializationErrorIndex=1, NSDebugDescription=Unexpected character 'o' in expected null value around line 1, column 2.}
+2026-11-03 01:22:47.846 I  DrawByStarlight[15497:c021] [com.pbordjadze.drawbystarlight:demo] demo-ready draw-cassiopeia
+2026-11-03 01:23:00.691 I  DrawByStarlight[16024:c5ad] [com.pbordjadze.drawbystarlight:demo] demo-ready constellations
