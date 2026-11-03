@@ -67,3 +67,74 @@ round 1's weakest thing: a finished figure no longer ends on a sheet.
 - **Spend so far:** about $42
 
 The loop stopped here: the critic says he'd show it without a caveat.
+
+# Polish loop 2: wonder over words
+
+The second loop's axis: show the sky, not words about it. Spend starts again from zero.
+
+## Round 6
+
+- **Build:** 30
+- **Changed:** home is tonight's whole sky, a planisphere (StarlightCore's `Dome`), wheeling
+  through the last two hours into place; a figure is named only once drawn; the ones below the
+  horizon wait under the rim. The story sheet lost its captions and Wikipedia's tagline.
+- **To see it:** the first screen; touch a figure.
+- **Critic:** words: home 5 (was 28), drawing 1–6, story about 79. "Almost": the finished
+  figure ends in an encyclopedia card; "never sets" is told, not shown.
+- **Spend so far:** about $10
+
+## Round 7
+
+- **Build:** 36
+- **Changed:** the story sheet shows the figure's night instead of saying it: a small sky
+  turning from sunset to sunrise (`FigureNightView`, `FigureScene.night`). Home shows a figure's
+  lines only as they're drawn.
+- **To see it:** finish a figure, tap the book.
+- **Critic:** story as first shown about 22 words. "Almost": home is a still chart boxed in the
+  middle of the screen.
+- **Spend so far:** about $22
+
+## Round 8
+
+- **Build:** 40
+- **Changed:** home goes edge to edge, the stars below the horizon faint beyond the rim; after
+  the opening wheel the sky turns on at the real rate and its gold stars twinkle. The story sheet
+  first shows its turning sky alone.
+- **Critic:** story sheet 0 words of its own. "Almost": home is an even spray of gold.
+- **Spend so far:** about $31
+
+## Round 9
+
+- **Build:** 44
+- **Changed:** on home, figures not begun are ordinary stars until their turn: one at a time,
+  each glows gold as a whole. The story's sky fills the sheet, a short wake behind the figure.
+- **Critic:** "Almost": the fresh drawing screen is a dot-to-dot of gold beads apart from the
+  sky.
+- **Spend so far:** about $41
+
+## Round 10
+
+- **Build:** 46
+- **Changed:** a figure zooms in from its place in the sky and back out; its stars start white,
+  sized by brightness, and turn gold as a line reaches them.
+- **Critic:** "Almost": a finished-figure screenshot came out black (a slow CI run; main's run
+  of the same code was ready in a second).
+- **Spend so far:** about $52
+
+## Round 11
+
+- **Build:** 48 (queued for the shared runners when this was written)
+- **Changed:** the zoom opens from plain anchors and VoiceOver's words are worked out once a
+  night; home's brightest stars are drawn larger, so the Dipper and the W show by themselves.
+- **Critic:** words per view: home 5, drawing 1–6, story sheet 0 of its own. "Almost: drawing
+  and finishing a figure is pure delight, but the first screen still looks like a diagram of the
+  sky rather than the sky." Its weakest thing: home's composition (dark bands above and below
+  the disc; a figure begun and one aglow read alike; the strip of waiting figures like a
+  toolbar).
+- **Spend so far:** about $63
+
+The loop stopped here on spend (≈ $70), one critic short of "without a caveat". Not taken, from
+reviews: a figure that sets during the evening loses its gold stars at the rim; a touch beyond
+the rim can find a figure's line there; tonight's start counts tomorrow's sunset when the Sun is
+just below the horizon (`FigureScene.evening`); during the opening wheel a zoom starts from where
+a figure stood two hours earlier.
