@@ -3,6 +3,7 @@ constellations-long-text@20
 draw-cassiopeia@20
 draw-cassiopeia-hint@20
 draw-cassiopeia-done@25
-draw-cassiopeia-done-long-text@25
+draw-cassiopeia-story@25
+draw-cassiopeia-story-long-text@25
 draw-ursa-major@20
 draw-orion@20

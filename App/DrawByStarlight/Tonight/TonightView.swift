@@ -24,17 +24,11 @@ struct TonightView: View {
     var body: some View {
         NavigationStack(path: $path) {
             List {
-                Section {
-                    ForEach(standings, id: \.constellation.id) { standing in
-                        NavigationLink(value: standing.constellation.id) {
-                            row(standing)
-                        }
-                        .listRowBackground(Theme.surface)
+                ForEach(standings, id: \.constellation.id) { standing in
+                    NavigationLink(value: standing.constellation.id) {
+                        row(standing)
                     }
-                } header: {
-                    Text("Draw")
-                } footer: {
-                    Text("Each is turned as it sits in your sky tonight.")
+                    .listRowBackground(Theme.surface)
                 }
             }
             .scrollContentBackground(.hidden)

@@ -26,29 +26,6 @@ nonisolated enum SkyWords {
         }
     }
 
-    /// Where a figure stands, for its drawing: "Turned as it sits tonight, high in the
-    /// northeast.", or when and where it will stand, or that it never rises from here.
-    static func standing(_ scene: FigureScene, place: Place?, time: (JulianDay) -> String) -> String {
-        switch scene.timing {
-        case .now:
-            let center = scene.center ?? Horizontal(altitude: 0, azimuth: 0)
-            return String(localized: "drawing.standing.now",
-                defaultValue: "Turned as it sits tonight, \(height(altitude: center.altitude)) in the \(direction(azimuth: center.azimuth)).",
-                comment: "Under a constellation's name on the drawing screen; the arguments are a height word (high, halfway up, low) and a compass direction.")
-        case .later(let moment), .beforeDawn(let moment):
-            let center = scene.center ?? Horizontal(altitude: 0, azimuth: 0)
-            return String(localized: "drawing.standing.later",
-                defaultValue: "Below the horizon now. Turned as it will sit at \(time(moment)), \(height(altitude: center.altitude)) in the \(direction(azimuth: center.azimuth)).",
-                comment: "Under a constellation's name on the drawing screen when it hasn't risen yet; the arguments are a clock time, a height word (high, halfway up, low) and a compass direction.")
-        case .notTonight:
-            return String(localized: "Not up tonight. North is up.")
-        case .unseen:
-            return place == nil
-                ? String(localized: "North is up.")
-                : String(localized: "It never rises from here. North is up.")
-        }
-    }
-
     /// Where a figure stands, for a list: "High in the northeast", "Rises later; highest at
     /// 2:15 AM", "Never rises from here".
     static func listing(_ scene: FigureScene, place: Place?, time: (JulianDay) -> String) -> String {

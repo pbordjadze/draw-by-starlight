@@ -4,8 +4,8 @@ import SwiftUI
 
 /// The sky of the drawing: the faint stars around the figure, the figure's stars in gold, the
 /// lines drawn, the line following the finger, a line that didn't belong fading in lavender, the
-/// glimmer, and the names of the stars a line has reached. One gesture draws; VoiceOver gets a
-/// button per star.
+/// glimmer, the names of the stars a line has reached, and the whole figure coming alive. One
+/// gesture draws; VoiceOver gets a button per star.
 struct SkyCanvasView: View {
     let model: DrawingModel
     /// The IAU border, shown once the figure is whole.
@@ -17,7 +17,7 @@ struct SkyCanvasView: View {
             let layout = FigureLayout(size: geometry.size, figure: model.figure.map(\.point))
             ZStack {
                 backdrop(layout)
-                TimelineView(.animation(minimumInterval: 1 / 30, paused: model.hint == nil || reduceMotion)) { context in
+                TimelineView(.animation(minimumInterval: 1 / 30, paused: (model.hint == nil && model.cameAlive == nil) || reduceMotion)) { context in
                     Canvas { canvas, _ in
                         draw(in: canvas, layout: layout, now: context.date)
                     }
@@ -78,8 +78,25 @@ struct SkyCanvasView: View {
 
     private func draw(in context: GraphicsContext, layout: FigureLayout, now: Date) {
         let points = Dictionary(uniqueKeysWithValues: model.figure.map { ($0.id, layout.point($0.point)) })
+        // Coming alive: seconds since the last line, while it lasts (never with Reduce Motion).
+        let alive = reduceMotion ? nil : model.cameAlive.map { now.timeIntervalSince($0) }
+        let segments = model.drawing.lines
+        // A wave of light runs along the figure's lines in order, and lights each star it passes.
+        func glow(_ index: Int) -> Double {
+            guard let alive else { return 0 }
+            let at = 0.3 + Double(index) * 1.6 / Double(max(segments.count - 1, 1))
+            return max(0, 1 - abs(alive - at) / 0.45)
+        }
+        var starGlow: [Int: Double] = [:]
+        for (index, segment) in segments.enumerated() {
+            let g = glow(index)
+            starGlow[segment.a] = max(starGlow[segment.a] ?? 0, g)
+            starGlow[segment.b] = max(starGlow[segment.b] ?? 0, g)
+        }
 
         if showsBorder {
+            // The border fades in as the figure comes alive.
+            let borderOpacity = alive.map { min(1, max(0, ($0 - 0.8) / 1.6)) } ?? 1
             var border = Path()
             for outline in model.scene.border {
                 guard let first = outline.first else { continue }
@@ -87,7 +104,7 @@ struct SkyCanvasView: View {
                 for p in outline.dropFirst() { border.addLine(to: layout.point(p)) }
                 border.closeSubpath()
             }
-            context.stroke(border, with: .color(Theme.lavender.opacity(0.55)),
+            context.stroke(border, with: .color(Theme.lavender.opacity(0.55 * borderOpacity)),
                            style: StrokeStyle(lineWidth: 1.2, lineCap: .round, dash: [1.5, 6]))
         }
 
@@ -101,6 +118,15 @@ struct SkyCanvasView: View {
         }
         context.stroke(lines, with: .color(Theme.ink.opacity(0.16)), style: StrokeStyle(lineWidth: 6, lineCap: .round))
         context.stroke(lines, with: .color(Theme.ink.opacity(0.92)), style: StrokeStyle(lineWidth: 1.6, lineCap: .round))
+        for (index, segment) in segments.enumerated() {
+            let g = glow(index)
+            guard g > 0, let a = points[segment.a], let b = points[segment.b] else { continue }
+            let (start, end) = trimmed(a, b, by: 9)
+            var line = Path()
+            line.move(to: start)
+            line.addLine(to: end)
+            context.stroke(line, with: .color(Theme.ink.opacity(0.4 * g)), style: StrokeStyle(lineWidth: 10, lineCap: .round))
+        }
 
         // The line following the finger.
         if let drag = model.drag, drag.moved, let from = points[drag.from] {
@@ -118,7 +144,7 @@ struct SkyCanvasView: View {
         for star in model.figure {
             guard let p = points[star.id] else { continue }
             let radius = max(2.4, 5.2 - 0.8 * star.star.magnitude)
-            let halo = radius * 3.2
+            let halo = radius * (3.2 + 2.4 * (starGlow[star.id] ?? 0))
             context.fill(
                 Path(ellipseIn: CGRect(x: p.x - halo, y: p.y - halo, width: 2 * halo, height: 2 * halo)),
                 with: .radialGradient(Gradient(colors: [Theme.goldLight.opacity(0.35), Theme.gold.opacity(0)]),
