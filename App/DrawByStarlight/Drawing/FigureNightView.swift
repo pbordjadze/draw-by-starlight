@@ -2,40 +2,48 @@ import StarlightCore
 import SwiftUI
 
 /// A figure's night, shown instead of told: the whole sky from where the stargazer is (`Dome`),
-/// turning from dusk to dawn as it really will, again and again, the figure's path across it
-/// traced faintly. A figure that never sets circles inside the rim; one that rises later comes up
-/// over it. VoiceOver reads the night in words.
+/// turning from sunset to sunrise (`FigureScene.night`) as it really will, again and again, the
+/// figure's path across it traced faintly. A figure that never sets circles inside the rim; one
+/// that rises later comes up over it. VoiceOver reads the night in words.
 struct FigureNightView: View {
-    let constellation: Constellation
-    let sky: Sky
-    let place: Place
     /// What VoiceOver reads: where the figure stands tonight.
     let words: String
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @State private var night: Night?
-    @ScaledMetric(relativeTo: .body) private var side: CGFloat = 200
+    @State private var night: Night
 
-    /// One night, dusk to dawn, takes this long to wheel by.
+    /// `still` is the moment shown without motion: the figure's own, up (`FigureScene.moment`).
+    init(constellation: Constellation, sky: Sky, place: Place, still: JulianDay, words: String) {
+        self.words = words
+        _night = State(initialValue: Night(constellation: constellation, sky: sky, place: place, still: still))
+    }
+
+    /// One night, sunset to sunrise, takes this long to wheel by.
     private static let seconds = 10.0
 
     var body: some View {
-        Group {
-            if let night {
-                TimelineView(.animation(paused: reduceMotion)) { context in
-                    Canvas { canvas, size in
-                        draw(night, at: reduceMotion ? night.evening : night.moment(at: context.date, period: Self.seconds),
-                             in: canvas, size: size)
-                    }
-                }
+        TimelineView(.animation(minimumInterval: 1.0 / 30, paused: still)) { context in
+            Canvas { canvas, size in
+                let (moment, opacity) = still ? (night.still, 1.0) : night.moment(at: context.date, period: Self.seconds)
+                var faded = canvas
+                faded.opacity = opacity
+                draw(night, at: moment, in: faded, size: size)
             }
         }
-        .frame(width: side, height: side)
+        // A picture, not text: it doesn't grow with the text size.
+        .frame(maxWidth: 220)
+        .aspectRatio(1, contentMode: .fit)
         .frame(maxWidth: .infinity)
         .accessibilityElement()
         .accessibilityLabel(Text(verbatim: words))
-        .onAppear {
-            if night == nil { night = Night(constellation: constellation, sky: sky, place: place) }
-        }
+        .accessibilityAddTraits(.isImage)
+    }
+
+    /// Still with Reduce Motion, and in a demo scenario, so its screenshot is the same each time.
+    private var still: Bool {
+        #if DEBUG
+        if DemoMode.isActive { return true }
+        #endif
+        return reduceMotion
     }
 
     /// Tonight for one figure, worked out once: dusk, dawn, the sky, and the figure's path.
@@ -43,16 +51,15 @@ struct FigureNightView: View {
         let constellation: Constellation
         let evening: JulianDay
         let dawn: JulianDay
+        let still: JulianDay
         let dome: Dome
         /// The figure's middle through the night, on the dome.
         let path: [PlanePoint]
 
-        init(constellation: Constellation, sky: Sky, place: Place) {
+        init(constellation: Constellation, sky: Sky, place: Place, still: JulianDay) {
             self.constellation = constellation
-            evening = FigureScene.evening(from: sky.moment, at: place)
-            // Where the Sun never rises again soon (a polar night), half a day.
-            let rise = place.nextRise(of: .sun, after: evening)
-            dawn = JulianDay(rise.map { min($0.value, evening.value + 1) } ?? evening.value + 0.5)
+            (evening, dawn) = FigureScene.night(from: sky.moment, at: place)
+            self.still = still
             dome = Dome(catalogue: sky.catalogue, place: place, around: evening, faintest: 3.5, figures: [constellation])
             let middle = FigureScene.middle(of: constellation.stars.compactMap { sky.catalogue.stars[$0]?.position(at: evening) })
                 ?? Equatorial(rightAscension: 0, declination: 0)
@@ -63,10 +70,12 @@ struct FigureNightView: View {
             }
         }
 
-        /// The moment shown at `date`: dusk to dawn every `period` seconds.
-        func moment(at date: Date, period: Double) -> JulianDay {
+        /// The moment shown at `date`, dusk to dawn every `period` seconds, and how much to show:
+        /// the night fades out at dawn and in again at dusk, rather than the sky snapping back.
+        func moment(at date: Date, period: Double) -> (JulianDay, Double) {
             let f = date.timeIntervalSinceReferenceDate.truncatingRemainder(dividingBy: period) / period
-            return JulianDay(evening.value + (dawn.value - evening.value) * f)
+            let fade = 0.06
+            return (JulianDay(evening.value + (dawn.value - evening.value) * f), min(1, f / fade, (1 - f) / fade))
         }
     }
 

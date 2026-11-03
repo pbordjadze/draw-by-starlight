@@ -50,6 +50,17 @@ struct RiseAndSetTests {
         #expect(abs(try #require(found).value - published.value) * 1440 < 1.5)
     }
 
+    @Test func tonightRunsFromSunsetToSunrise() throws {
+        // From noon EDT on the 25th: USNO's sunset at 6:06 PM EDT, and the next sunrise a minute
+        // after the 25th's published 7:21 AM, about 7:22 AM EDT on the 26th.
+        let night = FigureScene.night(from: try moment(2026, 10, 25, 16), at: pennsylvania)
+        #expect(abs(night.evening.value - (try moment(2026, 10, 25, 22, 6)).value) * 1440 < 1.5)
+        #expect(abs(night.dawn.value - (try moment(2026, 10, 26, 11, 22)).value) * 1440 < 2)
+        // After dark, tonight starts now.
+        let late = try moment(2026, 10, 26, 2)
+        #expect(FigureScene.night(from: late, at: pennsylvania).evening == late)
+    }
+
     @Test func aStarRisesAndSetsADayLess4MinutesLater() throws {
         let betelgeuse = try #require(Catalogue.bundled.stars[2061])
         let start = try moment(2026, 10, 25, 16)

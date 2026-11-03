@@ -54,7 +54,8 @@ struct FinishedFigureView: View {
     @ViewBuilder private var facts: some View {
         switch (sky.place, model.scene.timing) {
         case (let place?, .now), (let place?, .later), (let place?, .beforeDawn):
-            FigureNightView(constellation: model.scene.constellation, sky: sky, place: place, words: standing)
+            FigureNightView(constellation: model.scene.constellation, sky: sky, place: place,
+                            still: model.scene.moment, words: standing)
         default:
             Text(verbatim: standing)
                 .font(.system(.title3, design: .serif).italic())

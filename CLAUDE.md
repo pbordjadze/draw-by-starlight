@@ -29,8 +29,9 @@ rules.
   where drawn); `Drawing/` the one way to
   draw: `Sky` (the catalogue, the stories, the place guessed from the time zone, the moment),
   `DrawingModel` (lines, touches, the pause and the glimmer), `SkyCanvasView` (the canvas, one
-  gesture, a VoiceOver button per star), `DrawingView`, `FinishedFigureView` (the figure's night,
-  `FigureNightView`, turning dusk to dawn; then the story shown as Wikipedia's, with its link), `DrawnFigures` (what's drawn, a JSON file in Application Support),
+  gesture, a VoiceOver button per star), `DrawingView`, `FinishedFigureView` (the
+  figure's night, `FigureNightView`, turning sunset to sunrise; then the story shown as
+  Wikipedia's, with its link), `DrawnFigures` (what's drawn, a JSON file in Application Support),
   `SkyWords`, `FigureLayout`; `Resources/` the catalogs, privacy manifest and assets),
   `DrawByStarlightTests` (Swift Testing), `DrawByStarlightUITests` (XCTest), `Config/Info.plist`
   (export compliance, the scene manifest; the rest is the target's `INFOPLIST_KEY_*` settings).
