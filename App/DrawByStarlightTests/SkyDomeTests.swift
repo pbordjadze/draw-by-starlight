@@ -32,4 +32,16 @@ struct SkyDomeTests {
         let sunset = JulianDay(now.addingTimeInterval(4 * 3600))
         #expect(SkyDomeView.moment(evening: sunset, now: now, opened: now, settled: true) == sunset)
     }
+
+    @Test func waitingFiguresGlowOneAtATime() {
+        // Held still: the first glows, the rest wait.
+        #expect(SkyDomeView.glow(turn: 0, of: 3, at: nil) == 1)
+        #expect(SkyDomeView.glow(turn: 1, of: 3, at: nil) == 0)
+        // Halfway through the second turn: the second is at its brightest, the others dark.
+        #expect(abs(SkyDomeView.glow(turn: 1, of: 3, at: 7.5) - 1) < 1e-9)
+        #expect(SkyDomeView.glow(turn: 0, of: 3, at: 7.5) == 0)
+        #expect(SkyDomeView.glow(turn: 2, of: 3, at: 7.5) == 0)
+        // And round again.
+        #expect(SkyDomeView.glow(turn: 0, of: 3, at: 16) > 0)
+    }
 }

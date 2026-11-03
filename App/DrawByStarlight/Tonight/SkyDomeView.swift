@@ -2,10 +2,11 @@ import StarlightCore
 import SwiftUI
 
 /// Tonight's whole sky, as a planisphere shows it (`Dome`): the zenith in the middle, the horizon
-/// the rim, north up and east on the left. The figures that are up sit where they are, their
-/// stars in gold, their lines there once drawn; a figure is named once it's drawn.
+/// the rim, north up and east on the left. The figures that are up sit where they are, glowing
+/// gold by turns until begun, then gold, their lines there once drawn; a figure is named once
+/// it's drawn.
 /// Opening, the sky wheels through the last two hours to tonight, as it really turned; then it
-/// keeps turning at the Earth's own rate, its figures' stars twinkling. The stars below the
+/// keeps turning at the Earth's own rate, its gold stars twinkling. The stars below the
 /// horizon fill the screen beyond the rim, faintly; the figures below it wait under the sky. A
 /// touch on a figure opens it.
 struct SkyDomeView: View {
@@ -45,12 +46,12 @@ struct SkyDomeView: View {
                                     skyLayer(dome, night: night, marks: marks, now: context.date, disc: disc)
                                 }
                             }
-                            // The figures' stars, twinkling: a few dozen, gently.
+                            // The figures' stars, taking turns to glow: a few dozen, gently.
                             TimelineView(.animation(minimumInterval: settled ? 1.0 / 15 : nil, paused: still || !showing)) { context in
                                 Canvas { canvas, _ in
-                                    halos(dome, night: night, at: moment(night.evening, now: context.date),
-                                          twinkle: still ? nil : context.date.timeIntervalSinceReferenceDate,
-                                          in: canvas, disc: disc)
+                                    figureStars(dome, night: night, marks: marks, at: moment(night.evening, now: context.date),
+                                                time: still ? nil : context.date.timeIntervalSinceReferenceDate,
+                                                in: canvas, disc: disc)
                                 }
                             }
                             .accessibilityHidden(true)
@@ -266,12 +267,6 @@ struct SkyDomeView: View {
                 lines.addLine(to: q)
             }
             inside.stroke(lines, with: .color(Theme.ink.opacity(0.85)), lineWidth: 1.2)
-            for id in constellation.stars {
-                guard let p = points[id], let star = sky.catalogue.stars[id] else { continue }
-                let r = max(1, 2.6 - 0.4 * star.magnitude)
-                inside.fill(Path(ellipseIn: CGRect(x: p.x - r, y: p.y - r, width: 2 * r, height: 2 * r)),
-                            with: .color(Theme.gold))
-            }
             // A figure is named once it's drawn, under its stars that are up: the sky fills with
             // what's been learned.
             let up = disc.above(points)
@@ -285,25 +280,48 @@ struct SkyDomeView: View {
         }
     }
 
-    /// The figures' stars' halos, each breathing at its own pace while `twinkle` (a time in
-    /// seconds) runs; nil holds them still.
-    private func halos(_ dome: Dome, night: Night, at moment: JulianDay, twinkle: Double?,
-                       in context: GraphicsContext, disc: Disc) {
+    /// The figures' stars. A figure begun or drawn is gold, its stars twinkling; the others are
+    /// stars like the rest until their turn comes: one at a time, each glows gold as a whole for
+    /// a few seconds, so its shape shows itself without a line. `time`, in seconds, runs the
+    /// turns and the twinkle; nil holds them still, the first waiting figure aglow.
+    private func figureStars(_ dome: Dome, night: Night, marks: Marks, at moment: JulianDay, time: Double?,
+                             in context: GraphicsContext, disc: Disc) {
         var inside = context
         inside.clip(to: Path(ellipseIn: CGRect(x: disc.center.x - disc.radius, y: disc.center.y - disc.radius,
                                                width: 2 * disc.radius, height: 2 * disc.radius)))
-        for id in night.own {
-            guard let point = dome.point(of: id, at: moment), let star = sky.catalogue.stars[id] else { continue }
-            let p = disc.point(point)
-            let r = 2.5 * max(1, 2.6 - 0.4 * star.magnitude)
-            // Each at its own pace and phase.
-            let pace: Double = 1.1 + Double(id % 7) * 0.13
-            let phase = Double(id)
-            let glow: Double = twinkle.map { t in 0.6 + 0.4 * sin(t * pace + phase) } ?? 1
-            inside.fill(Path(ellipseIn: CGRect(x: p.x - r, y: p.y - r, width: 2 * r, height: 2 * r)),
-                        with: .color(Theme.gold.opacity(0.16 * glow)))
+        let waiting = night.up.filter { (marks.inked[$0.id] ?? []).isEmpty }.map(\.id)
+        for constellation in night.up {
+            let turn = waiting.firstIndex(of: constellation.id)
+            let gold = turn.map { Self.glow(turn: $0, of: waiting.count, at: time) } ?? 1
+            for id in constellation.stars {
+                guard let point = dome.point(of: id, at: moment), let star = sky.catalogue.stars[id] else { continue }
+                let p = disc.point(point)
+                let r = max(1, 2.6 - 0.4 * star.magnitude)
+                // Each twinkles at its own pace and phase.
+                let pace: Double = 1.1 + Double(id % 7) * 0.13
+                let phase = Double(id)
+                let twinkle: Double = time.map { t in 0.6 + 0.4 * sin(t * pace + phase) } ?? 1
+                let halo = 2.5 * r
+                inside.fill(Path(ellipseIn: CGRect(x: p.x - halo, y: p.y - halo, width: 2 * halo, height: 2 * halo)),
+                            with: .color(Theme.gold.opacity(0.18 * gold * twinkle)))
+                let dot = Path(ellipseIn: CGRect(x: p.x - r, y: p.y - r, width: 2 * r, height: 2 * r))
+                inside.fill(dot, with: .color(Theme.ink.opacity(0.8 * (1 - gold))))
+                inside.fill(dot, with: .color(Theme.gold.opacity(gold)))
+            }
         }
     }
+
+    /// How gold a waiting figure is: each in turn rises and fades over `turnSeconds`; with no
+    /// time, the first is aglow and the rest wait.
+    nonisolated static func glow(turn: Int, of count: Int, at time: Double?) -> Double {
+        guard let time else { return turn == 0 ? 1 : 0 }
+        let slot = time / turnSeconds
+        let current = Int(slot.rounded(.down)) % max(count, 1)
+        guard current == turn else { return 0 }
+        return sin(.pi * (slot - slot.rounded(.down)))
+    }
+
+    private nonisolated static let turnSeconds = 5.0
 
     /// N, E, S and W just inside the rim, where those horizons are.
     private func cardinals(_ disc: Disc) -> some View {
