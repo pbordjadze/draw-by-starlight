@@ -1,0 +1,1 @@
+Merge claude/wonder-r11: polish round 11, the zoom opens from plain anchors; the brightest stars stand out (painting-company row 128)

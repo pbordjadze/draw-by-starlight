@@ -1,0 +1,77 @@
+{
+  "name": "Draw by Starlight (CI builds)",
+  "identifier": "com.pbordjadze.drawbystarlight.source",
+  "subtitle": "Automatic builds",
+  "iconURL": "https://raw.githubusercontent.com/pbordjadze/draw-by-starlight/sidestore/icon.png",
+  "website": "https://github.com/pbordjadze/draw-by-starlight",
+  "tintColor": "#C9A24A",
+  "apps": [
+    {
+      "name": "Draw by Starlight",
+      "bundleIdentifier": "com.pbordjadze.drawbystarlight",
+      "developerName": "pbordjadze",
+      "subtitle": "Learn the night sky by drawing it",
+      "localizedDescription": "Learn the constellations by drawing them, star to star, in tonight's real sky. A line that belongs stays and names its stars; pause, and the next star glimmers. When the figure is whole, its story, quoted from Wikipedia. No account, no network, nothing counted: everything stays on your iPhone. A work in progress.",
+      "iconURL": "https://raw.githubusercontent.com/pbordjadze/draw-by-starlight/sidestore/icon.png",
+      "tintColor": "#C9A24A",
+      "category": "education",
+      "versions": [
+        {
+          "version": "1.0.48",
+          "buildVersion": "48",
+          "date": "2026-11-03T14:09:50Z",
+          "localizedDescription": "Merge claude/wonder-r11: polish round 11, the zoom opens from plain anchors; the brightest stars stand out (painting-company row 128)",
+          "downloadURL": "https://github.com/pbordjadze/draw-by-starlight/releases/download/build-48/DrawByStarlight.ipa",
+          "size": 445615,
+          "minOSVersion": "26.0"
+        },
+        {
+          "version": "1.0.46",
+          "buildVersion": "46",
+          "date": "2026-11-03T12:31:58Z",
+          "localizedDescription": "Merge claude/wonder-r10: polish round 10, a figure opens from its place in the sky and lights as it's drawn (painting-company row 128)",
+          "downloadURL": "https://github.com/pbordjadze/draw-by-starlight/releases/download/build-46/DrawByStarlight.ipa",
+          "size": 442596,
+          "minOSVersion": "26.0"
+        },
+        {
+          "version": "1.0.44",
+          "buildVersion": "44",
+          "date": "2026-11-03T11:59:15Z",
+          "localizedDescription": "Merge claude/wonder-r9: polish round 9, waiting figures glow by turns; the story's sky fills the sheet (painting-company row 128)",
+          "downloadURL": "https://github.com/pbordjadze/draw-by-starlight/releases/download/build-44/DrawByStarlight.ipa",
+          "size": 441193,
+          "minOSVersion": "26.0"
+        },
+        {
+          "version": "1.0.40",
+          "buildVersion": "40",
+          "date": "2026-11-03T11:28:16Z",
+          "localizedDescription": "Merge claude/wonder-r8: polish round 8, home's sky fills the screen and keeps living (painting-company row 128)",
+          "downloadURL": "https://github.com/pbordjadze/draw-by-starlight/releases/download/build-40/DrawByStarlight.ipa",
+          "size": 438807,
+          "minOSVersion": "26.0"
+        },
+        {
+          "version": "1.0.36",
+          "buildVersion": "36",
+          "date": "2026-11-03T10:43:44Z",
+          "localizedDescription": "Merge claude/wonder-r7: polish round 7, the story sheet shows the figure's night turning (painting-company row 128)",
+          "downloadURL": "https://github.com/pbordjadze/draw-by-starlight/releases/download/build-36/DrawByStarlight.ipa",
+          "size": 432711,
+          "minOSVersion": "26.0"
+        }
+      ],
+      "version": "1.0.48",
+      "versionDate": "2026-11-03T14:09:50Z",
+      "versionDescription": "Merge claude/wonder-r11: polish round 11, the zoom opens from plain anchors; the brightest stars stand out (painting-company row 128)",
+      "downloadURL": "https://github.com/pbordjadze/draw-by-starlight/releases/download/build-48/DrawByStarlight.ipa",
+      "size": 445615,
+      "appPermissions": {
+        "entitlements": [],
+        "privacy": {}
+      }
+    }
+  ],
+  "news": []
+}

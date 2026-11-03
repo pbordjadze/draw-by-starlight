@@ -1,0 +1,2 @@
+build/release/Build/Products/Release-iphonesimulator/DrawByStarlight.app/PrivacyInfo.xcprivacy: OK
+Release build ok: privacy manifest, always dark, no permissions or background modes, no Debug-only code
