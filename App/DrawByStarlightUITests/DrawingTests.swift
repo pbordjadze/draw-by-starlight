@@ -21,6 +21,8 @@ final class DrawingTests: XCTestCase {
         story.tap()
         XCTAssertTrue(app.staticTexts["From Wikipedia"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts["Schedar"].exists)
+        // Its night is shown turning, and read to VoiceOver in words.
+        XCTAssertTrue(app.descendants(matching: .any)["Never sets from here."].exists)
         // The story's sheet rests below the figure: every star stays in view above it. The
         // sheet's top is its Close button's, read once the sheet has stopped rising.
         let close = app.buttons["Close"]
