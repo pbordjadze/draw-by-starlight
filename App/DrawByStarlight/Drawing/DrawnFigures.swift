@@ -1,6 +1,7 @@
 import Foundation
 import Observation
 import os
+import StarlightCore
 
 /// What you drew stays drawn: each constellation's lines so far, and when its figure was first and
 /// last whole, in a small JSON file in the app's Application Support folder (on the device only,
@@ -38,6 +39,17 @@ final class DrawnFigures {
 
     /// The lines drawn so far, to pick up where the stargazer left off.
     func lines(_ constellation: String) -> [[Int]] { records[constellation]?.lines ?? [] }
+
+    /// The lines to ink in for a figure, each a pair of Bright Star numbers, the smaller first: the
+    /// lines drawn so far, or all of them once it is whole and not taken up again (as the drawing
+    /// opens it).
+    func inked(_ constellation: Constellation) -> Set<[Int]> {
+        let lines = lines(constellation.id)
+        let pairs = lines.isEmpty && isDrawn(constellation.id)
+            ? constellation.segments.map { [$0.0, $0.1] }
+            : lines.filter { $0.count == 2 }
+        return Set(pairs.map { [min($0[0], $0[1]), max($0[0], $0[1])] })
+    }
 
     /// The figure is whole.
     func record(_ constellation: String, at date: Date = .now) {

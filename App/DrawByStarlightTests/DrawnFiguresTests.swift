@@ -1,4 +1,5 @@
 import Foundation
+import StarlightCore
 import Testing
 @testable import DrawByStarlight
 
@@ -24,6 +25,19 @@ struct DrawnFiguresTests {
         #expect(abs(try #require(record.first).timeIntervalSince(night)) < 1)
         #expect(abs(try #require(record.latest).timeIntervalSince(night) - 86_400) < 1)
         #expect(!second.isDrawn("Ori"))
+    }
+
+    @Test func inkedLines() throws {
+        let cassiopeia = try #require(Catalogue.bundled.constellations["Cas"])
+        let figures = DrawnFigures(file: nil)
+        #expect(figures.inked(cassiopeia).isEmpty)
+        // Lines so far, in either order, each pair smaller first.
+        figures.keep([[168, 21], [168, 264]], of: "Cas")
+        #expect(figures.inked(cassiopeia) == [[21, 168], [168, 264]])
+        // Whole and not taken up again: every line.
+        figures.record("Cas")
+        figures.keep([], of: "Cas")
+        #expect(figures.inked(cassiopeia).count == cassiopeia.segments.count)
     }
 
     @Test func aBadFileStartsOver() throws {

@@ -2,10 +2,11 @@ import StarlightCore
 import SwiftUI
 
 /// The home screen. Until tonight's sky lands here (painting-company row 128, slice 4) it is a
-/// plain list of the constellations that can be drawn, each with where it stands tonight, and a
-/// sparkle on the ones drawn.
+/// list of the constellations that can be drawn, each its figure in small as it sits tonight
+/// (inked in where it's drawn) and where it stands.
 ///
-/// Demo scenarios: `constellations` (the list); `draw-…` opens a constellation (`DrawingView`).
+/// Demo scenarios: `constellations` (the list, Cassiopeia drawn and Cygnus begun); `draw-…` opens
+/// a constellation (`DrawingView`).
 struct TonightView: View {
     @State private var sky = Sky.tonight()
     @State private var path: [String] = []
@@ -52,6 +53,9 @@ struct TonightView: View {
             if scenario.hasPrefix("draw-"), let constellation = demoConstellation(scenario) {
                 path = [constellation.id]
             } else {
+                // Something drawn, to show it inked in: Cassiopeia whole, Cygnus begun.
+                drawn.record("Cas", at: DemoMode.fixedNow)
+                drawn.keep([[7949, 7796], [7796, 7615]], of: "Cyg")
                 DemoMode.markReady()
             }
         }
@@ -59,7 +63,8 @@ struct TonightView: View {
     }
 
     private func row(_ standing: FigureScene) -> some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 14) {
+            FigureGlyph(scene: standing, inked: drawn.inked(standing.constellation))
             VStack(alignment: .leading, spacing: 3) {
                 Text(verbatim: standing.constellation.name)
                     .font(.display(.headline, weight: .semibold))
@@ -69,15 +74,10 @@ struct TonightView: View {
                     .foregroundStyle(Theme.lavender)
             }
             Spacer(minLength: 0)
-            if drawn.isDrawn(standing.constellation.id) {
-                SparkleShape()
-                    .fill(Theme.gold)
-                    .frame(width: 14, height: 14)
-                    .accessibilityLabel("Drawn")
-            }
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 2)
         .accessibilityElement(children: .combine)
+        .accessibilityValue(drawn.isDrawn(standing.constellation.id) ? Text("Drawn") : Text(verbatim: ""))
     }
 
     /// Where each constellation stands tonight: the ones up now first, highest first; then the
