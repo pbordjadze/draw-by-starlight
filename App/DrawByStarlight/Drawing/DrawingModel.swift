@@ -265,8 +265,8 @@ final class DrawingModel {
             drawing.complete()
             isComplete = true
             guard scenario.contains("-story") else { return }
-            // After the push, as when the last line is drawn: a sheet presented in the same
-            // instant as a navigation push can leave the screen blank.
+            // A beat after the push: a sheet presented in the same instant as a navigation push
+            // can leave the screen blank.
             finishTask = Task { [weak self] in
                 try? await Task.sleep(for: .seconds(0.6))
                 guard !Task.isCancelled, let self else { return }
