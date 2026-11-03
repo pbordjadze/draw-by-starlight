@@ -60,7 +60,9 @@ struct FigureNightView: View {
 
         init(constellation: Constellation, sky: Sky, place: Place, still: JulianDay) {
             self.constellation = constellation
-            (evening, dawn) = FigureScene.night(from: sky.moment, at: place)
+            let (evening, dawn) = FigureScene.night(from: sky.moment, at: place)
+            self.evening = evening
+            self.dawn = dawn
             self.still = still
             magnitudes = Dictionary(uniqueKeysWithValues: constellation.stars.compactMap { id in
                 sky.catalogue.stars[id].map { (id, $0.magnitude) }
