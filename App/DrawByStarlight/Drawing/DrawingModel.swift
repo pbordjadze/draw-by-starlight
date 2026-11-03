@@ -81,6 +81,9 @@ final class DrawingModel {
 
     var name: String { scene.constellation.name }
 
+    /// Gold: a line has reached it, or the figure is whole. Until then it is white.
+    func isLit(_ star: Int) -> Bool { isComplete || drawing.namedStars.contains(star) }
+
     func label(_ star: Int) -> String {
         figure.first { $0.id == star }?.star.label ?? ""
     }

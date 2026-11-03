@@ -9,6 +9,8 @@ import SwiftUI
 struct TonightView: View {
     @State private var sky = Sky.tonight()
     @State private var path: [String] = []
+    /// A figure opens from where it stands in the sky, and goes back there.
+    @Namespace private var zoom
     @Environment(\.scenePhase) private var scenePhase
     private let drawn = Self.store()
 
@@ -23,7 +25,7 @@ struct TonightView: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            SkyDomeView(sky: sky, drawn: drawn, showing: path.isEmpty) { id in
+            SkyDomeView(sky: sky, drawn: drawn, showing: path.isEmpty, zoom: zoom) { id in
                 path.append(id)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -33,6 +35,7 @@ struct TonightView: View {
             .navigationDestination(for: String.self) { id in
                 if let constellation = sky.constellation(id) {
                     DrawingView(constellation: constellation, sky: sky, drawn: drawn)
+                        .navigationTransition(.zoom(sourceID: id, in: zoom))
                 }
             }
         }

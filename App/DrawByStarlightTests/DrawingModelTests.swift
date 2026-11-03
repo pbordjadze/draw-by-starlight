@@ -35,6 +35,16 @@ struct DrawingModelTests {
         #expect(m.announcement?.text == "Cassiopeia is whole.")
     }
 
+    @Test func aStarTurnsGoldWhenALineReachesIt() {
+        let m = model()
+        #expect(!m.isLit(21) && !m.isLit(168))
+        m.tap(21)
+        #expect(!m.isLit(21))
+        m.tap(168)
+        #expect(m.isLit(21) && m.isLit(168) && !m.isLit(264))
+        #expect(model(drawn: true).isLit(264))
+    }
+
     @Test func aDragJoinsTwoStars() {
         let m = model()
         let a = CGPoint(x: 100, y: 100), b = CGPoint(x: 160, y: 140)
