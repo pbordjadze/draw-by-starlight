@@ -17,8 +17,8 @@ struct FigureNightTests {
     }
 
     @Test func theWakeTrailsTheFigure() {
-        #expect(FigureNightView.wake(at: at(5), evening: evening, dawn: dawn, steps: 96) == 0..<5)
-        #expect(FigureNightView.wake(at: at(50), evening: evening, dawn: dawn, steps: 96) == 38..<50)
+        #expect(FigureNightView.wake(at: at(5.5), evening: evening, dawn: dawn, steps: 96) == 0..<5)
+        #expect(FigureNightView.wake(at: at(50.5), evening: evening, dawn: dawn, steps: 96) == 38..<50)
         // Between steps, it never runs ahead.
         #expect(FigureNightView.wake(at: at(50.9), evening: evening, dawn: dawn, steps: 96) == 38..<50)
     }
