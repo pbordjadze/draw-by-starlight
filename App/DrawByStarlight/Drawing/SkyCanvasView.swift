@@ -2,10 +2,10 @@ import Foundation
 import StarlightCore
 import SwiftUI
 
-/// The sky of the drawing: the faint stars around the figure, the figure's stars white until a
-/// line reaches them and gold after, the lines drawn, the line following the finger, a line that didn't belong fading in lavender, the
-/// glimmer, the names of the stars a line has reached, and the whole figure coming alive. One
-/// gesture draws; VoiceOver gets a button per star.
+/// The sky of the drawing: the faint stars around the figure, the figure's stars white until a line
+/// reaches them and gold after, the lines drawn, the line following the finger, a line that didn't
+/// belong fading in lavender, the glimmer, the names of the stars a line has reached, and the whole
+/// figure coming alive. One gesture draws; VoiceOver gets a button per star.
 struct SkyCanvasView: View {
     let model: DrawingModel
     /// The IAU border, shown once the figure is whole.
@@ -145,7 +145,7 @@ struct SkyCanvasView: View {
         for star in model.figure {
             guard let p = points[star.id] else { continue }
             let lit = model.isLit(star.id)
-            let radius = max(1.8, 5.6 - 1.0 * star.star.magnitude)
+            let radius = max(2.3, 5.6 - 1.0 * star.star.magnitude)
             let halo = radius * (3.2 + 2.4 * (starGlow[star.id] ?? 0))
             let haloColor = lit ? Theme.goldLight.opacity(0.35) : Theme.ink.opacity(0.18)
             context.fill(
@@ -229,7 +229,7 @@ struct SkyCanvasView: View {
     // MARK: Words
 
     private func accessibilityLabel(_ star: FigureScene.PlacedStar) -> String {
-        if model.drawing.namedStars.contains(star.id) || model.isComplete { return star.star.label }
+        if model.isLit(star.id) { return star.star.label }
         return String(localized: "voiceover.unnamed-star", defaultValue: "A star of \(model.name)",
                       comment: "VoiceOver's name for a star no line has reached yet; the argument is the constellation's name.")
     }
