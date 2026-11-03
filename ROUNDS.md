@@ -21,12 +21,24 @@ next round takes the weakest thing the critic names.
 The loop's main axis from here: show, don't tell. Words only on demand. This round also takes
 round 1's weakest thing: a finished figure no longer ends on a sheet.
 
-- **Build:** pending
+- **Build:** 18
 - **Changed:** the drawing screen has no words but the title and star names: the instruction
   line, the "turned as it sits tonight" line and the feedback lines are gone. A first look
   glimmers where to begin after a breath, and "Show me" is a sparkle in the toolbar. Drawing the
   last line no longer pops up the story: light runs along the figure's lines and its border fades
   in; the story waits behind the book button. The home list lost its header and footer.
 - **To see it:** open any constellation and wait a moment; draw it to the end.
+- **Critic:** words per view: drawing 1 (fresh), 4 (two lines), 6 (whole); story sheet 42; home
+  49. "Almost": he'd show the drawing proudly but close the story sheet first, because it says
+  what he just saw ("Drawn tonight.", the border explained, the name twice).
+- **Spend so far:** about $24
+
+## Round 3
+
+- **Build:** pending
+- **Changed:** the story sheet stops repeating the sky: "Drawn tonight.", the Border row and its
+  second "Cassiopeia" heading are gone; it opens on the brightest star and tonight's timing, then
+  Wikipedia's story, attributed as before.
+- **To see it:** finish a constellation, tap the book.
 - **Critic:** pending
-- **Spend so far:** about $16
+- **Spend so far:** about $28

@@ -1,14 +1,13 @@
 import StarlightCore
 import SwiftUI
 
-/// The figure, whole: when it was drawn, its story quoted from Wikipedia and plainly marked as
-/// Wikipedia's, with a link to the article, and a fact or two computed from the catalogue. The
-/// drawing stays visible above the sheet.
+/// The figure's story, on demand: a fact or two computed from the catalogue, then its story
+/// quoted from Wikipedia and plainly marked as Wikipedia's, with a link to the article. Nothing
+/// the sky above it already shows (that it's drawn, its border, its name twice). The drawing
+/// stays visible above the sheet.
 struct FinishedFigureView: View {
     let model: DrawingModel
     let sky: Sky
-    /// When this figure was first drawn; nil until it is recorded.
-    let drawnAt: Date?
     /// Where the sheet first rests: low enough that the figure shows whole above it, undimmed.
     let firstDetent: PresentationDetent
     let done: () -> Void
@@ -17,10 +16,6 @@ struct FinishedFigureView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    drawnLine
-                    Text(verbatim: model.name)
-                        .font(.display(.title))
-                        .foregroundStyle(Theme.ink)
                     facts
                     if let story = model.story {
                         WikipediaCard(story: story, stories: sky.stories)
@@ -54,28 +49,6 @@ struct FinishedFigureView: View {
         #endif
     }
 
-    private var drawnLine: some View {
-        HStack(spacing: 8) {
-            SparkleShape()
-                .fill(Theme.gold)
-                .frame(width: 12, height: 12)
-                .accessibilityHidden(true)
-            Text(drawnText)
-                .font(.footnote.weight(.semibold))
-                .foregroundStyle(Theme.lavender)
-        }
-        .padding(.top, 8)
-    }
-
-    private var drawnText: String {
-        guard let drawnAt, Calendar.current.isDate(drawnAt, inSameDayAs: sky.now) == false else {
-            return String(localized: "Drawn tonight.")
-        }
-        let day = drawnAt.formatted(Date.FormatStyle(date: .long, time: .omitted, timeZone: sky.timeZone))
-        return String(localized: "figure.drawn-on", defaultValue: "First drawn \(day).",
-                      comment: "On the finished figure, when it was drawn before; the argument is a date.")
-    }
-
     /// Facts the catalogue and the sky give, never written by hand.
     private var facts: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -85,7 +58,6 @@ struct FinishedFigureView: View {
                             comment: "A fact on the finished figure; the arguments are a star's name and its magnitude."))
             }
             fact(String(localized: "Tonight"), standing)
-            fact(String(localized: "Border"), String(localized: "The dotted line: its border, drawn by the IAU in 1930."))
         }
     }
 

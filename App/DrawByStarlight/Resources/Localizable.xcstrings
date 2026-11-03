@@ -5,10 +5,6 @@
       "comment": "VoiceOver, after a line already drawn is drawn again.",
       "extractionState": "manual"
     },
-    "Border": {
-      "comment": "The label of a fact on the finished figure: its IAU border.",
-      "extractionState": "manual"
-    },
     "Brightest star": {
       "comment": "The label of a fact on the finished figure.",
       "extractionState": "manual"
@@ -27,10 +23,6 @@
     },
     "Drawn": {
       "comment": "VoiceOver's name for the sparkle beside a constellation already drawn, in the list.",
-      "extractionState": "manual"
-    },
-    "Drawn tonight.": {
-      "comment": "At the top of the finished figure, when it was drawn tonight.",
       "extractionState": "manual"
     },
     "From Wikipedia": {
@@ -101,10 +93,6 @@
       "comment": "Toolbar button on a finished drawing: shows its story again.",
       "extractionState": "manual"
     },
-    "The dotted line: its border, drawn by the IAU in 1930.": {
-      "comment": "A fact on the finished figure, beside the dotted border on the drawing.",
-      "extractionState": "manual"
-    },
     "The next star glimmers.": {
       "comment": "VoiceOver hint on the Show me button.",
       "extractionState": "manual"
@@ -129,18 +117,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@, magnitude %@"
-          }
-        }
-      }
-    },
-    "figure.drawn-on": {
-      "comment": "On the finished figure, when it was drawn before; the argument is a date.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "First drawn %@."
           }
         }
       }
