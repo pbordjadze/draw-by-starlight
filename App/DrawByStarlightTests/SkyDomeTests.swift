@@ -1,8 +1,10 @@
 import CoreGraphics
+import Foundation
+import StarlightCore
 import Testing
 @testable import DrawByStarlight
 
-/// A touch on the home screen's sky finds the figure whose line is nearest it.
+/// The home screen's sky: the moment it shows, and a touch finding the figure nearest it.
 struct SkyDomeTests {
     @Test func distanceToALineIsToItsNearestPoint() {
         let a = CGPoint(x: 0, y: 0), b = CGPoint(x: 10, y: 0)
@@ -10,5 +12,24 @@ struct SkyDomeTests {
         // Past an end, the distance is to that end.
         #expect(SkyDomeView.distance(from: CGPoint(x: 13, y: 4), toSegment: a, b) == 5)
         #expect(SkyDomeView.distance(from: CGPoint(x: 3, y: 4), toSegment: a, a) == 5)
+    }
+
+    @Test func theSkyWheelsIntoTheEveningThenFollowsTheRealSky() {
+        let opened = Date(timeIntervalSince1970: 1_792_976_400)
+        let evening = JulianDay(opened)
+        // Opening: two hours back, then the evening, as the wheel ends.
+        let first = SkyDomeView.moment(evening: evening, now: opened, opened: opened, settled: false)
+        #expect(abs((evening.value - first.value) * 24 - 2) < 1e-6)
+        let last = SkyDomeView.moment(evening: evening, now: opened.addingTimeInterval(4), opened: opened, settled: false)
+        #expect(abs(last.value - evening.value) < 1e-9)
+        // Settled: the real moment, an hour on an hour later.
+        let later = SkyDomeView.moment(evening: evening, now: opened.addingTimeInterval(3600), opened: opened, settled: true)
+        #expect(abs((later.value - evening.value) * 24 - 1) < 1e-6)
+    }
+
+    @Test func inDaylightTheSkyHoldsAtTheComingSunset() {
+        let now = Date(timeIntervalSince1970: 1_792_976_400)
+        let sunset = JulianDay(now.addingTimeInterval(4 * 3600))
+        #expect(SkyDomeView.moment(evening: sunset, now: now, opened: now, settled: true) == sunset)
     }
 }
