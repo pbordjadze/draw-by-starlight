@@ -58,6 +58,7 @@ struct SkyDomeView: View {
                             }
                             .accessibilityHidden(true)
                             cardinals(disc)
+                            zoomSources(dome, night: night, disc: disc)
                             TimelineView(.periodic(from: .now, by: 30)) { context in
                                 figureElements(dome, night: night, marks: marks, at: moment(night.evening, now: context.date), disc: disc)
                             }
@@ -72,7 +73,7 @@ struct SkyDomeView: View {
                 } else {
                     Spacer()
                 }
-                below(night.down)
+                below(night)
             }
         }
         .padding(.bottom, 8)
@@ -106,9 +107,15 @@ struct SkyDomeView: View {
         /// The rest, as they'll stand: the ones rising later, soonest first, then the ones not
         /// up tonight.
         let down: [FigureScene]
+        /// Where each figure stands tonight, in words, for VoiceOver: worked out once, since a
+        /// figure's rising and setting take a moment to find.
+        let words: [String: String]
 
         init(sky: Sky) {
             let scenes = sky.drawable.map { sky.scene($0, backdrop: false) }
+            words = Dictionary(uniqueKeysWithValues: scenes.map {
+                ($0.constellation.id, SkyWords.listing($0, place: sky.place, time: sky.time))
+            })
             up = scenes.filter { $0.timing == .now }.map(\.constellation)
             own = Set(up.flatMap(\.stars))
             down = scenes.filter { $0.timing != .now }.sorted { a, b in
@@ -143,10 +150,10 @@ struct SkyDomeView: View {
     }
 
     /// Under the rim, the figures below the horizon, dimmer, turned as they'll stand.
-    private func below(_ scenes: [FigureScene]) -> some View {
+    private func below(_ night: Night) -> some View {
         ScrollView(.horizontal) {
             HStack(spacing: 18) {
-                ForEach(scenes, id: \.constellation.id) { scene in
+                ForEach(night.down, id: \.constellation.id) { scene in
                     Button {
                         open(scene.constellation.id)
                     } label: {
@@ -156,7 +163,7 @@ struct SkyDomeView: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel(Text(verbatim: scene.constellation.name))
-                    .accessibilityValue(standing(scene, drawn: drawn.isDrawn(scene.constellation.id)))
+                    .accessibilityValue(standing(night.words[scene.constellation.id], drawn: drawn.isDrawn(scene.constellation.id)))
                     .accessibilityIdentifier("figure-\(scene.constellation.id)")
                 }
             }
@@ -224,7 +231,7 @@ struct SkyDomeView: View {
     }
 
     private static let bands: [(faintest: Double, radius: CGFloat, opacity: Double)] = [
-        (1.5, 1.6, 0.8), (2.5, 1.2, 0.65), (3.5, 0.9, 0.45), (4.5, 0.65, 0.3), (.infinity, 0.45, 0.2),
+        (1.5, 2.3, 0.95), (2.5, 1.6, 0.8), (3.5, 1.0, 0.5), (4.5, 0.65, 0.3), (.infinity, 0.45, 0.2),
     ]
 
     private func draw(_ dome: Dome, night: Night, marks: Marks, at moment: JulianDay,
@@ -335,7 +342,7 @@ struct SkyDomeView: View {
 
     /// N, E, S and W just inside the rim, where those horizons are.
     private func cardinals(_ disc: Disc) -> some View {
-        let r = disc.radius - 12
+        let r = disc.radius - 16
         return ZStack {
             cardinal(Text("N"), at: CGPoint(x: disc.center.x, y: disc.center.y - r))
             cardinal(Text("E"), at: CGPoint(x: disc.center.x - r, y: disc.center.y))
@@ -356,6 +363,24 @@ struct SkyDomeView: View {
 
     // MARK: Touch and VoiceOver
 
+    /// Where each figure up opens from, at its middle: plain anchors for the zoom, apart from
+    /// anything that changes as figures are drawn, so the zoom has nothing to follow while a
+    /// drawing is open.
+    private func zoomSources(_ dome: Dome, night: Night, disc: Disc) -> some View {
+        ForEach(night.up, id: \.id) { constellation in
+            let points = disc.above(disc.points(of: constellation, on: dome, at: night.evening))
+            if !points.isEmpty {
+                Color.clear
+                    .frame(width: 44, height: 44)
+                    .matchedTransitionSource(id: constellation.id, in: zoom)
+                    .position(x: points.map(\.x).reduce(0, +) / CGFloat(points.count),
+                              y: points.map(\.y).reduce(0, +) / CGFloat(points.count))
+                    .allowsHitTesting(false)
+                    .accessibilityHidden(true)
+            }
+        }
+    }
+
     /// One element per figure up, at its middle as drawn, for VoiceOver and the UI tests; touches go to the
     /// dome's tap.
     private func figureElements(_ dome: Dome, night: Night, marks: Marks, at moment: JulianDay, disc: Disc) -> some View {
@@ -364,13 +389,12 @@ struct SkyDomeView: View {
             if !points.isEmpty {
                 Color.clear
                     .frame(width: 44, height: 44)
-                    .matchedTransitionSource(id: constellation.id, in: zoom)
                     .position(x: points.map(\.x).reduce(0, +) / CGFloat(points.count),
                               y: points.map(\.y).reduce(0, +) / CGFloat(points.count))
                     .allowsHitTesting(false)
                     .accessibilityElement()
                     .accessibilityLabel(Text(verbatim: constellation.name))
-                    .accessibilityValue(standing(constellation, drawn: marks.named.contains(constellation.id)))
+                    .accessibilityValue(standing(night.words[constellation.id], drawn: marks.named.contains(constellation.id)))
                     .accessibilityAddTraits(.isButton)
                     .accessibilityIdentifier("figure-\(constellation.id)")
                     .accessibilityAction { open(constellation.id) }
@@ -379,12 +403,8 @@ struct SkyDomeView: View {
     }
 
     /// For VoiceOver, where a figure stands tonight and whether it's drawn: what the sky shows.
-    private func standing(_ constellation: Constellation, drawn: Bool) -> Text {
-        standing(sky.scene(constellation, backdrop: false), drawn: drawn)
-    }
-
-    private func standing(_ scene: FigureScene, drawn: Bool) -> Text {
-        let words = SkyWords.listing(scene, place: sky.place, time: sky.time)
+    private func standing(_ words: String?, drawn: Bool) -> Text {
+        let words = words ?? ""
         return Text(verbatim: drawn
             ? String(localized: "dome.standing.drawn", defaultValue: "\(words). Drawn.",
                      comment: "VoiceOver, the value of a drawn figure on the home screen's sky; the argument is where it stands tonight (High in the northeast).")
