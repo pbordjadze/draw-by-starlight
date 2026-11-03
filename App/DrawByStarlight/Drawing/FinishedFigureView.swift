@@ -56,6 +56,8 @@ struct FinishedFigureView: View {
         case (let place?, .now), (let place?, .later), (let place?, .beforeDawn):
             FigureNightView(constellation: model.scene.constellation, sky: sky, place: place,
                             still: model.scene.moment, words: standing)
+                // The sheet first rests on the turning sky alone; the story is a scroll below.
+                .padding(.vertical, 60)
         default:
             Text(verbatim: standing)
                 .font(.system(.title3, design: .serif).italic())

@@ -34,6 +34,17 @@ struct DomeTests {
         #expect(dome.visible(at: evening).contains { $0.star.id == 424 })
     }
 
+    @Test func belowTheHorizonFallsOutsideTheRim() throws {
+        let evening = try moment(2026, 10, 26, 1)
+        let dome = Dome(catalogue: .bundled, place: Place(latitude: 40, longitude: -75), around: evening)
+        let all = dome.visible(at: evening, lowest: -90)
+        let up = dome.visible(at: evening)
+        #expect(all.count > up.count)
+        for star in all where !up.contains(where: { $0.star.id == star.star.id }) {
+            #expect((star.point.x * star.point.x + star.point.y * star.point.y).squareRoot() >= 1)
+        }
+    }
+
     @Test func aFigureStarFainterThanTheCutIsKept() throws {
         let evening = try moment(2026, 10, 26, 1)
         let lyra = try #require(Catalogue.bundled.constellations["Lyr"])
