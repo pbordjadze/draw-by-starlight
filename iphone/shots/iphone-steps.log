@@ -1,0 +1,29 @@
+12:54:35 iphone: booted
+12:54:58 iphone: installed
+12:55:06 iphone: launch constellations: com.pbordjadze.drawbystarlight: 11082 
+12:55:11 iphone: constellations ready after 5 s
+12:55:18 iphone: captured constellations
+12:55:21 iphone: launch constellations-long-text: com.pbordjadze.drawbystarlight: 11881 
+12:55:25 iphone: constellations-long-text ready after 4 s
+12:55:28 iphone: captured constellations-long-text
+12:55:30 iphone: launch draw-cassiopeia: com.pbordjadze.drawbystarlight: 12225 
+12:55:31 iphone: draw-cassiopeia ready after 1 s
+12:55:33 iphone: captured draw-cassiopeia
+12:55:35 iphone: launch draw-cassiopeia-hint: com.pbordjadze.drawbystarlight: 12467 
+12:55:36 iphone: draw-cassiopeia-hint ready after 1 s
+12:55:38 iphone: captured draw-cassiopeia-hint
+12:55:40 iphone: launch draw-cassiopeia-done: com.pbordjadze.drawbystarlight: 12893 
+12:55:40 iphone: draw-cassiopeia-done ready after 0 s
+12:55:44 iphone: captured draw-cassiopeia-done
+12:55:45 iphone: launch draw-cassiopeia-story: com.pbordjadze.drawbystarlight: 12939 
+12:55:47 iphone: draw-cassiopeia-story ready after 2 s
+12:55:55 iphone: captured draw-cassiopeia-story
+12:56:03 iphone: launch draw-cassiopeia-story-long-text: com.pbordjadze.drawbystarlight: 13307 
+12:56:03 iphone: draw-cassiopeia-story-long-text ready after 0 s
+12:56:08 iphone: captured draw-cassiopeia-story-long-text
+12:56:12 iphone: launch draw-ursa-major: com.pbordjadze.drawbystarlight: 13634 
+12:56:12 iphone: draw-ursa-major ready after 0 s
+12:56:16 iphone: captured draw-ursa-major
+12:56:18 iphone: launch draw-orion: com.pbordjadze.drawbystarlight: 13675 
+12:56:18 iphone: draw-orion ready after 0 s
+12:56:22 iphone: captured draw-orion
