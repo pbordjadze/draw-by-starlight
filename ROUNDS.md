@@ -46,9 +46,19 @@ round 1's weakest thing: a finished figure no longer ends on a sheet.
 
 ## Round 4
 
-- **Build:** pending
+- **Build:** 22
 - **Changed:** each row of the home list starts with its constellation's figure in small, turned
   as it sits tonight: gold stars, the lines only hinted until you draw them, then inked in.
 - **To see it:** the first screen; draw a few lines of one and come back.
+- **Critic:** words per view: home 44, drawing 1–6, story about 77. "No": drawing feels like
+  wonder, but home still looks like a settings page (a grey card, chevrons, small figures).
+- **Spend so far:** about $36
+
+## Round 5
+
+- **Build:** pending
+- **Changed:** home is the night itself: no card, no chevrons, no separators, and each figure
+  is twice the size.
+- **To see it:** the first screen.
 - **Critic:** pending
-- **Spend so far:** about $34
+- **Spend so far:** about $39

@@ -7,11 +7,13 @@ struct FigureGlyph: View {
     let scene: FigureScene
     /// The lines inked in, each a pair of Bright Star numbers, the smaller first.
     let inked: Set<[Int]>
-    @ScaledMetric(relativeTo: .headline) private var side: CGFloat = 52
+    @ScaledMetric(relativeTo: .headline) private var side: CGFloat = 96
 
     var body: some View {
         Canvas { context, size in
-            let layout = FigureLayout(size: size, figure: scene.figure.map(\.point), inset: 4)
+            // Line and star sizes, and the room kept for the brightest star, grow with the glyph.
+            let k = size.width / 64
+            let layout = FigureLayout(size: size, figure: scene.figure.map(\.point), inset: 3.4 * k)
             let points = Dictionary(uniqueKeysWithValues: scene.figure.map { ($0.id, layout.point($0.point)) })
             for (a, b) in scene.constellation.segments {
                 guard let p = points[a], let q = points[b] else { continue }
@@ -19,19 +21,19 @@ struct FigureGlyph: View {
                 line.move(to: p)
                 line.addLine(to: q)
                 if inked.contains([min(a, b), max(a, b)]) {
-                    context.stroke(line, with: .color(Theme.ink.opacity(0.85)), lineWidth: 1.1)
+                    context.stroke(line, with: .color(Theme.ink.opacity(0.85)), lineWidth: 1.1 * k)
                 } else {
-                    context.stroke(line, with: .color(Theme.lavender.opacity(0.3)), lineWidth: 0.7)
+                    context.stroke(line, with: .color(Theme.lavender.opacity(0.3)), lineWidth: 0.7 * k)
                 }
             }
             for star in scene.figure {
                 guard let p = points[star.id] else { continue }
-                let r = max(0.9, 2.2 - 0.35 * star.star.magnitude)
+                let r = max(0.9, 2.2 - 0.35 * star.star.magnitude) * k
                 context.fill(Path(ellipseIn: CGRect(x: p.x - r, y: p.y - r, width: 2 * r, height: 2 * r)),
                              with: .color(Theme.gold))
             }
         }
-        .frame(width: max(side, 48), height: max(side, 48))
+        .frame(width: max(side, 72), height: max(side, 72))
         .accessibilityHidden(true)
     }
 }
