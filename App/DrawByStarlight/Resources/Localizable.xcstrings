@@ -5,24 +5,20 @@
       "comment": "VoiceOver, after a line already drawn is drawn again.",
       "extractionState": "manual"
     },
-    "Brightest star": {
-      "comment": "The label of a fact on the finished figure.",
-      "extractionState": "manual"
-    },
     "Close": {
       "comment": "The close button of the finished figure's sheet.",
       "extractionState": "manual"
     },
     "Done": {
-      "comment": "The one button on the finished figure: back to the list.",
+      "comment": "The one button on the finished figure: back to the sky.",
       "extractionState": "manual"
     },
     "Draw again": {
       "comment": "Toolbar button on a finished drawing: clears the lines to draw it once more.",
       "extractionState": "manual"
     },
-    "Drawn": {
-      "comment": "VoiceOver's value for a constellation already drawn, in the list.",
+    "E": {
+      "comment": "The east point at the rim of the sky on the home screen.",
       "extractionState": "manual"
     },
     "From Wikipedia": {
@@ -37,8 +33,12 @@
       "comment": "The link under a story whose article says more; opens Safari.",
       "extractionState": "manual"
     },
+    "N": {
+      "comment": "The north point at the rim of the sky on the home screen.",
+      "extractionState": "manual"
+    },
     "Never rises from here": {
-      "comment": "Under a constellation's name in the list when it never rises from the stargazer's place.",
+      "comment": "Where a constellation stands, read by VoiceOver on the home screen's sky, when it never rises from the stargazer's place.",
       "extractionState": "manual"
     },
     "Never rises from here.": {
@@ -50,7 +50,7 @@
       "extractionState": "manual"
     },
     "Not up tonight": {
-      "comment": "Under a constellation's name in the list when it rises from the stargazer's place but not tonight.",
+      "comment": "Where a constellation stands, read by VoiceOver on the home screen's sky, when it rises from the stargazer's place but not tonight.",
       "extractionState": "manual"
     },
     "Not up tonight.": {
@@ -70,11 +70,15 @@
       "extractionState": "manual"
     },
     "Place unknown": {
-      "comment": "In the list and on the finished figure when the device's time zone gives no place.",
+      "comment": "Read by VoiceOver on the home screen's sky, and on the finished figure, when the device's time zone gives no place.",
       "extractionState": "manual"
     },
     "Read the article on Wikipedia": {
       "comment": "The link under a story whose article's lead is all shown; opens Safari.",
+      "extractionState": "manual"
+    },
+    "S": {
+      "comment": "The south point at the rim of the sky on the home screen.",
       "extractionState": "manual"
     },
     "Selected": {
@@ -102,24 +106,28 @@
       "extractionState": "manual"
     },
     "Tonight": {
-      "comment": "The home screen's title: tonight's sky; also the label of a fact on the finished figure (where it stands tonight).",
+      "comment": "The home screen's title (its bar is hidden; VoiceOver and the back button's menu read it): tonight's sky.",
       "extractionState": "manual"
     },
-    "east": {
-      "comment": "A compass direction, in a sentence (\"high in the east\").",
+    "W": {
+      "comment": "The west point at the rim of the sky on the home screen.",
       "extractionState": "manual"
     },
-    "figure.brightest": {
-      "comment": "A fact on the finished figure; the arguments are a star's name and its magnitude.",
+    "dome.standing.drawn": {
+      "comment": "VoiceOver, the value of a drawn figure on the home screen's sky; the argument is where it stands tonight (High in the northeast).",
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@, magnitude %@"
+            "value": "%@. Drawn."
           }
         }
       }
+    },
+    "east": {
+      "comment": "A compass direction, in a sentence (\"high in the east\").",
+      "extractionState": "manual"
     },
     "figure.highest": {
       "comment": "A fact on the finished figure; the arguments are a clock time, a height word (high, halfway up, low) and a compass direction.",
@@ -142,7 +150,7 @@
       "extractionState": "manual"
     },
     "list.standing.dawn": {
-      "comment": "Under a constellation's name in the list when it rises after midnight and is highest in daylight; the argument is a clock time, an hour before sunrise.",
+      "comment": "Where a constellation stands, read by VoiceOver on the home screen's sky, when it rises after midnight and is highest in daylight; the argument is a clock time, an hour before sunrise.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -154,7 +162,7 @@
       }
     },
     "list.standing.later": {
-      "comment": "Under a constellation's name in the list when it hasn't risen yet; the argument is a clock time.",
+      "comment": "Where a constellation stands, read by VoiceOver on the home screen's sky, when it hasn't risen yet; the argument is a clock time.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -166,7 +174,7 @@
       }
     },
     "list.standing.now": {
-      "comment": "Under a constellation's name in the list; the arguments are a capitalized height word (High, Halfway up, Low) and a compass direction.",
+      "comment": "Where a constellation stands, read by VoiceOver on the home screen's sky; the arguments are a capitalized height word (High, Halfway up, Low) and a compass direction.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -203,10 +211,6 @@
     },
     "southwest": {
       "comment": "A compass direction, in a sentence.",
-      "extractionState": "manual"
-    },
-    "the free encyclopedia": {
-      "comment": "Beside the From Wikipedia heading: Wikipedia's own subtitle.",
       "extractionState": "manual"
     },
     "voiceover.glimmer": {

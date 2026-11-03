@@ -26,7 +26,7 @@ nonisolated enum SkyWords {
         }
     }
 
-    /// Where a figure stands, for a list: "High in the northeast", "Rises later; highest at
+    /// Where a figure stands, in a few words: "High in the northeast", "Rises later; highest at
     /// 2:15 AM", "Never rises from here".
     static func listing(_ scene: FigureScene, place: Place?, time: (JulianDay) -> String) -> String {
         switch scene.timing {
@@ -36,15 +36,15 @@ nonisolated enum SkyWords {
             let capitalized = height.prefix(1).uppercased() + String(height.dropFirst())
             return String(localized: "list.standing.now",
                 defaultValue: "\(capitalized) in the \(direction(azimuth: center.azimuth))",
-                comment: "Under a constellation's name in the list; the arguments are a capitalized height word (High, Halfway up, Low) and a compass direction.")
+                comment: "Where a constellation stands, read by VoiceOver on the home screen's sky; the arguments are a capitalized height word (High, Halfway up, Low) and a compass direction.")
         case .later(let transit):
             return String(localized: "list.standing.later",
                 defaultValue: "Rises later; highest at \(time(transit))",
-                comment: "Under a constellation's name in the list when it hasn't risen yet; the argument is a clock time.")
+                comment: "Where a constellation stands, read by VoiceOver on the home screen's sky, when it hasn't risen yet; the argument is a clock time.")
         case .beforeDawn(let moment):
             return String(localized: "list.standing.dawn",
                 defaultValue: "Rises later; before dawn at \(time(moment))",
-                comment: "Under a constellation's name in the list when it rises after midnight and is highest in daylight; the argument is a clock time, an hour before sunrise.")
+                comment: "Where a constellation stands, read by VoiceOver on the home screen's sky, when it rises after midnight and is highest in daylight; the argument is a clock time, an hour before sunrise.")
         case .notTonight:
             return String(localized: "Not up tonight")
         case .unseen:
