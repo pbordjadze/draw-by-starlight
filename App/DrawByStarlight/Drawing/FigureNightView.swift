@@ -30,8 +30,8 @@ struct FigureNightView: View {
             }
         }
         // A picture, not text: it doesn't grow with the text size.
-        .frame(maxWidth: 220)
         .aspectRatio(1, contentMode: .fit)
+        .frame(maxWidth: 220)
         .frame(maxWidth: .infinity)
         .accessibilityElement()
         .accessibilityLabel(Text(verbatim: words))
