@@ -9,7 +9,7 @@ final class LaunchTests: XCTestCase {
         app.launch()
         let cassiopeia = app.descendants(matching: .any).matching(identifier: "figure-Cas").firstMatch
         XCTAssertTrue(cassiopeia.waitForExistence(timeout: 10))
-        XCTAssertEqual(cassiopeia.value as? String, "Drawn")
+        XCTAssertEqual(cassiopeia.value as? String, "High in the northeast. Drawn.")
         // Orion is below the horizon on the demo evening: it waits under the sky.
         XCTAssertTrue(app.buttons["figure-Ori"].exists)
         cassiopeia.tap()

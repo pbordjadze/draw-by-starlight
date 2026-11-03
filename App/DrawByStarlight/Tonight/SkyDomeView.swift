@@ -26,11 +26,11 @@ struct SkyDomeView: View {
                     // Read here, so a figure drawn since redraws the sky.
                     let marks = Marks(
                         inked: Dictionary(uniqueKeysWithValues: night.up.map { ($0.id, drawn.inked($0)) }),
-                        named: Set(night.up.map(\.id).filter(drawn.isDrawn)))
+                        named: Set(night.up.map(\.id).filter { drawn.isDrawn($0) }))
                     GeometryReader { geometry in
                         let disc = Disc(size: geometry.size)
                         ZStack {
-                            TimelineView(.animation(paused: settled)) { context in
+                            TimelineView(.animation(paused: settled || reduceMotion)) { context in
                                 Canvas { canvas, _ in
                                     draw(dome, night: night, marks: marks, at: moment(night.evening, now: context.date), in: canvas, disc: disc)
                                 }
@@ -41,6 +41,8 @@ struct SkyDomeView: View {
                         }
                         .contentShape(Rectangle())
                         .onTapGesture(coordinateSpace: .local) { location in
+                            // While the sky wheels, the figures aren't where a touch would look.
+                            guard settled else { return }
                             if let id = figure(near: location, dome: dome, night: night, disc: disc) { open(id) }
                         }
                     }
@@ -75,6 +77,8 @@ struct SkyDomeView: View {
         let dome: Dome?
         /// The figures up tonight.
         let up: [Constellation]
+        /// Their stars, drawn apart from the rest.
+        let own: Set<Int>
         /// The rest, as they'll stand: the ones rising later, soonest first, then the ones not
         /// up tonight.
         let down: [FigureScene]
@@ -82,6 +86,7 @@ struct SkyDomeView: View {
         init(sky: Sky) {
             let scenes = sky.drawable.map { sky.scene($0, backdrop: false) }
             up = scenes.filter { $0.timing == .now }.map(\.constellation)
+            own = Set(up.flatMap(\.stars))
             down = scenes.filter { $0.timing != .now }.sorted { a, b in
                 switch (Self.rising(a), Self.rising(b)) {
                 case (let x?, let y?): x < y
@@ -126,7 +131,7 @@ struct SkyDomeView: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel(Text(verbatim: scene.constellation.name))
-                    .accessibilityValue(drawn.isDrawn(scene.constellation.id) ? Text("Drawn") : Text(verbatim: ""))
+                    .accessibilityValue(standing(scene, drawn: drawn.isDrawn(scene.constellation.id)))
                     .accessibilityIdentifier("figure-\(scene.constellation.id)")
                 }
             }
@@ -152,6 +157,11 @@ struct SkyDomeView: View {
             CGPoint(x: center.x + CGFloat(p.x) * radius, y: center.y - CGFloat(p.y) * radius)
         }
 
+        /// The points inside the rim: the stars above the horizon.
+        func above(_ points: [Int: CGPoint]) -> [CGPoint] {
+            points.values.filter { hypot($0.x - center.x, $0.y - center.y) <= radius }
+        }
+
         func points(of constellation: Constellation, on dome: Dome, at moment: JulianDay) -> [Int: CGPoint] {
             var points: [Int: CGPoint] = [:]
             for id in constellation.stars {
@@ -163,11 +173,15 @@ struct SkyDomeView: View {
 
     /// The moment shown: the last two hours wheeling by as the screen opens, then the evening.
     private func moment(_ evening: JulianDay, now: Date) -> JulianDay {
-        guard !settled else { return evening }
+        guard !settled, !reduceMotion else { return evening }
         let f = min(1, max(0, now.timeIntervalSince(opened) / Self.lapseSeconds))
         let eased = 1 - pow(1 - f, 3)
         return JulianDay(evening.value - Self.lapse * (1 - eased))
     }
+
+    private static let bands: [(faintest: Double, radius: CGFloat, opacity: Double)] = [
+        (1.5, 1.6, 0.8), (2.5, 1.2, 0.65), (3.5, 0.9, 0.45), (4.5, 0.65, 0.3), (.infinity, 0.45, 0.2),
+    ]
 
     private func draw(_ dome: Dome, night: Night, marks: Marks, at moment: JulianDay, in context: GraphicsContext, disc: Disc) {
         var rim = Path()
@@ -180,13 +194,17 @@ struct SkyDomeView: View {
 
         var inside = context
         inside.clip(to: rim)
-        let own = Set(night.up.flatMap(\.stars))
-        for star in dome.visible(at: moment) where !own.contains(star.star.id) {
+        // The other stars, one path per band of brightness: the brighter, the larger and the
+        // less faded.
+        var bands = Array(repeating: Path(), count: Self.bands.count)
+        for star in dome.visible(at: moment) where !night.own.contains(star.star.id) {
+            let band = Self.bands.firstIndex { star.star.magnitude <= $0.faintest } ?? Self.bands.count - 1
             let p = disc.point(star.point)
-            let r = max(0.45, 1.6 - 0.25 * star.star.magnitude)
-            let opacity = max(0.2, min(0.8, 1 - 0.15 * star.star.magnitude))
-            inside.fill(Path(ellipseIn: CGRect(x: p.x - r, y: p.y - r, width: 2 * r, height: 2 * r)),
-                        with: .color(Theme.ink.opacity(opacity)))
+            let r = Self.bands[band].radius
+            bands[band].addEllipse(in: CGRect(x: p.x - r, y: p.y - r, width: 2 * r, height: 2 * r))
+        }
+        for (band, path) in zip(Self.bands, bands) {
+            inside.fill(path, with: .color(Theme.ink.opacity(band.opacity)))
         }
 
         for constellation in night.up {
@@ -211,10 +229,12 @@ struct SkyDomeView: View {
                 inside.fill(Path(ellipseIn: CGRect(x: p.x - r, y: p.y - r, width: 2 * r, height: 2 * r)),
                             with: .color(Theme.gold))
             }
-            // A figure is named once it's drawn: the sky fills with what's been learned.
-            if marks.named.contains(constellation.id), let lowest = points.values.map(\.y).max() {
-                let x = points.values.map(\.x).reduce(0, +) / CGFloat(points.count)
-                inside.draw(Text(verbatim: constellation.name)
+            // A figure is named once it's drawn, under its stars that are up: the sky fills with
+            // what's been learned.
+            let up = disc.above(points)
+            if marks.named.contains(constellation.id), let lowest = up.map(\.y).max() {
+                let x = up.map(\.x).reduce(0, +) / CGFloat(up.count)
+                context.draw(Text(verbatim: constellation.name)
                                 .font(.system(.footnote, design: .serif).italic())
                                 .foregroundStyle(Theme.ink.opacity(0.9)),
                             at: CGPoint(x: x, y: lowest + 14))
@@ -246,7 +266,7 @@ struct SkyDomeView: View {
     /// dome's tap.
     private func figureElements(_ dome: Dome, night: Night, marks: Marks, disc: Disc) -> some View {
         ForEach(night.up, id: \.id) { constellation in
-            let points = Array(disc.points(of: constellation, on: dome, at: night.evening).values)
+            let points = disc.above(disc.points(of: constellation, on: dome, at: night.evening))
             if !points.isEmpty {
                 Color.clear
                     .frame(width: 44, height: 44)
@@ -255,12 +275,25 @@ struct SkyDomeView: View {
                     .allowsHitTesting(false)
                     .accessibilityElement()
                     .accessibilityLabel(Text(verbatim: constellation.name))
-                    .accessibilityValue(marks.named.contains(constellation.id) ? Text("Drawn") : Text(verbatim: ""))
+                    .accessibilityValue(standing(constellation, drawn: marks.named.contains(constellation.id)))
                     .accessibilityAddTraits(.isButton)
                     .accessibilityIdentifier("figure-\(constellation.id)")
                     .accessibilityAction { open(constellation.id) }
             }
         }
+    }
+
+    /// For VoiceOver, where a figure stands tonight and whether it's drawn: what the sky shows.
+    private func standing(_ constellation: Constellation, drawn: Bool) -> Text {
+        standing(sky.scene(constellation, backdrop: false), drawn: drawn)
+    }
+
+    private func standing(_ scene: FigureScene, drawn: Bool) -> Text {
+        let words = SkyWords.listing(scene, place: sky.place, time: sky.time)
+        return Text(verbatim: drawn
+            ? String(localized: "dome.standing.drawn", defaultValue: "\(words). Drawn.",
+                     comment: "VoiceOver, the value of a drawn figure on the home screen's sky; the argument is where it stands tonight (High in the northeast).")
+            : words)
     }
 
     /// The figure up with a line nearest a touch, within reach of a finger.
@@ -277,7 +310,7 @@ struct SkyDomeView: View {
         return best?.id
     }
 
-    private nonisolated static func distance(from c: CGPoint, toSegment a: CGPoint, _ b: CGPoint) -> CGFloat {
+    nonisolated static func distance(from c: CGPoint, toSegment a: CGPoint, _ b: CGPoint) -> CGFloat {
         let dx = b.x - a.x, dy = b.y - a.y
         let length = dx * dx + dy * dy
         let t = length == 0 ? 0 : max(0, min(1, ((c.x - a.x) * dx + (c.y - a.y) * dy) / length))
