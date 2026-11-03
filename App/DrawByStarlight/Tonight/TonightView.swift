@@ -25,13 +25,19 @@ struct TonightView: View {
     var body: some View {
         NavigationStack(path: $path) {
             List {
+                // Figures on the night itself: no card, no chevrons, no separators.
                 ForEach(standings, id: \.constellation.id) { standing in
-                    NavigationLink(value: standing.constellation.id) {
+                    Button {
+                        path.append(standing.constellation.id)
+                    } label: {
                         row(standing)
                     }
-                    .listRowBackground(Theme.surface)
+                    .buttonStyle(.plain)
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
                 }
             }
+            .listStyle(.plain)
             .scrollContentBackground(.hidden)
             .background(Theme.paper.ignoresSafeArea())
             .navigationTitle("Tonight")
@@ -63,7 +69,7 @@ struct TonightView: View {
     }
 
     private func row(_ standing: FigureScene) -> some View {
-        HStack(spacing: 14) {
+        HStack(spacing: 16) {
             FigureGlyph(scene: standing, inked: drawn.inked(standing.constellation))
             VStack(alignment: .leading, spacing: 3) {
                 Text(verbatim: standing.constellation.name)
@@ -76,6 +82,7 @@ struct TonightView: View {
             Spacer(minLength: 0)
         }
         .padding(.vertical, 2)
+        .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
         .accessibilityValue(drawn.isDrawn(standing.constellation.id) ? Text("Drawn") : Text(verbatim: ""))
     }
