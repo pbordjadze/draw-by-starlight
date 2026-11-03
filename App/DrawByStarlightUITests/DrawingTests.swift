@@ -1,7 +1,7 @@
 import XCTest
 
 /// Drawing Cassiopeia's W with five taps, star to star, on the demo evening; the story from
-/// Wikipedia follows.
+/// Wikipedia is a tap away.
 final class DrawingTests: XCTestCase {
     @MainActor
     func testDrawingCassiopeiaBringsItsStory() {
@@ -14,6 +14,11 @@ final class DrawingTests: XCTestCase {
             XCTAssertTrue(element.waitForExistence(timeout: 5), "star \(star)")
             element.tap()
         }
+        // The figure comes alive; its story waits for the book.
+        let story = app.buttons["Story"]
+        XCTAssertTrue(story.waitForExistence(timeout: 5))
+        XCTAssertFalse(app.staticTexts["From Wikipedia"].exists)
+        story.tap()
         XCTAssertTrue(app.staticTexts["From Wikipedia"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts["Schedar"].exists)
         // The story's sheet rests below the figure: every star stays in view above it. The

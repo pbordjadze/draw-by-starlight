@@ -98,10 +98,13 @@ reason to the manifest, and to the list `ShipHygieneTests` pins (Debug-only code
 - `MemberImportVisibility` is enabled: every file that touches members of a type from another
   module imports that module itself (`import StarlightCore`, …); a file that logs through `Log`
   imports `os`.
-- Drawing (the one way): tap or drag star to star; a line that belongs stays and names its two
-  stars, one that doesn't fades in lavender; after four seconds without a new line, or on "Show
-  me", the next star glimmers; the whole figure brings two gold sparkles, then its story. What's
-  drawn stays drawn. Help never counts, scores or levels.
+- Drawing (the one way): no words on the drawing screen but the title and the stars' names; the
+  sky shows what to do. A first look glimmers where to begin after a breath; tap or drag star to
+  star; a line that belongs stays and names its two stars, one that doesn't fades in lavender;
+  after four seconds without a new line, or on "Show me" (a sparkle in the toolbar), the next star
+  glimmers; the whole figure brings two gold sparkles and comes alive (light runs along its
+  lines, its border fades in); its story waits behind the book. What's drawn stays drawn. Help
+  never counts, scores or levels.
 - Night only: the sky is the canvas, so the app is always dark (`UIUserInterfaceStyle` Dark), and
   the Outside screen is dim red on true black.
 - The look is Paint by Moonlight's design system (`Theme`, the asset catalog's colors): New York

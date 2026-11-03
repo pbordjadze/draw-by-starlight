@@ -21,10 +21,6 @@
       "comment": "The one button on the finished figure: back to the list.",
       "extractionState": "manual"
     },
-    "Draw": {
-      "comment": "The list's section header: the constellations that can be drawn.",
-      "extractionState": "manual"
-    },
     "Draw again": {
       "comment": "Toolbar button on a finished drawing: clears the lines to draw it once more.",
       "extractionState": "manual"
@@ -37,10 +33,6 @@
       "comment": "At the top of the finished figure, when it was drawn tonight.",
       "extractionState": "manual"
     },
-    "Each is turned as it sits in your sky tonight.": {
-      "comment": "The list's footer.",
-      "extractionState": "manual"
-    },
     "From Wikipedia": {
       "comment": "The heading of the story card: the text below is quoted from Wikipedia.",
       "extractionState": "manual"
@@ -49,20 +41,8 @@
       "comment": "VoiceOver value of the star glimmering to show the next line.",
       "extractionState": "manual"
     },
-    "It never rises from here. North is up.": {
-      "comment": "Under a constellation's name on the drawing screen when it never rises from the stargazer's place.",
-      "extractionState": "manual"
-    },
-    "Join the stars, one line at a time.": {
-      "comment": "The prompt under the sky before the first line.",
-      "extractionState": "manual"
-    },
     "Keep reading on Wikipedia": {
       "comment": "The link under a story whose article says more; opens Safari.",
-      "extractionState": "manual"
-    },
-    "Let go on a star.": {
-      "comment": "The prompt under the sky while a line follows the finger.",
       "extractionState": "manual"
     },
     "Never rises from here": {
@@ -77,10 +57,6 @@
       "comment": "A fact on the finished figure: it is circumpolar from the stargazer's place.",
       "extractionState": "manual"
     },
-    "North is up.": {
-      "comment": "Under a constellation's name on the drawing screen when the place is unknown.",
-      "extractionState": "manual"
-    },
     "Not up tonight": {
       "comment": "Under a constellation's name in the list when it rises from the stargazer's place but not tonight.",
       "extractionState": "manual"
@@ -89,16 +65,8 @@
       "comment": "A fact on the finished figure: it rises from here but not tonight.",
       "extractionState": "manual"
     },
-    "Not up tonight. North is up.": {
-      "comment": "Under a constellation's name on the drawing screen when it rises from the stargazer's place but not tonight.",
-      "extractionState": "manual"
-    },
     "Nothing selected.": {
       "comment": "VoiceOver, after the selected star is tapped again.",
-      "extractionState": "manual"
-    },
-    "Now to the next star.": {
-      "comment": "The prompt under the sky once a first star is chosen.",
       "extractionState": "manual"
     },
     "Opens Wikipedia in Safari.": {
@@ -148,30 +116,6 @@
     "Tonight": {
       "comment": "The home screen's title: tonight's sky; also the label of a fact on the finished figure (where it stands tonight).",
       "extractionState": "manual"
-    },
-    "drawing.standing.later": {
-      "comment": "Under a constellation's name on the drawing screen when it hasn't risen yet; the arguments are a clock time, a height word (high, halfway up, low) and a compass direction.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Below the horizon now. Turned as it will sit at %@, %@ in the %@."
-          }
-        }
-      }
-    },
-    "drawing.standing.now": {
-      "comment": "Under a constellation's name on the drawing screen; the arguments are a height word (high, halfway up, low) and a compass direction.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Turned as it sits tonight, %@ in the %@."
-          }
-        }
-      }
     },
     "east": {
       "comment": "A compass direction, in a sentence (\"high in the east\").",

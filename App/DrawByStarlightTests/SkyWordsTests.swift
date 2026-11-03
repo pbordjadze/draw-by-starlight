@@ -24,16 +24,11 @@ struct SkyWordsTests {
 
     @Test func cassiopeiaTonight() throws {
         let scene = sky.scene(try #require(sky.constellation("Cas")), backdrop: false)
-        #expect(SkyWords.standing(scene, place: sky.place, time: sky.time) == "Turned as it sits tonight, high in the northeast.")
         #expect(SkyWords.listing(scene, place: sky.place, time: sky.time) == "High in the northeast")
     }
 
     @Test func orionLater() throws {
         let scene = sky.scene(try #require(sky.constellation("Ori")), backdrop: false)
-        let standing = SkyWords.standing(scene, place: sky.place, time: sky.time)
-        #expect(standing.hasPrefix("Below the horizon now. Turned as it will sit at 4:07"))
-        // iOS sets a narrow space before AM.
-        #expect(standing.contains("AM, high in the south."))
         #expect(SkyWords.listing(scene, place: sky.place, time: sky.time).hasPrefix("Rises later; highest at "))
     }
 
@@ -41,13 +36,11 @@ struct SkyWordsTests {
         let scene = sky.scene(try #require(sky.constellation("Leo")), backdrop: false)
         let listing = SkyWords.listing(scene, place: sky.place, time: sky.time)
         #expect(listing.hasPrefix("Rises later; before dawn at 6:2"))
-        #expect(SkyWords.standing(scene, place: sky.place, time: sky.time).hasPrefix("Below the horizon now. Turned as it will sit at 6:2"))
     }
 
     @Test func noPlace() throws {
         let nowhere = Sky(place: nil, now: sky.now, timeZone: sky.timeZone)
         let scene = nowhere.scene(try #require(nowhere.constellation("Cas")), backdrop: false)
-        #expect(SkyWords.standing(scene, place: nil, time: nowhere.time) == "North is up.")
         #expect(SkyWords.listing(scene, place: nil, time: nowhere.time) == "Place unknown")
     }
 
