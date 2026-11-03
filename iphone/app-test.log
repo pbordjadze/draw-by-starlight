@@ -1,0 +1,16 @@
+Retrying tests on failure. Running tests repeatedly up to 2 times.
+
+Writing result bundle at path:
+	/Users/runner/work/draw-by-starlight/draw-by-starlight/build/Tests.xcresult
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:F0C70C77-E423-4478-B648-3D25045B311B, OS:26.5, name:iPhone 17 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:F0C70C77-E423-4478-B648-3D25045B311B, OS:26.5, name:iPhone 17 Pro }
+2026-11-03 09:55:31.294 xcodebuild[8784:30051] [MT] IDELaunchParametersSnapshot: The operation couldn’t be completed. (DebuggerLLDB.DebuggerVersionStore.StoreError error 0.)
+2026-11-03 09:55:31.294 xcodebuild[8784:30051] [MT] IDELaunchParametersSnapshot: no debugger version
+2026-11-03 09:56:18.415 xcodebuild[8784:30051] [MT] IDELaunchParametersSnapshot: The operation couldn’t be completed. (DebuggerLLDB.DebuggerVersionStore.StoreError error 0.)
+2026-11-03 09:56:18.415 xcodebuild[8784:30051] [MT] IDELaunchParametersSnapshot: no debugger version
+2026-11-03 09:56:31.599 xcodebuild[8784:30051] [MT] IDETestOperationsObserverDebug: 100.762 elapsed -- Testing started completed.
+2026-11-03 09:56:31.599 xcodebuild[8784:30051] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-11-03 09:56:31.599 xcodebuild[8784:30051] [MT] IDETestOperationsObserverDebug: 100.762 sec, +100.762 sec -- end
+Testing started
