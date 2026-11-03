@@ -1,7 +1,7 @@
 import StarlightCore
 import SwiftUI
 
-/// The figure's story, on demand: where it stands tonight, computed, then its story
+/// The figure's story, on demand: its night, shown turning (or said, when it isn't up), then its story
 /// quoted from Wikipedia and plainly marked as Wikipedia's, with a link to the article. Nothing
 /// the sky above it already shows (that it's drawn, its border, its name twice). The drawing
 /// stays visible above the sheet.
@@ -49,12 +49,18 @@ struct FinishedFigureView: View {
         #endif
     }
 
-    /// Where it stands tonight, computed, never written by hand: the one fact the sky above
-    /// doesn't show.
-    private var facts: some View {
-        Text(verbatim: standing)
-            .font(.system(.title3, design: .serif).italic())
-            .foregroundStyle(Theme.ink)
+    /// Its night, the one thing the sky above doesn't show: shown turning from dusk to dawn
+    /// (`FigureNightView`), or, when it isn't up tonight at all, said in a line.
+    @ViewBuilder private var facts: some View {
+        switch (sky.place, model.scene.timing) {
+        case (let place?, .now), (let place?, .later), (let place?, .beforeDawn):
+            FigureNightView(constellation: model.scene.constellation, sky: sky, place: place,
+                            still: model.scene.moment, words: standing)
+        default:
+            Text(verbatim: standing)
+                .font(.system(.title3, design: .serif).italic())
+                .foregroundStyle(Theme.ink)
+        }
     }
 
     private var standing: String {

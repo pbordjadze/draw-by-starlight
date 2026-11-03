@@ -128,6 +128,14 @@ public struct FigureScene: Sendable {
         return now
     }
 
+    /// Tonight, from `evening(from:at:)` to the next sunrise; half a day where the Sun doesn't
+    /// rise again within a day (a polar night).
+    public static func night(from now: JulianDay, at place: Place) -> (evening: JulianDay, dawn: JulianDay) {
+        let evening = evening(from: now, at: place)
+        let dawn = place.nextRise(of: .sun, after: evening).map { min($0.value, evening.value + 1) } ?? evening.value + 0.5
+        return (evening, JulianDay(dawn))
+    }
+
     /// The direction in the middle of `directions` (the mean of their unit vectors).
     public static func middle(of directions: [Equatorial]) -> Equatorial? {
         var x = 0.0, y = 0.0, z = 0.0

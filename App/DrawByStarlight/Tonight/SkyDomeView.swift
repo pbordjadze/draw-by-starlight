@@ -3,7 +3,7 @@ import SwiftUI
 
 /// Tonight's whole sky, as a planisphere shows it (`Dome`): the zenith in the middle, the horizon
 /// the rim, north up and east on the left. The figures that are up sit where they are, their
-/// stars in gold and their lines only hinted until drawn; a figure is named once it's drawn.
+/// stars in gold, their lines there once drawn; a figure is named once it's drawn.
 /// Opening, the sky wheels through the last two hours to tonight, as it really turned. The
 /// figures below the horizon wait under the rim. A touch on a figure opens it.
 struct SkyDomeView: View {
@@ -212,17 +212,14 @@ struct SkyDomeView: View {
         for constellation in night.up {
             let inked = marks.inked[constellation.id] ?? []
             let points = disc.points(of: constellation, on: dome, at: moment)
-            for (a, b) in constellation.segments {
+            // Only the lines drawn: the rest of the figure is its stars, waiting.
+            var lines = Path()
+            for (a, b) in constellation.segments where inked.contains([min(a, b), max(a, b)]) {
                 guard let p = points[a], let q = points[b] else { continue }
-                var line = Path()
-                line.move(to: p)
-                line.addLine(to: q)
-                if inked.contains([min(a, b), max(a, b)]) {
-                    inside.stroke(line, with: .color(Theme.ink.opacity(0.85)), lineWidth: 1.2)
-                } else {
-                    inside.stroke(line, with: .color(Theme.lavender.opacity(0.4)), lineWidth: 0.8)
-                }
+                lines.move(to: p)
+                lines.addLine(to: q)
             }
+            inside.stroke(lines, with: .color(Theme.ink.opacity(0.85)), lineWidth: 1.2)
             for id in constellation.stars {
                 guard let p = points[id], let star = sky.catalogue.stars[id] else { continue }
                 let r = max(1, 2.6 - 0.4 * star.magnitude)
