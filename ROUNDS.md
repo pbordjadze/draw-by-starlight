@@ -56,9 +56,14 @@ round 1's weakest thing: a finished figure no longer ends on a sheet.
 
 ## Round 5
 
-- **Build:** pending
+- **Build:** 25
 - **Changed:** home is the night itself: no card, no chevrons, no separators, and each figure
   is twice the size.
 - **To see it:** the first screen.
-- **Critic:** pending
-- **Spend so far:** about $39
+- **Critic:** words per view: home 28, drawing 1–6, story about 71. "Yes: drawing is wordless
+  and lovely, and the wordy part only appears when you tap the book." Its next idea, not taken:
+  drop the story sheet's "the free encyclopedia" tagline and the "Brightest star" and "Tonight"
+  captions.
+- **Spend so far:** about $42
+
+The loop stopped here: the critic says he'd show it without a caveat.
