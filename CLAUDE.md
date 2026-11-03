@@ -9,32 +9,33 @@ rules.
 - `Package.swift`: `StarlightCore` and `StarlightCoreTests`. The Xcode project builds
   StarlightCore from this package (local reference `..`); its iOS 26 / macOS 15 platforms are a
   floor.
-- `Sources/StarlightCore`: the portable, dependency-free sky (builds on Linux too). `JulianDay`
-  (a moment as days since 4713 BC; T since J2000.0), the time argument every sky computation
-  starts from; `Time` (sidereal time, ΔT), `Coordinates` (`Equatorial`, `Horizontal`, `Place`),
+- `Sources/StarlightCore`: the portable, dependency-free sky (builds on Linux too). `JulianDay` (a
+  moment as days since 4713 BC; T since J2000.0), the time argument every sky computation starts
+  from; `Time` (sidereal time, ΔT), `Coordinates` (`Equatorial`, `Horizontal`, `Place`),
   `Precession`, `Sun`, `Moon` (place, phase, the next new or full), `RiseAndSet` (`SkyObject`),
   `Catalogue` (`Star`, `Constellation`: figures and borders), `Projection` (a figure laid flat as
-  the stargazer sees it), `Dome` (the whole sky as a planisphere shows it), `FigureScene` (one constellation laid out for drawing in a place's sky
-  at a moment, or at its next meridian crossing when it is below the horizon; the stars around
-  it; its border), `FigureDrawing` (the lines drawn, the selected star, the hint), `Stories`
-  (`Story`: each drawable constellation's Wikipedia lead, verbatim, with its revision; the first
-  set is `Catalogue.firstSet`), `Places` (`Place.guess(timeZone:)`). `Resources/`: the bundled
-  sky, built by `tools/sky_data.py`, `stories.json` (`tools/wikipedia_stories.py`), `zones.tsv`
-  (`tools/zones.py`), and `CREDITS.md`, its sources and licenses, for the Acknowledgements screen.
+  the stargazer sees it), `Dome` (the whole sky as a planisphere shows it), `FigureScene` (one
+  constellation laid out for drawing in a place's sky at a moment, or at its next meridian crossing
+  when it is below the horizon; the stars around it; its border), `FigureDrawing` (the lines drawn,
+  the selected star, the hint), `Stories` (`Story`: each drawable constellation's Wikipedia lead,
+  verbatim, with its revision; the first set is `Catalogue.firstSet`), `Places`
+  (`Place.guess(timeZone:)`). `Resources/`: the bundled sky, built by `tools/sky_data.py`,
+  `stories.json` (`tools/wikipedia_stories.py`), `zones.tsv` (`tools/zones.py`), and `CREDITS.md`,
+  its sources and licenses, for the Acknowledgements screen.
 - `Tests/StarlightCoreTests` (Swift Testing), pinned to published values (below).
 - `App/`: `DrawByStarlight.xcodeproj` (synchronized folders: adding files needs no project edit),
   `DrawByStarlight/` (`App/` the app, `Theme`, `Log` and `DemoMode`; `Tonight/` the home screen,
-  tonight's whole sky (`SkyDomeView`: StarlightCore's `Dome`, wheeling into place as it opens, a
-  figure named once drawn, the ones not up under the rim as `FigureGlyph`s, tonight's turn, inked
-  where drawn); `Drawing/` the one way to
-  draw: `Sky` (the catalogue, the stories, the place guessed from the time zone, the moment),
-  `DrawingModel` (lines, touches, the pause and the glimmer), `SkyCanvasView` (the canvas, one
-  gesture, a VoiceOver button per star), `DrawingView`, `FinishedFigureView` (the
-  figure's night, `FigureNightView`, turning sunset to sunrise; then the story shown as
-  Wikipedia's, with its link), `DrawnFigures` (what's drawn, a JSON file in Application Support),
-  `SkyWords`, `FigureLayout`; `Resources/` the catalogs, privacy manifest and assets),
-  `DrawByStarlightTests` (Swift Testing), `DrawByStarlightUITests` (XCTest), `Config/Info.plist`
-  (export compliance, the scene manifest; the rest is the target's `INFOPLIST_KEY_*` settings).
+  tonight's whole sky (`SkyDomeView`: StarlightCore's `Dome`, wheeling into place, then turning on;
+  a figure named once drawn, the ones not up under the rim as `FigureGlyph`s, tonight's turn, inked
+  where drawn); `Drawing/` the one way to draw: `Sky` (the catalogue, the stories, the place guessed
+  from the time zone, the moment), `DrawingModel` (lines, touches, the pause and the glimmer),
+  `SkyCanvasView` (the canvas, one gesture, a VoiceOver button per star), `DrawingView`,
+  `FinishedFigureView` (the figure's night, `FigureNightView`, turning sunset to sunrise; then the
+  story shown as Wikipedia's, with its link), `DrawnFigures` (what's drawn, a JSON file in
+  Application Support), `SkyWords`, `FigureLayout`; `Resources/` the catalogs, privacy manifest and
+  assets), `DrawByStarlightTests` (Swift Testing), `DrawByStarlightUITests` (XCTest),
+  `Config/Info.plist` (export compliance, the scene manifest; the rest is the target's
+  `INFOPLIST_KEY_*` settings).
 - `ci/` and `.github/workflows/ci.yml`: jobs `core` (Linux: StarlightCore tests, warnings, string
   catalog), `apple` (`iphone` on every push: Debug build, screenshots, unit and UI tests, Release
   check; or `compile`), `ipa` (on `main`, or `[ipa]` on a branch without publishing: the

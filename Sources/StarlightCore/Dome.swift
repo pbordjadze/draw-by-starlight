@@ -31,13 +31,14 @@ public struct Dome: Sendable {
         positions[star].map { Self.point(place.horizontal(of: $0, at: moment)) }
     }
 
-    /// The stars above the horizon at `moment`, faintest first, so the bright ones draw on top.
-    public func visible(at moment: JulianDay) -> [FigureScene.PlacedStar] {
+    /// The stars higher than `lowest` (the horizon, by default) at `moment`, faintest first, so
+    /// the bright ones draw on top.
+    public func visible(at moment: JulianDay, lowest: Double = 0) -> [FigureScene.PlacedStar] {
         let sidereal = place.siderealTime(at: moment)
         return stars.compactMap { star in
             guard let position = positions[star.id] else { return nil }
             let direction = position.horizontal(latitude: place.latitude, localSiderealTime: sidereal)
-            guard direction.altitude > 0 else { return nil }
+            guard direction.altitude > lowest else { return nil }
             return FigureScene.PlacedStar(star: star, point: Self.point(direction))
         }
     }

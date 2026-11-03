@@ -4,8 +4,10 @@ import SwiftUI
 /// Tonight's whole sky, as a planisphere shows it (`Dome`): the zenith in the middle, the horizon
 /// the rim, north up and east on the left. The figures that are up sit where they are, their
 /// stars in gold, their lines there once drawn; a figure is named once it's drawn.
-/// Opening, the sky wheels through the last two hours to tonight, as it really turned. The
-/// figures below the horizon wait under the rim. A touch on a figure opens it.
+/// Opening, the sky wheels through the last two hours to tonight, as it really turned; then it
+/// keeps turning at the Earth's own rate, its figures' stars twinkling. The stars below the
+/// horizon fill the screen beyond the rim, faintly; the figures below it wait under the sky. A
+/// touch on a figure opens it.
 struct SkyDomeView: View {
     let sky: Sky
     let drawn: DrawnFigures
@@ -18,11 +20,11 @@ struct SkyDomeView: View {
     @State private var settled = false
 
     /// The sky turns through this much of the evening, in days, as the home screen opens.
-    private static let lapse = 2.0 / 24
-    private static let lapseSeconds = 4.0
+    private nonisolated static let lapse = 2.0 / 24
+    private nonisolated static let lapseSeconds = 4.0
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 8) {
             if let night {
                 if let dome = night.dome {
                     // Read here, so a figure drawn since redraws the sky.
@@ -32,14 +34,30 @@ struct SkyDomeView: View {
                     GeometryReader { geometry in
                         let disc = Disc(size: geometry.size)
                         ZStack {
-                            TimelineView(.animation(paused: settled || reduceMotion || !showing)) { context in
+                            // The sky: wheeling at the display's rate as it opens, then turning on,
+                            // redrawn every half minute (a star moves a fraction of a point).
+                            if settled {
+                                TimelineView(.periodic(from: .now, by: 30)) { context in
+                                    skyLayer(dome, night: night, marks: marks, now: context.date, disc: disc)
+                                }
+                            } else {
+                                TimelineView(.animation(paused: still || !showing)) { context in
+                                    skyLayer(dome, night: night, marks: marks, now: context.date, disc: disc)
+                                }
+                            }
+                            // The figures' stars, twinkling: a few dozen, gently.
+                            TimelineView(.animation(minimumInterval: settled ? 1.0 / 15 : nil, paused: still || !showing)) { context in
                                 Canvas { canvas, _ in
-                                    draw(dome, night: night, marks: marks, at: moment(night.evening, now: context.date), in: canvas, disc: disc)
+                                    halos(dome, night: night, at: moment(night.evening, now: context.date),
+                                          twinkle: still ? nil : context.date.timeIntervalSinceReferenceDate,
+                                          in: canvas, disc: disc)
                                 }
                             }
                             .accessibilityHidden(true)
                             cardinals(disc)
-                            figureElements(dome, night: night, marks: marks, disc: disc)
+                            TimelineView(.periodic(from: .now, by: 30)) { context in
+                                figureElements(dome, night: night, marks: marks, at: moment(night.evening, now: context.date), disc: disc)
+                            }
                         }
                         .contentShape(Rectangle())
                         .onTapGesture(coordinateSpace: .local) { location in
@@ -48,12 +66,13 @@ struct SkyDomeView: View {
                             if let id = figure(near: location, dome: dome, night: night, at: now, disc: disc) { open(id) }
                         }
                     }
-                    .aspectRatio(1, contentMode: .fit)
+                } else {
+                    Spacer()
                 }
                 below(night.down)
             }
         }
-        .padding(.horizontal, 12)
+        .padding(.bottom, 8)
         .onChange(of: sky.now, initial: true) {
             night = Night(sky: sky)
         }
@@ -151,8 +170,7 @@ struct SkyDomeView: View {
 
         init(size: CGSize) {
             center = CGPoint(x: size.width / 2, y: size.height / 2)
-            // Room for the compass letters around the rim.
-            radius = max(10, min(size.width, size.height) / 2 - 18)
+            radius = max(10, min(size.width, size.height) / 2 - 4)
         }
 
         func point(_ p: PlanePoint) -> CGPoint {
@@ -173,19 +191,40 @@ struct SkyDomeView: View {
         }
     }
 
-    /// The moment shown: the last two hours wheeling by as the screen opens, then the evening.
+    /// Held still with Reduce Motion, and in a demo scenario, so its screenshot repeats.
+    private var still: Bool {
+        #if DEBUG
+        if DemoMode.isActive { return true }
+        #endif
+        return reduceMotion
+    }
+
     private func moment(_ evening: JulianDay, now: Date) -> JulianDay {
-        guard !settled, !reduceMotion else { return evening }
-        let f = min(1, max(0, now.timeIntervalSince(opened) / Self.lapseSeconds))
+        still ? evening : Self.moment(evening: evening, now: now, opened: opened, settled: settled)
+    }
+
+    /// The moment shown: the last two hours wheeling by as the screen opens, then the real sky,
+    /// held at the evening until it comes (in daylight, the evening is the coming sunset).
+    nonisolated static func moment(evening: JulianDay, now: Date, opened: Date, settled: Bool) -> JulianDay {
+        if settled { return JulianDay(max(evening.value, JulianDay(now).value)) }
+        let f = min(1, max(0, now.timeIntervalSince(opened) / lapseSeconds))
         let eased = 1 - pow(1 - f, 3)
-        return JulianDay(evening.value - Self.lapse * (1 - eased))
+        return JulianDay(evening.value - lapse * (1 - eased))
+    }
+
+    private func skyLayer(_ dome: Dome, night: Night, marks: Marks, now: Date, disc: Disc) -> some View {
+        Canvas { canvas, _ in
+            draw(dome, night: night, marks: marks, at: moment(night.evening, now: now), in: canvas, disc: disc)
+        }
+        .accessibilityHidden(true)
     }
 
     private static let bands: [(faintest: Double, radius: CGFloat, opacity: Double)] = [
         (1.5, 1.6, 0.8), (2.5, 1.2, 0.65), (3.5, 0.9, 0.45), (4.5, 0.65, 0.3), (.infinity, 0.45, 0.2),
     ]
 
-    private func draw(_ dome: Dome, night: Night, marks: Marks, at moment: JulianDay, in context: GraphicsContext, disc: Disc) {
+    private func draw(_ dome: Dome, night: Night, marks: Marks, at moment: JulianDay,
+                      in context: GraphicsContext, disc: Disc) {
         var rim = Path()
         rim.addEllipse(in: CGRect(x: disc.center.x - disc.radius, y: disc.center.y - disc.radius,
                                   width: 2 * disc.radius, height: 2 * disc.radius))
@@ -197,16 +236,23 @@ struct SkyDomeView: View {
         var inside = context
         inside.clip(to: rim)
         // The other stars, one path per band of brightness: the brighter, the larger and the
-        // less faded.
-        var bands = Array(repeating: Path(), count: Self.bands.count)
-        for star in dome.visible(at: moment) where !night.own.contains(star.star.id) {
+        // less faded; the ones below the horizon, beyond the rim, fainter still.
+        var overhead = Array(repeating: Path(), count: Self.bands.count)
+        var beneath = overhead
+        for star in dome.visible(at: moment, lowest: -90) where !night.own.contains(star.star.id) {
             let band = Self.bands.firstIndex { star.star.magnitude <= $0.faintest } ?? Self.bands.count - 1
             let p = disc.point(star.point)
             let r = Self.bands[band].radius
-            bands[band].addEllipse(in: CGRect(x: p.x - r, y: p.y - r, width: 2 * r, height: 2 * r))
+            let dot = CGRect(x: p.x - r, y: p.y - r, width: 2 * r, height: 2 * r)
+            if star.point.x * star.point.x + star.point.y * star.point.y <= 1 {
+                overhead[band].addEllipse(in: dot)
+            } else {
+                beneath[band].addEllipse(in: dot)
+            }
         }
-        for (band, path) in zip(Self.bands, bands) {
-            inside.fill(path, with: .color(Theme.ink.opacity(band.opacity)))
+        for (band, (above, below)) in zip(Self.bands, zip(overhead, beneath)) {
+            inside.fill(above, with: .color(Theme.ink.opacity(band.opacity)))
+            context.fill(below, with: .color(Theme.ink.opacity(band.opacity * 0.3)))
         }
 
         for constellation in night.up {
@@ -223,8 +269,6 @@ struct SkyDomeView: View {
             for id in constellation.stars {
                 guard let p = points[id], let star = sky.catalogue.stars[id] else { continue }
                 let r = max(1, 2.6 - 0.4 * star.magnitude)
-                inside.fill(Path(ellipseIn: CGRect(x: p.x - 2.5 * r, y: p.y - 2.5 * r, width: 5 * r, height: 5 * r)),
-                            with: .color(Theme.gold.opacity(0.12)))
                 inside.fill(Path(ellipseIn: CGRect(x: p.x - r, y: p.y - r, width: 2 * r, height: 2 * r)),
                             with: .color(Theme.gold))
             }
@@ -241,14 +285,37 @@ struct SkyDomeView: View {
         }
     }
 
-    /// N, E, S and W just outside the rim, where those horizons are.
-    private func cardinals(_ disc: Disc) -> some View {
-        ZStack {
-            cardinal(Text("N"), at: CGPoint(x: disc.center.x, y: disc.center.y - disc.radius - 10))
-            cardinal(Text("E"), at: CGPoint(x: disc.center.x - disc.radius - 10, y: disc.center.y))
-            cardinal(Text("S"), at: CGPoint(x: disc.center.x, y: disc.center.y + disc.radius + 10))
-            cardinal(Text("W"), at: CGPoint(x: disc.center.x + disc.radius + 10, y: disc.center.y))
+    /// The figures' stars' halos, each breathing at its own pace while `twinkle` (a time in
+    /// seconds) runs; nil holds them still.
+    private func halos(_ dome: Dome, night: Night, at moment: JulianDay, twinkle: Double?,
+                       in context: GraphicsContext, disc: Disc) {
+        var inside = context
+        inside.clip(to: Path(ellipseIn: CGRect(x: disc.center.x - disc.radius, y: disc.center.y - disc.radius,
+                                               width: 2 * disc.radius, height: 2 * disc.radius)))
+        for id in night.own {
+            guard let point = dome.point(of: id, at: moment), let star = sky.catalogue.stars[id] else { continue }
+            let p = disc.point(point)
+            let r = 2.5 * max(1, 2.6 - 0.4 * star.magnitude)
+            // Each at its own pace and phase.
+            let pace: Double = 1.1 + Double(id % 7) * 0.13
+            let phase = Double(id)
+            let glow: Double = twinkle.map { t in 0.6 + 0.4 * sin(t * pace + phase) } ?? 1
+            inside.fill(Path(ellipseIn: CGRect(x: p.x - r, y: p.y - r, width: 2 * r, height: 2 * r)),
+                        with: .color(Theme.gold.opacity(0.16 * glow)))
         }
+    }
+
+    /// N, E, S and W just inside the rim, where those horizons are.
+    private func cardinals(_ disc: Disc) -> some View {
+        let r = disc.radius - 12
+        return ZStack {
+            cardinal(Text("N"), at: CGPoint(x: disc.center.x, y: disc.center.y - r))
+            cardinal(Text("E"), at: CGPoint(x: disc.center.x - r, y: disc.center.y))
+            cardinal(Text("S"), at: CGPoint(x: disc.center.x, y: disc.center.y + r))
+            cardinal(Text("W"), at: CGPoint(x: disc.center.x + r, y: disc.center.y))
+        }
+        // Decoration near the rim: kept small, so it never runs off the screen or over the sky.
+        .dynamicTypeSize(...DynamicTypeSize.xLarge)
         .accessibilityHidden(true)
     }
 
@@ -261,11 +328,11 @@ struct SkyDomeView: View {
 
     // MARK: Touch and VoiceOver
 
-    /// One element per figure up, at its middle, for VoiceOver and the UI tests; touches go to the
+    /// One element per figure up, at its middle as drawn, for VoiceOver and the UI tests; touches go to the
     /// dome's tap.
-    private func figureElements(_ dome: Dome, night: Night, marks: Marks, disc: Disc) -> some View {
+    private func figureElements(_ dome: Dome, night: Night, marks: Marks, at moment: JulianDay, disc: Disc) -> some View {
         ForEach(night.up, id: \.id) { constellation in
-            let points = disc.above(disc.points(of: constellation, on: dome, at: night.evening))
+            let points = disc.above(disc.points(of: constellation, on: dome, at: moment))
             if !points.isEmpty {
                 Color.clear
                     .frame(width: 44, height: 44)
