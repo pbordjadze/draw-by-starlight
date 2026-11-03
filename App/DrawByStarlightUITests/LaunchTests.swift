@@ -12,6 +12,8 @@ final class LaunchTests: XCTestCase {
         XCTAssertEqual(cassiopeia.value as? String, "High in the northeast. Drawn.")
         // Orion is below the horizon on the demo evening: it waits under the sky.
         XCTAssertTrue(app.buttons["figure-Ori"].exists)
+        // The sky wheels into place as it opens; the element stands where the figure settles.
+        Thread.sleep(forTimeInterval: 5)
         cassiopeia.tap()
         XCTAssertTrue(app.navigationBars["Cassiopeia"].waitForExistence(timeout: 10))
     }

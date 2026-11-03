@@ -43,9 +43,9 @@ struct SkyDomeView: View {
                         }
                         .contentShape(Rectangle())
                         .onTapGesture(coordinateSpace: .local) { location in
-                            // While the sky wheels, the figures aren't where a touch would look.
-                            guard settled else { return }
-                            if let id = figure(near: location, dome: dome, night: night, disc: disc) { open(id) }
+                            // Where the figures are drawn now, while the sky wheels too.
+                            let now = moment(night.evening, now: .now)
+                            if let id = figure(near: location, dome: dome, night: night, at: now, disc: disc) { open(id) }
                         }
                     }
                     .aspectRatio(1, contentMode: .fit)
@@ -299,10 +299,10 @@ struct SkyDomeView: View {
     }
 
     /// The figure up with a line nearest a touch, within reach of a finger.
-    private func figure(near location: CGPoint, dome: Dome, night: Night, disc: Disc) -> String? {
+    private func figure(near location: CGPoint, dome: Dome, night: Night, at moment: JulianDay, disc: Disc) -> String? {
         var best: (id: String, distance: CGFloat)?
         for constellation in night.up {
-            let points = disc.points(of: constellation, on: dome, at: night.evening)
+            let points = disc.points(of: constellation, on: dome, at: moment)
             for (a, b) in constellation.segments {
                 guard let p = points[a], let q = points[b] else { continue }
                 let d = Self.distance(from: location, toSegment: p, q)
