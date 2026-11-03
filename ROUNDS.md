@@ -123,7 +123,7 @@ The second loop's axis: show the sky, not words about it. Spend starts again fro
 
 ## Round 11
 
-- **Build:** 48 (queued for the shared runners when this was written)
+- **Build:** 48
 - **Changed:** the zoom opens from plain anchors and VoiceOver's words are worked out once a
   night; home's brightest stars are drawn larger, so the Dipper and the W show by themselves.
 - **Critic:** words per view: home 5, drawing 1–6, story sheet 0 of its own. "Almost: drawing
