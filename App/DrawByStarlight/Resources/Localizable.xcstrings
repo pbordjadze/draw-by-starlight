@@ -22,7 +22,7 @@
       "extractionState": "manual"
     },
     "Drawn": {
-      "comment": "VoiceOver's name for the sparkle beside a constellation already drawn, in the list.",
+      "comment": "VoiceOver's value for a constellation already drawn, in the list.",
       "extractionState": "manual"
     },
     "From Wikipedia": {

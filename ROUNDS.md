@@ -35,10 +35,20 @@ round 1's weakest thing: a finished figure no longer ends on a sheet.
 
 ## Round 3
 
-- **Build:** pending
+- **Build:** 20
 - **Changed:** the story sheet stops repeating the sky: "Drawn tonight.", the Border row and its
   second "Cassiopeia" heading are gone; it opens on the brightest star and tonight's timing, then
   Wikipedia's story, attributed as before.
 - **To see it:** finish a constellation, tap the book.
+- **Critic:** words per view: home 49, drawing 1–6, story about 72. "No": the drawing and the
+  come-alive moment are lovely, but the first screen is a plain text list with no sky.
+- **Spend so far:** about $30
+
+## Round 4
+
+- **Build:** pending
+- **Changed:** each row of the home list starts with its constellation's figure in small, turned
+  as it sits tonight: gold stars, the lines only hinted until you draw them, then inked in.
+- **To see it:** the first screen; draw a few lines of one and come back.
 - **Critic:** pending
-- **Spend so far:** about $28
+- **Spend so far:** about $34

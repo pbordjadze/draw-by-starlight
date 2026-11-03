@@ -24,7 +24,8 @@ rules.
 - `Tests/StarlightCoreTests` (Swift Testing), pinned to published values (below).
 - `App/`: `DrawByStarlight.xcodeproj` (synchronized folders: adding files needs no project edit),
   `DrawByStarlight/` (`App/` the app, `Theme`, `Log` and `DemoMode`; `Tonight/` the home screen,
-  a plain list of what can be drawn until the dome lands (slice 4); `Drawing/` the one way to
+  a list of what can be drawn until the dome lands (slice 4), each row its figure in small
+  (`FigureGlyph`: tonight's turn, inked where drawn) and where it stands; `Drawing/` the one way to
   draw: `Sky` (the catalogue, the stories, the place guessed from the time zone, the moment),
   `DrawingModel` (lines, touches, the pause and the glimmer), `SkyCanvasView` (the canvas, one
   gesture, a VoiceOver button per star), `DrawingView`, `FinishedFigureView` (the story shown as
